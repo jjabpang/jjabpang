@@ -1,19 +1,22 @@
 package com.dongnae.jjabpang.entity;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * 회원
  */
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "User")
-public class User implements Serializable {
+public class User extends BaseTimeEntity implements Serializable {
       
       private static final long serialVersionUID = 1L;
       
@@ -28,56 +31,57 @@ public class User implements Serializable {
       /**
        * 이메일
        */
-      @Column(name = "email")
+      @Column(name = "email", length = 50)
       private String email;
       
       /**
        * 비밀번호
        */
-      @Column(name = "password")
+      @Column(name = "password", length = 500)
       private String password;
       
       /**
        * 생년월일
        */
-      @Column(name = "birth")
+      @Column(name = "birth", length = 10)
       private String birth;
       
       /**
        * 닉네임
        */
-      @Column(name = "nickname")
+      @Column(name = "nickname", length = 50)
       private String nickname;
       
       /**
        * 이용약관동의
        */
       @Column(name = "agree_TOS")
-      private BigDecimal agreeTos;
+      private String agreeTos;
       
       /**
        * 개인정보수집 및 이용동의
        */
       @Column(name = "agree_PICU")
-      private BigDecimal agreePicu;
+      private String agreePicu;
       
       /**
        * 이벤트, 프로모션 메일, SMS수신
        */
       @Column(name = "agree_promotion")
-      private BigDecimal agreePromotion;
+      private String agreePromotion;
       
       /**
        * 성별
        */
       @Column(name = "gender")
-      private BigDecimal gender;
+      private String gender;
       
       /**
        * 역할구분(구매자,판매자,관리자)
        */
-      @Column(name = "role")
-      private BigDecimal role;
+      @Column(name = "role", nullable = false)
+      @Enumerated(EnumType.STRING)
+      private Role role;
       
       /**
        * 회원상태
@@ -96,5 +100,10 @@ public class User implements Serializable {
        */
       @Column(name = "udt")
       private Date udt;
+      /**
+       * 휴대폰 번호
+       */
+      @Column(name = "phone_nm", nullable = false)
+      private String phoneNm;
       
 }
