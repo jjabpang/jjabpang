@@ -19,9 +19,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class UserSingUpDto {
+public class UserSingUpRequestDto {
       private String u_email;
       private String password;
       private String username;
@@ -30,16 +28,15 @@ public class UserSingUpDto {
       private String agree_promotion;
       private String phone_nm;
       
-      /*DTO -> ENTITY*/
-      public User toEntity() {
-            return User.builder()
-                       .email(u_email)
-                       .password(password)
-                       .nickname(username)
-                       .agreeTos(agree_TOS)
-                       .agreePicu(agree_PICU)
-                       .agreePromotion(agree_promotion)
-                       .phoneNm(phone_nm)
-                       .build();
+      
+      @Builder
+      public UserSingUpRequestDto(String u_email, String password, String username, String agree_TOS, String agree_PICU, String agree_promotion, String phone_nm) {
+            this.u_email = u_email;
+            this.password = password;
+            this.username = username;
+            this.agree_TOS = agree_TOS;
+            this.agree_PICU = agree_PICU;
+            this.agree_promotion = agree_promotion;
+            this.phone_nm = phone_nm;
       }
 }

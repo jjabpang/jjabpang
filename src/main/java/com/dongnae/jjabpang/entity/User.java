@@ -1,11 +1,10 @@
 package com.dongnae.jjabpang.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -14,6 +13,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
+@Setter
 @Entity
 @Table(name = "User")
 public class User extends BaseTimeEntity implements Serializable {
@@ -79,7 +80,7 @@ public class User extends BaseTimeEntity implements Serializable {
       /**
        * 역할구분(구매자,판매자,관리자)
        */
-      @Column(name = "role", nullable = false)
+      @Column(name = "role")
       @Enumerated(EnumType.STRING)
       private Role role;
       
@@ -93,13 +94,14 @@ public class User extends BaseTimeEntity implements Serializable {
        * 가입일자
        */
       @Column(name = "cdt")
-      private Date cdt;
+      private LocalDateTime cdt;
       
       /**
        * 회원정보수정일자
        */
       @Column(name = "udt")
-      private Date udt;
+      private LocalDateTime udt;
+      
       /**
        * 휴대폰 번호
        */

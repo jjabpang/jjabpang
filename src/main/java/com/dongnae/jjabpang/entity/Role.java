@@ -1,24 +1,30 @@
 package com.dongnae.jjabpang.entity;
-
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
-/**
- * packageName    : com.dongnae.jjabpang.entity
+/*
+ *packageName    : com.dongnae.jjabpang.entity
  * fileName       : Role
- * author         : jihye94
- * date           : 2022-07-31
+ * author         : ipeac
+ * date           : 2022-08-01
  * description    :
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2022-07-31        jihye94       최초 생성
+ * 2022-08-01        ipeac       최초 생성
  */
+
+import lombok.Getter;
+
 @Getter
-@RequiredArgsConstructor
 public enum Role {
-      USER("ROLE_USER"),
-      ADMIN("ROLE_ADMIN");
+      BUYER("B", "구매자"),
+      SELLER("S", "판매자"),
+      MANGER("M", "관리자");
       
-      private final String value;
+      private String code;
+      private String name;
+      
+      Role(String code, String name) {
+            this.code = code;
+            this.name = name;
+      }
+      
 }
