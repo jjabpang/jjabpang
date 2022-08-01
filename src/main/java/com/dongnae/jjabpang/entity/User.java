@@ -52,7 +52,7 @@ public class User extends BaseTimeEntity {
       /**
        * 이용약관동의
        */
-      @Column(name = "agree_TOS")
+      @Column(name = "agree_tos")
       private String agreeTos;
       
       /**
