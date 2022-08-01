@@ -3,9 +3,7 @@ package com.dongnae.jjabpang.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * 회원
@@ -16,10 +14,8 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "User")
-public class User extends BaseTimeEntity implements Serializable {
-      
-      private static final long serialVersionUID = 1L;
+@Table(name = "user")
+public class User extends BaseTimeEntity {
       
       /**
        * 회원번호
@@ -62,7 +58,7 @@ public class User extends BaseTimeEntity implements Serializable {
       /**
        * 개인정보수집 및 이용동의
        */
-      @Column(name = "agree_PICU")
+      @Column(name = "agree_picu")
       private String agreePicu;
       
       /**
@@ -87,7 +83,7 @@ public class User extends BaseTimeEntity implements Serializable {
       /**
        * 회원상태
        */
-      @Column(name = "del_YN")
+      @Column(name = "del_yn")
       private String delYn;
       
       /**

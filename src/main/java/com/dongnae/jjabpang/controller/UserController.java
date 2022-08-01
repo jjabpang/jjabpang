@@ -1,18 +1,13 @@
 package com.dongnae.jjabpang.controller;
 
-import com.dongnae.jjabpang.dto.DefaultResponseDTO;
-import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.User;
+import com.dongnae.jjabpang.repository.user.UserRepository;
 import com.dongnae.jjabpang.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PrimitiveIterator;
 
 /**
  * packageName    : com.dongnae.jjabpang.controller
@@ -28,10 +23,11 @@ import java.util.PrimitiveIterator;
 @RequestMapping("/api/user/")
 @RestController
 @Slf4j
+@RequiredArgsConstructor
 public class UserController {
       
-      @Autowired
-      private UserService userService;
+      private final UserService userService;
+      private final UserRepository userRepository;
       
       
       /**
@@ -39,16 +35,25 @@ public class UserController {
        */
       @PostMapping("/sign-up")
       public void signUp(@RequestBody User user) {
-      
+            
       }
       
       /**
        * 회원 목록 조회
        */
       @GetMapping("/users")
-      public List<User> retrieveAllUsers() {
-            return userService.findAll();
+      public Result retrieveAllUsers() {
+            return new Result(userService.findAll());
       }
+      
+      /**
+       * 회원 탈퇴 기능
+       */
+      @DeleteMapping("/users/{id}")
+      public void deleteUser(@PathVariable int id) {
+            userService.delete(id);
+      }
+      
       
       @Data
       @AllArgsConstructor

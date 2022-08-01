@@ -2,7 +2,6 @@ package com.dongnae.jjabpang.controller;
 
 import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.User;
-import com.dongnae.jjabpang.repository.user.UserCustomRepository;
 import com.dongnae.jjabpang.repository.user.UserCustomRepositoryImpl;
 import com.dongnae.jjabpang.repository.user.UserRepository;
 import com.dongnae.jjabpang.service.UserService;
@@ -11,9 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /*
  *packageName    : com.dongnae.jjabpang.controller
@@ -27,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 2022-08-01        ipeac       최초 생성
  */
 @SpringBootTest
-@Transactional
+@Transactional(readOnly = true)
 public class UserServiceTest {
       @Autowired
       UserService userService;
@@ -58,5 +56,17 @@ public class UserServiceTest {
             System.out.println("findUser = " + findUser);
             //then
             
+      }
+      
+      @Test
+      void findAll() {
+            List<User> findMember = userService.findAll();
+            for (User user : findMember) {
+                  System.out.println("user = " + user);
+            }
+      }
+      
+      @Test
+      void delete() {
       }
 }
