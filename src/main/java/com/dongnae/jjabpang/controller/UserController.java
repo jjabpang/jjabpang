@@ -1,8 +1,12 @@
 package com.dongnae.jjabpang.controller;
 
+import com.dongnae.jjabpang.dto.UserLoginRequestDto;
 import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.User;
+import com.dongnae.jjabpang.exception.UsernameNotFoundException;
 import com.dongnae.jjabpang.repository.user.UserRepository;
+import com.dongnae.jjabpang.response.Message;
+import com.dongnae.jjabpang.response.StatusEnum;
 import com.dongnae.jjabpang.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,7 +14,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.nio.charset.Charset;
 
 /**
  * packageName    : com.dongnae.jjabpang.controller
@@ -33,16 +43,25 @@ public class UserController {
       private final UserService userService;
       private final UserRepository userRepository;
       
-      
       /**
        * 회원가입 기능
        */
       @ApiOperation(value = "회원 가입")
       @PostMapping("/users")
-      public Integer signUp(@RequestBody UserSingUpRequestDto dto) {
-//            User user = dto.toEntity();
+      public ResponseEntity<Message> signUp(@RequestBody UserSingUpRequestDto dto) {
+            Message message = new Message();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
             
-            return userService.signUp(dto);
+            // User user = dto.toEntity();
+            Integer userNo = userService.signUp(dto);
+            
+            
+            message.setStatus(StatusEnum.OK);
+            message.setMessage("회원 가입 성공");
+            message.setData(userNo);
+            
+            return new ResponseEntity<>(message, headers, HttpStatus.OK);
       }
       
       /**
@@ -61,13 +80,31 @@ public class UserController {
       @DeleteMapping("/users/{id}")
       public void deleteUser(@PathVariable int id) {
             userService.delete(id);
-            
       }
       
+      @ApiOperation(value = "회원 로그인 기능")
+      @PostMapping("/users/login")
+      public ResponseEntity<Message> login(@RequestBody UserLoginRequestDto dto) throws UsernameNotFoundException {
+            Message message = new Message();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+            
+            User findUser = userService.findByEmail(dto.getEmail())
+                                       .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 사용자 입니다."));
+            if (!findUser.getPassword()
+                         .equals(dto.getPassword())) {
+                  throw new IllegalArgumentException("잘못된 비밀번호 입니다.");
+            }
+            message.setStatus(StatusEnum.OK);
+            message.setMessage("로그인 성공");
+            message.setData(findUser.getUserNo());
+            return new ResponseEntity<>(message, headers, HttpStatus.OK);
+      }
       
       @Data
       @AllArgsConstructor
-      class Result<T> {
+      
+      static class Result<T> {
             
             private T data;
             
@@ -81,4 +118,6 @@ public class UserController {
                   this.id = id;
             }
       }
+      
+      
 }

@@ -3,8 +3,6 @@ package com.dongnae.jjabpang.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -98,13 +96,13 @@ public class User {
       /**
        * 가입일자
        */
-      @Column(name = "cdt", updatable = false, columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP")
+      @Column(name = "cdt", updatable = false, columnDefinition = "DATETIME default current_timestamp")
       private LocalDateTime cdt;
       
       /**
        * 회원정보수정일자
        */
-      @Column(name = "udt", columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP")
+      @Column(name = "udt", columnDefinition = "DATETIME default current_timestamp")
       private LocalDateTime udt;
       
       /**
