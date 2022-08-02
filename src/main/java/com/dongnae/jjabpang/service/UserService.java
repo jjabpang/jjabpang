@@ -2,6 +2,7 @@ package com.dongnae.jjabpang.service;
 
 import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.User;
+import com.dongnae.jjabpang.exception.UsernameNotFoundException;
 import com.dongnae.jjabpang.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +21,8 @@ public class UserService {
       private final UserRepository userRepository;
       
       public List<User> findAll() {
-            List<User> userList = userRepository.findAll();
-            for (User user : userList) {
-                  System.out.println("user = " + user);
-            }
-            return userList;
+            
+            return userRepository.findAll();
       }
       
       
@@ -57,6 +55,15 @@ public class UserService {
       public void delete(Integer id) {
             userRepository.deleteUserByUserNo(id);
             
+      }
+      
+      public Optional<User> findByEmail(String email) throws UsernameNotFoundException {
+            Optional<User> findUser = userRepository.findByEmail(email);
+            findUser
+                  .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
+            
+            
+            return findUser;
       }
       
 }
