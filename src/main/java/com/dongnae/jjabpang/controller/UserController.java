@@ -1,5 +1,6 @@
 package com.dongnae.jjabpang.controller;
 
+import com.dongnae.jjabpang.dto.UserInfoModificationDto;
 import com.dongnae.jjabpang.dto.UserLoginRequestDto;
 import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.User;
@@ -78,8 +79,21 @@ public class UserController {
        */
       @ApiOperation(value = "회원 탈퇴 기능")
       @DeleteMapping("/users/{id}")
-      public void deleteUser(@PathVariable int id) {
-            userService.delete(id);
+      public ResponseEntity<Message> deleteUser(@PathVariable int id) {
+            Message message = new Message();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+            
+            Integer row = userService.delete(id);
+            if (row == 0) {
+                  throw new IllegalStateException("회원 탈퇴 실패");
+            } else {
+                  message.setStatus(StatusEnum.OK);
+                  message.setMessage("회원 탈퇴 성공");
+                  message.setData(row + "행 반영됨");
+                  
+                  return new ResponseEntity<>(message, headers, HttpStatus.OK);
+            }
       }
       
       @ApiOperation(value = "회원 로그인 기능")
@@ -99,6 +113,16 @@ public class UserController {
             message.setMessage("로그인 성공");
             message.setData(findUser.getUserNo());
             return new ResponseEntity<>(message, headers, HttpStatus.OK);
+      }
+      
+      @ApiOperation(value = "회원 정보 수정")
+      @PutMapping("/users/{id}")
+      public ResponseEntity<Message> modify(@PathVariable int id, @RequestBody UserInfoModificationDto dto) {
+            Message message = new Message();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+            
+            return null;
       }
       
       @Data

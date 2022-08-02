@@ -13,6 +13,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
       
       List<User> findAll();
       
-      void deleteUserByUserNo(int id);
+      Integer deleteUserByUserNo(int id);
       
 }

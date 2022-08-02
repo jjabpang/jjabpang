@@ -52,9 +52,9 @@ public class UserService {
        * 회원 탈퇴 기능
        */
       @Transactional
-      public void delete(Integer id) {
-            userRepository.deleteUserByUserNo(id);
+      public Integer delete(Integer id) {
             
+            return userRepository.deleteUserByUserNo(id);
       }
       
       public Optional<User> findByEmail(String email) throws UsernameNotFoundException {
