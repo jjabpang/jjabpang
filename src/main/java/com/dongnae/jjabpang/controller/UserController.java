@@ -1,8 +1,11 @@
 package com.dongnae.jjabpang.controller;
 
+import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.User;
 import com.dongnae.jjabpang.repository.user.UserRepository;
 import com.dongnae.jjabpang.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
+@Api(tags = "회원")
 public class UserController {
       
       private final UserService userService;
@@ -33,14 +37,18 @@ public class UserController {
       /**
        * 회원가입 기능
        */
-      @PostMapping("/sign-up")
-      public void signUp(@RequestBody User user) {
+      @ApiOperation(value = "회원 가입")
+      @PostMapping("/users")
+      public Integer signUp(@RequestBody UserSingUpRequestDto dto) {
+//            User user = dto.toEntity();
             
+            return userService.signUp(dto);
       }
       
       /**
        * 회원 목록 조회
        */
+      @ApiOperation(value = "회원 전체 목록 조회")
       @GetMapping("/users")
       public Result retrieveAllUsers() {
             return new Result(userService.findAll());
@@ -49,9 +57,11 @@ public class UserController {
       /**
        * 회원 탈퇴 기능
        */
+      @ApiOperation(value = "회원 탈퇴 기능")
       @DeleteMapping("/users/{id}")
       public void deleteUser(@PathVariable int id) {
             userService.delete(id);
+            
       }
       
       

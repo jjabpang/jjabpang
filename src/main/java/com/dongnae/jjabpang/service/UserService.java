@@ -4,20 +4,27 @@ import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.User;
 import com.dongnae.jjabpang.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 @Transactional(readOnly = true)
 public class UserService {
       
       private final UserRepository userRepository;
       
       public List<User> findAll() {
-            return userRepository.findAll();
+            List<User> userList = userRepository.findAll();
+            for (User user : userList) {
+                  System.out.println("user = " + user);
+            }
+            return userList;
       }
       
       
@@ -26,17 +33,9 @@ public class UserService {
        */
       @Transactional
       public Integer signUp(UserSingUpRequestDto dto) {
-            validateDuplicateMember(dto.getU_email());
-            User user = new User();
-            
-            //pw salt user 저장
-            user.setEmail(dto.getU_email());
-            user.setGender("M");
-            user.setPassword(dto.getPassword());
-            user.setAgreeTos(dto.getAgree_TOS());
-            user.setAgreePicu(dto.getAgree_PICU());
-            user.setAgreePromotion(dto.getAgree_promotion());
-            user.setPhoneNm(dto.getPhone_nm());
+            validateDuplicateMember(dto.getEmail());
+            log.debug("dto.getEmail() = " + dto.getEmail());
+            User user = dto.toEntity();
             
             userRepository.save(user);
             
@@ -44,8 +43,9 @@ public class UserService {
       }
       
       private void validateDuplicateMember(String u_email) {
-            User findUser = userRepository.findByEmail(u_email);
-            if (findUser != null) {
+            Optional<User> findUser = userRepository.findByEmail(u_email);
+            log.debug("findUser = " + findUser);
+            if (findUser.isPresent()) {
                   throw new IllegalStateException("이미 존재하는 회원입니다.");
             }
       }
@@ -56,6 +56,7 @@ public class UserService {
       @Transactional
       public void delete(Integer id) {
             userRepository.deleteUserByUserNo(id);
+            
       }
       
 }
