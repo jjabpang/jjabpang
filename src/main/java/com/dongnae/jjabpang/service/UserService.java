@@ -1,5 +1,6 @@
 package com.dongnae.jjabpang.service;
 
+import com.dongnae.jjabpang.dto.UserInfoModificationDto;
 import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.User;
 import com.dongnae.jjabpang.exception.UsernameNotFoundException;
@@ -40,6 +41,7 @@ public class UserService {
             return user.getUserNo();
       }
       
+      /* 중복 회원 검증*/
       private void validateDuplicateMember(String u_email) {
             Optional<User> findUser = userRepository.findByEmail(u_email);
             log.debug("findUser = " + findUser);
@@ -52,11 +54,14 @@ public class UserService {
        * 회원 탈퇴 기능
        */
       @Transactional
-      public void delete(Integer id) {
-            userRepository.deleteUserByUserNo(id);
+      public Integer delete(Integer id) {
             
+            return userRepository.deleteUserByUserNo(id);
       }
       
+      /**
+       * 이메일로 조회
+       */
       public Optional<User> findByEmail(String email) throws UsernameNotFoundException {
             Optional<User> findUser = userRepository.findByEmail(email);
             findUser
@@ -65,5 +70,27 @@ public class UserService {
             
             return findUser;
       }
+      
+      /**
+       * 회원 정보 수정
+       */
+      @Transactional
+      public Integer updateUserInfo(int id, UserInfoModificationDto dto) {
+            Optional<User> findUser = userRepository.findById(id);
+            if (findUser.isEmpty()) {
+                  return 0;
+            }
+            
+            User user = findUser.get();
+            user.setEmail(dto.getEmail());
+            user.setNickname(dto.getUsername());
+            user.setPhoneNm(dto.getPhoneNm());
+            user.setPassword(dto.getNewPassword());
+            
+            userRepository.save(user);
+            
+            return 1;
+      }
+      
       
 }
