@@ -41,6 +41,7 @@ public class UserService {
             return user.getUserNo();
       }
       
+      /* 중복 회원 검증*/
       private void validateDuplicateMember(String u_email) {
             Optional<User> findUser = userRepository.findByEmail(u_email);
             log.debug("findUser = " + findUser);
