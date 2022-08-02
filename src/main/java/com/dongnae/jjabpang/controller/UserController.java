@@ -122,7 +122,16 @@ public class UserController {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
             
-            return null;
+            Integer affectedRow = userService.updateUserInfo(id, dto);
+            if (affectedRow == 0) {
+                  throw new IllegalArgumentException("회원정보 수정 실패");
+            } else {
+                  message.setStatus(StatusEnum.OK);
+                  message.setMessage("회원정보 수정 성공\n(Data) 반영된 행수");
+                  message.setData(affectedRow);
+            }
+            
+            return new ResponseEntity<>(message, headers, HttpStatus.OK);
       }
       
       @Data
