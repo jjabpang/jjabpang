@@ -34,6 +34,6 @@ public abstract class BaseTimeEntity {
       @CreatedDate
       private LocalDateTime cdt;
       @LastModifiedDate
-      private LocalDateTime upt;
+      private LocalDateTime udt;
       
 }
