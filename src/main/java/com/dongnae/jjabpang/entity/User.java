@@ -6,6 +6,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.LAZY;
+
 /**
  * 회원
  */
@@ -99,4 +101,7 @@ public class User extends BaseTimeEntity {
       @Column(name = "phone_nm", nullable = false)
       private String phoneNm;
       
+      @ApiModelProperty(value = "장바구니")
+      @OneToOne(fetch = LAZY, mappedBy = "user") // 연관관계의 주인이 아닌 객체를 mappedBy
+      private Cart cart;
 }

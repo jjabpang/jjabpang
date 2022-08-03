@@ -5,7 +5,6 @@ import com.dongnae.jjabpang.dto.UserLoginRequestDto;
 import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.User;
 import com.dongnae.jjabpang.exception.UsernameNotFoundException;
-import com.dongnae.jjabpang.repository.user.UserRepository;
 import com.dongnae.jjabpang.repository.user.querydsl.PostUserRepository;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
@@ -47,7 +46,6 @@ import java.util.Map;
 public class UserController {
       
       private final UserService userService;
-      private final UserRepository userRepository;
       private final PostUserRepository postUserRepository;
       
       /**

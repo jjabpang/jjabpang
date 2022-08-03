@@ -5,6 +5,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static javax.persistence.FetchType.LAZY;
 
 /**
  * packageName    : com.dongnae.jjabpang.entity
@@ -18,10 +22,11 @@ import javax.persistence.*;
  * 2022-08-03        jihye94       최초 생성
  */
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "item")
 @ApiModel("상품엔티티")
@@ -49,7 +54,7 @@ public class Item extends BaseTimeEntity {
       private Integer price;
       
       @ApiModelProperty(value = "상품 할인율")
-      @Column(name = "discount_rate", columnDefinition = "NUMERIC(3,2)")
+      @Column(name = "discount_rate", columnDefinition = "NUMERIC(5,2) DEFAULT 0.00")
       private float discountRate;
       
       @ApiModelProperty(value = "배송비")
@@ -61,14 +66,26 @@ public class Item extends BaseTimeEntity {
       private Integer specialFee;
       
       @ApiModelProperty(value = "별점 합")
-      @Column(name = "rating_sum", columnDefinition = "INT")
-      private Integer ratingSum;
+      @Column(name = "rating_sum", columnDefinition = "NUMERIC(4,2) DEFAULT 0.00")
+      private float ratingSum;
       
       @ApiModelProperty(value = "별점 개수")
-      @Column(name = "rating_cnt", columnDefinition = "INT")
+      @Column(name = "rating_cnt", columnDefinition = "INT DEFAULT 0")
       private Integer ratingCnt;
       
       @ApiModelProperty(value = "상품 디테일 사항")
       @Column(name = "detail", columnDefinition = "TEXT")
       private String detail;
+      
+      @OneToMany(fetch = LAZY, mappedBy = "item")
+      @ApiModelProperty(name = "장바구니_상품")
+      @ToString.Exclude
+      List<CartItem> cartItemList = new ArrayList<>();
+      
+      @ManyToOne(fetch = LAZY)
+      @JoinColumn(name = "category")
+      @ApiModelProperty(name = "카테고리")
+      @ToString.Exclude
+      private Category category;
+      
 }

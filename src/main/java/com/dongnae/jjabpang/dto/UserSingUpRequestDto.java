@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 /**
  * packageName    : com.dongnae.jjabpang.dto
  * fileName       : UserSingUpDto
@@ -30,11 +28,9 @@ public class UserSingUpRequestDto {
       private String agree_promotion;
       private String phoneNm;
       private String del_yn;
-      private LocalDateTime cdt;
-      private LocalDateTime udt;
       
       @Builder
-      public UserSingUpRequestDto(String email, String password, String username, String agree_TOS, String agree_PICU, String gender, String agree_promotion, String phoneNm, String del_yn, LocalDateTime cdt, LocalDateTime udt) {
+      public UserSingUpRequestDto(String email, String password, String username, String agree_TOS, String agree_PICU, String gender, String agree_promotion, String phoneNm, String del_yn) {
             this.email = email;
             this.password = password;
             this.username = username;
@@ -44,8 +40,6 @@ public class UserSingUpRequestDto {
             this.agree_promotion = agree_promotion;
             this.phoneNm = phoneNm;
             this.del_yn = del_yn;
-            this.cdt = cdt;
-            this.udt = LocalDateTime.now();
       }
       
       public UserSingUpRequestDto(String email) {
