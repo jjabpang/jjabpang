@@ -5,7 +5,6 @@ import com.dongnae.jjabpang.dto.UserLoginRequestDto;
 import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.User;
 import com.dongnae.jjabpang.exception.UsernameNotFoundException;
-import com.dongnae.jjabpang.repository.user.UserRepository;
 import com.dongnae.jjabpang.repository.user.querydsl.PostUserRepository;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
@@ -47,7 +46,6 @@ import java.util.Map;
 public class UserController {
       
       private final UserService userService;
-      private final UserRepository userRepository;
       private final PostUserRepository postUserRepository;
       
       /**
@@ -61,7 +59,7 @@ public class UserController {
             headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
             
             // User user = dto.toEntity();
-            Integer userNo = userService.signUp(dto);
+            Long userNo = userService.signUp(dto);
             
             
             message.setStatus(StatusEnum.OK);
@@ -123,7 +121,7 @@ public class UserController {
       
       @ApiOperation(value = "회원 정보 수정")
       @PutMapping("/users/{id}")
-      public ResponseEntity<Message> modify(@PathVariable int id, @RequestBody UserInfoModificationDto dto) {
+      public ResponseEntity<Message> modify(@PathVariable Long id, @RequestBody UserInfoModificationDto dto) {
             Message message = new Message();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));

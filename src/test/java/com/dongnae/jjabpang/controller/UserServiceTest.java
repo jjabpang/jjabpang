@@ -1,19 +1,18 @@
 package com.dongnae.jjabpang.controller;
 
 import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
+import com.dongnae.jjabpang.entity.Cart;
 import com.dongnae.jjabpang.entity.Role;
 import com.dongnae.jjabpang.entity.User;
 import com.dongnae.jjabpang.repository.user.UserCustomRepositoryImpl;
 import com.dongnae.jjabpang.repository.user.UserRepository;
 import com.dongnae.jjabpang.service.UserService;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,7 +56,7 @@ public class UserServiceTest {
             dto.setAgree_promotion("0");
             
             //when
-            Integer saveId = userService.signUp(dto);
+            Long saveId = userService.signUp(dto);
             
             Optional<User> findUser = userRepository.findById(saveId);
             
@@ -68,8 +67,8 @@ public class UserServiceTest {
       
       @Test
       public void duplicated_email_test() {
-            UserSingUpRequestDto user1 = new UserSingUpRequestDto("qkrtkdwns3410", "1234", "1234", "0", "0", "m", "0", "01011111111", "n", LocalDateTime.now(), LocalDateTime.now());
-            UserSingUpRequestDto user2 = new UserSingUpRequestDto("qkrtkdwns3410", "1234", "1234", "0", "0", "m", "0", "01011111111", "n", LocalDateTime.now(), LocalDateTime.now());
+            UserSingUpRequestDto user1 = new UserSingUpRequestDto("qkrtkdwns3410", "1234", "1234", "0", "0", "m", "0", "01011111111", "n");
+            UserSingUpRequestDto user2 = new UserSingUpRequestDto("qkrtkdwns3410", "1234", "1234", "0", "0", "m", "0", "01011111111", "n");
             
             userService.signUp(user1);
             IllegalStateException e = assertThrows(IllegalStateException.class, () -> userService.signUp(user2));
@@ -79,8 +78,9 @@ public class UserServiceTest {
       
       @Test
       void findAll() {
-            User user = new User(1, "qkrtkdwns3410@navber", "1234", "951103", "박", "0", "0", "0", "m", Role.b, "n", LocalDateTime.now(), LocalDateTime.now(), "01011111111");
-            User user2 = new User(2, "qkrtkdwns3410@navber", "1234", "951103", "박", "0", "0", "0", "m", Role.b, "n", LocalDateTime.now(), LocalDateTime.now(), "01011111111");
+            
+            User user = new User(1L, "qkrtkdwns3410@navber", "1234", "951103", "박", "0", "0", "0", "m", Role.b, "n", "01011111111", new Cart());
+            User user2 = new User(2L, "qkrtkdwns3410@navber", "1234", "951103", "박", "0", "0", "0", "m", Role.b, "n", "01011111111", new Cart());
             
             userRepository.save(user);
             userRepository.save(user2);

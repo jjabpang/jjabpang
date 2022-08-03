@@ -5,7 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+
+import static javax.persistence.FetchType.LAZY;
 
 /**
  * 회원
@@ -19,7 +20,7 @@ import java.time.LocalDateTime;
 @ToString
 @Table(name = "user")
 @ApiModel("회원엔티티")
-public class User {
+public class User extends BaseTimeEntity {
       
       /**
        * 회원번호
@@ -28,7 +29,7 @@ public class User {
       @Column(name = "user_no", nullable = false)
       @GeneratedValue(strategy = GenerationType.IDENTITY)
       @ApiModelProperty(value = "유저번호", required = true)
-      private Integer userNo;
+      private Long userNo;
       
       /**
        * 이메일
@@ -93,17 +94,6 @@ public class User {
       @Column(name = "del_yn", columnDefinition = "varchar(5) default 'n'")
       private String delYn;
       
-      /**
-       * 가입일자
-       */
-      @Column(name = "cdt", updatable = false, columnDefinition = "DATETIME default current_timestamp")
-      private LocalDateTime cdt;
-      
-      /**
-       * 회원정보수정일자
-       */
-      @Column(name = "udt", columnDefinition = "DATETIME default current_timestamp")
-      private LocalDateTime udt;
       
       /**
        * 휴대폰 번호
@@ -111,4 +101,7 @@ public class User {
       @Column(name = "phone_nm", nullable = false)
       private String phoneNm;
       
+      @ApiModelProperty(value = "장바구니")
+      @OneToOne(fetch = LAZY, mappedBy = "user") // 연관관계의 주인이 아닌 객체를 mappedBy
+      private Cart cart;
 }
