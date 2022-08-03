@@ -31,7 +31,7 @@ public class UserService {
        * 회원가입 기능
        */
       @Transactional
-      public Integer signUp(UserSingUpRequestDto dto) {
+      public Long signUp(UserSingUpRequestDto dto) {
             validateDuplicateMember(dto.getEmail());
             log.debug("dto.getEmail() = " + dto.getEmail());
             User user = dto.toEntity();
@@ -75,7 +75,7 @@ public class UserService {
        * 회원 정보 수정
        */
       @Transactional
-      public Integer updateUserInfo(int id, UserInfoModificationDto dto) {
+      public Integer updateUserInfo(Long id, UserInfoModificationDto dto) {
             Optional<User> findUser = userRepository.findById(id);
             if (findUser.isEmpty()) {
                   return 0;

@@ -61,7 +61,7 @@ public class UserController {
             headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
             
             // User user = dto.toEntity();
-            Integer userNo = userService.signUp(dto);
+            Long userNo = userService.signUp(dto);
             
             
             message.setStatus(StatusEnum.OK);
@@ -123,7 +123,7 @@ public class UserController {
       
       @ApiOperation(value = "회원 정보 수정")
       @PutMapping("/users/{id}")
-      public ResponseEntity<Message> modify(@PathVariable int id, @RequestBody UserInfoModificationDto dto) {
+      public ResponseEntity<Message> modify(@PathVariable Long id, @RequestBody UserInfoModificationDto dto) {
             Message message = new Message();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));

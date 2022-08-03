@@ -1,7 +1,6 @@
 package com.dongnae.jjabpang.dto;
 
 import com.dongnae.jjabpang.entity.User;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -64,8 +63,6 @@ public class UserSingUpRequestDto {
                        .agreePromotion(agree_promotion)
                        .phoneNm(phoneNm)
                        .delYn(del_yn)
-                       .cdt(cdt)
-                       .udt(udt)
                        .build();
       }
       

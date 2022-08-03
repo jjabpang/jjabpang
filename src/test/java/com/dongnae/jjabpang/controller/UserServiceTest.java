@@ -6,7 +6,6 @@ import com.dongnae.jjabpang.entity.User;
 import com.dongnae.jjabpang.repository.user.UserCustomRepositoryImpl;
 import com.dongnae.jjabpang.repository.user.UserRepository;
 import com.dongnae.jjabpang.service.UserService;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -79,8 +78,8 @@ public class UserServiceTest {
       
       @Test
       void findAll() {
-            User user = new User(1, "qkrtkdwns3410@navber", "1234", "951103", "박", "0", "0", "0", "m", Role.b, "n", LocalDateTime.now(), LocalDateTime.now(), "01011111111");
-            User user2 = new User(2, "qkrtkdwns3410@navber", "1234", "951103", "박", "0", "0", "0", "m", Role.b, "n", LocalDateTime.now(), LocalDateTime.now(), "01011111111");
+            User user = new User(1L, "qkrtkdwns3410@navber", "1234", "951103", "박", "0", "0", "0", "m", Role.b, "n", "01011111111");
+            User user2 = new User(2L, "qkrtkdwns3410@navber", "1234", "951103", "박", "0", "0", "0", "m", Role.b, "n", "01011111111");
             
             userRepository.save(user);
             userRepository.save(user2);
