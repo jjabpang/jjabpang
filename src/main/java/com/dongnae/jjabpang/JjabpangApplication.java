@@ -2,6 +2,8 @@ package com.dongnae.jjabpang;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @SpringBootApplication
 public class JjabpangApplication {
@@ -10,4 +12,8 @@ public class JjabpangApplication {
             SpringApplication.run(JjabpangApplication.class, args);
       }
       
+      @Bean
+      public InternalResourceViewResolver defaultViewResolver() {
+            return new InternalResourceViewResolver();
+      }
 }

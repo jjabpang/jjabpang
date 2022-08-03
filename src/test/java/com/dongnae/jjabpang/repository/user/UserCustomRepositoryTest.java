@@ -27,20 +27,5 @@ class UserCustomRepositoryTest {
       
       }
       
-      @Test
-      public void save() throws Exception {
-            //given
-            User user = new User();
-            user.setEmail("qkrtkdwn3410");
-            user.setPhoneNm("1010101010");
-            user.setPassword("1010101010");
-            userRepository.save(user);
-            
-            //when
-            User findUser = userRepository.findByEmail(user.getEmail());
-            
-            //then
-            
-            assertThat(user.getEmail()).isEqualTo(findUser.getEmail());
-      }
+      
 }

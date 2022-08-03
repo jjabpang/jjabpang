@@ -15,9 +15,9 @@ import lombok.Getter;
 
 @Getter
 public enum Role {
-      BUYER("B", "구매자"),
-      SELLER("S", "판매자"),
-      MANGER("M", "관리자");
+      b("b", "구매자"),
+      s("s", "판매자"),
+      m("m", "관리자");
       
       private String code;
       private String name;

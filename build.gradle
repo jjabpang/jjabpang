@@ -1,10 +1,3 @@
-// 1. queryDsl version 정보 추가
-buildscript {
-    ext {
-        queryDslVersion = "5.0.0"
-    }
-}
-
 plugins {
     id 'org.springframework.boot' version '2.2.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.12.RELEASE'
@@ -29,8 +22,7 @@ repositories {
 
 dependencies {
 
-    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
-    implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+    implementation 'com.querydsl:querydsl-jpa'
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-hateoas'
@@ -42,36 +34,31 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8'
+
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
 
-/*
- * queryDSL 설정 추가
- */
-// querydsl에서 사용할 경로 설정
+//querydsl 추가 시작
 def querydslDir = "$buildDir/generated/querydsl"
-// JPA 사용 여부와 사용할 경로를 설정
 querydsl {
     jpa = true
     querydslSourcesDir = querydslDir
 }
-// build 시 사용할 sourceSet 추가
 sourceSets {
     main.java.srcDir querydslDir
 }
-// querydsl 컴파일시 사용할 옵션 설정
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
 compileQuerydsl {
     options.annotationProcessorPath = configurations.querydsl
-}
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-    querydsl.extendsFrom compileClasspath
 }
 //querydsl 추가 끝
 
