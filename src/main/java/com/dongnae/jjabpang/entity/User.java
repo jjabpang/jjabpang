@@ -3,7 +3,6 @@ package com.dongnae.jjabpang.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 /**
  * 회원
@@ -23,7 +22,7 @@ public class User extends BaseTimeEntity {
       @Id
       @Column(name = "user_no", nullable = false)
       @GeneratedValue(strategy = GenerationType.IDENTITY)
-      private Integer userNo;
+      private Long userNo;
       
       /**
        * 이메일
@@ -86,17 +85,6 @@ public class User extends BaseTimeEntity {
       @Column(name = "del_yn")
       private String delYn;
       
-      /**
-       * 가입일자
-       */
-      @Column(name = "cdt")
-      private LocalDateTime cdt;
-      
-      /**
-       * 회원정보수정일자
-       */
-      @Column(name = "udt")
-      private LocalDateTime udt;
       
       /**
        * 휴대폰 번호

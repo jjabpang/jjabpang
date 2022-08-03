@@ -49,7 +49,7 @@ public class UserServiceTest {
             dto.setAgree_promotion("0");
             
             //when
-            Integer saveId = userService.signUp(dto);
+            Long saveId = userService.signUp(dto);
             
             Optional<User> findUser = userRepository.findById(saveId);
             

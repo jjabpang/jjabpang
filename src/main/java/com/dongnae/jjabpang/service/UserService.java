@@ -25,7 +25,7 @@ public class UserService {
        * 회원가입 기능
        */
       @Transactional
-      public Integer signUp(UserSingUpRequestDto dto) {
+      public Long signUp(UserSingUpRequestDto dto) {
             validateDuplicateMember(dto.getU_email());
             User user = new User();
             
