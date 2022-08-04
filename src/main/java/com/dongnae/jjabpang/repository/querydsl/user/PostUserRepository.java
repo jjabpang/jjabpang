@@ -1,4 +1,4 @@
-package com.dongnae.jjabpang.repository.user.querydsl;
+package com.dongnae.jjabpang.repository.querydsl.user;
 /*
  *packageName    : com.dongnae.jjabpang.repository.user.querydsl
  * fileName       : PostUserRepository
@@ -18,5 +18,6 @@ public interface PostUserRepository {
       @Query(name = "핸드폰 번호로 이메일을 가져옵니다.")
       String findEmailByPhoneNm(String phoneNm);
       
+      @Query(name = "사용자 실명과 이메일로 비밀번호를 검색합니다.")
       String findPwdByUsernameAndEmail(String username, String email);
 }

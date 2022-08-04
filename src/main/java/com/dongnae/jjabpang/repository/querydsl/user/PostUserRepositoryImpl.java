@@ -1,4 +1,4 @@
-package com.dongnae.jjabpang.repository.user.querydsl;
+package com.dongnae.jjabpang.repository.querydsl.user;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
