@@ -1,4 +1,4 @@
-package com.dongnae.jjabpang.dto;
+package com.dongnae.jjabpang.entity.dto;
 
 import lombok.Data;
 
@@ -14,7 +14,7 @@ import lombok.Data;
  * 2022-08-01        ipeac       최초 생성
  */
 @Data
-public class DefaultResponseDTO {
+public class DefaultResponseDto {
       private String timeStamp;
       private int status;
       private String message;

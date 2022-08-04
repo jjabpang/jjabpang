@@ -24,7 +24,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Entity(name = "orders")
-@Table()
+@Table(name = "orders")
 @ApiModel("주문엔티티")
 public class Order extends BaseTimeEntity {
       @Id
@@ -34,14 +34,16 @@ public class Order extends BaseTimeEntity {
       private Long orderNo;
       
       @ApiModelProperty(name = "상품 개수")
-      @Column(name = "quantity")
+      @Column(name = "quantity", columnDefinition = "INT DEFAULT 0")
       private Integer quantity;
       
       @Enumerated(EnumType.STRING)
-      @Column(name = "status")
+      @Column(name = "status", columnDefinition = "VARCHAR(10)")
+      @ApiModelProperty(name = "상품 상태")
       private Status status;
       
-      @Column(name = "memo", length = 100)
+      @Column(name = "memo", length = 100, columnDefinition = "VARCHAR(300)")
+      @ApiModelProperty(name = "상품 메모")
       private String memo;
       
       

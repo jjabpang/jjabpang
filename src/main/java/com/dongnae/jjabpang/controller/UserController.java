@@ -1,11 +1,11 @@
 package com.dongnae.jjabpang.controller;
 
-import com.dongnae.jjabpang.dto.UserInfoModificationDto;
-import com.dongnae.jjabpang.dto.UserLoginRequestDto;
-import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.User;
+import com.dongnae.jjabpang.entity.dto.UserInfoModificationDto;
+import com.dongnae.jjabpang.entity.dto.UserLoginRequestDto;
+import com.dongnae.jjabpang.entity.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.exception.UsernameNotFoundException;
-import com.dongnae.jjabpang.repository.user.querydsl.PostUserRepository;
+import com.dongnae.jjabpang.repository.querydsl.user.QUserRepository;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
 import com.dongnae.jjabpang.service.UserService;
@@ -46,7 +46,7 @@ import java.util.Map;
 public class UserController {
       
       private final UserService userService;
-      private final PostUserRepository postUserRepository;
+      private final QUserRepository qUserRepository;
       
       /**
        * 회원가입 기능
@@ -144,7 +144,7 @@ public class UserController {
             
             Map<String, String> resultMap = new HashMap<>();
             
-            String email = postUserRepository.findEmailByPhoneNm(phoneNum.get("phoneNum"));
+            String email = qUserRepository.findEmailByPhoneNm(phoneNum.get("phoneNum"));
             
             if (email == null) {
                   throw new IllegalStateException("등록된 이메일이 없습니다");
@@ -159,7 +159,7 @@ public class UserController {
       public Result findPwd(@RequestBody UsernameAndEmailDto dto) {
             Map<String, String> resultMap = new HashMap<>();
             
-            String pwd = postUserRepository.findPwdByUsernameAndEmail(dto.getUsername(), dto.getEmail());
+            String pwd = qUserRepository.findPwdByUsernameAndEmail(dto.getUsername(), dto.getEmail());
             
             if (pwd == null) {
                   throw new IllegalStateException("등록된 이메일 혹은 이름이 없습니다.");

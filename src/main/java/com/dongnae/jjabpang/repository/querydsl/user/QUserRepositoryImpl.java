@@ -1,4 +1,4 @@
-package com.dongnae.jjabpang.repository.user.querydsl;
+package com.dongnae.jjabpang.repository.querydsl.user;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import static com.dongnae.jjabpang.entity.QUser.user;
  */
 @Repository
 @RequiredArgsConstructor
-public class PostUserRepositoryImpl implements PostUserRepository {
+public class QUserRepositoryImpl implements QUserRepository {
       
       private final JPAQueryFactory qf;
       

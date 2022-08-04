@@ -28,13 +28,14 @@ import static javax.persistence.FetchType.LAZY;
 @Setter
 @ToString
 @Entity(name = "category")
+@Table(name = "category")
 @ApiModel("카테고리")
 public class Category extends BaseTimeEntity {
       @Id
       @Column(name = "category_no", nullable = false)
       @GeneratedValue(strategy = GenerationType.IDENTITY)
       @ApiModelProperty(name = "카테고리 번호", required = true)
-      private Long category_no;
+      private Long categoryNo;
       
       @Column(name = "category_name", length = 50)
       @ApiModelProperty(name = "카테고리 이름")
@@ -48,9 +49,8 @@ public class Category extends BaseTimeEntity {
       @ApiModelProperty(name = "카테고리 깊이")
       private Integer categoryDepth;
       
-      @OneToMany(mappedBy = "category", fetch = LAZY)
-      @ApiModelProperty(name = "한 카테고리에는 여러 아이템이 들어갈 수 있음")
+      @OneToMany(fetch = LAZY, mappedBy = "category")
+      @ApiModelProperty(name = "카테고리안의 상품")
       @ToString.Exclude
-      private List<Item> items = new ArrayList<>();
-      
+      List<Item> items = new ArrayList<>();
 }

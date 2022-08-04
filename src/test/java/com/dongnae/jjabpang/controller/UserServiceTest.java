@@ -1,9 +1,9 @@
 package com.dongnae.jjabpang.controller;
 
-import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.Cart;
 import com.dongnae.jjabpang.entity.Role;
 import com.dongnae.jjabpang.entity.User;
+import com.dongnae.jjabpang.entity.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.repository.user.UserCustomRepositoryImpl;
 import com.dongnae.jjabpang.repository.user.UserRepository;
 import com.dongnae.jjabpang.service.UserService;
