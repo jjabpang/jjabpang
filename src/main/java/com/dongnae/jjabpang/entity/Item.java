@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
@@ -76,6 +77,10 @@ public class Item extends BaseTimeEntity {
       @Column(name = "detail", columnDefinition = "TEXT")
       private String detail;
       
+      @ApiModelProperty(value = "상품 재고")
+      @Column(name = "quantity", columnDefinition = "INT")
+      private Integer quantity;
+      
       @OneToMany(fetch = LAZY, mappedBy = "item")
       @ApiModelProperty(name = "장바구니_상품")
       @ToString.Exclude
@@ -87,4 +92,17 @@ public class Item extends BaseTimeEntity {
       @ToString.Exclude
       private Category category;
       
+      @OneToMany(fetch = LAZY, mappedBy = "item")
+      @ApiModelProperty(name = "상품 주문 목록")
+      @ToString.Exclude
+      private List<OrderItem> orderList = new ArrayList<>();
+      
+      public void removeStock(int quantity) {
+      
+      
+      }
+      
+      public void addStock(Integer quantity) {
+      
+      }
 }

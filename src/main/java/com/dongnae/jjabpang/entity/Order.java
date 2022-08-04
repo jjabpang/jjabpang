@@ -5,6 +5,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static javax.persistence.FetchType.LAZY;
 
 /**
  * packageName    : com.dongnae.jjabpang.entity
@@ -45,6 +49,30 @@ public class Order extends BaseTimeEntity {
       @Column(name = "memo", length = 100, columnDefinition = "VARCHAR(300)")
       @ApiModelProperty(name = "상품 메모")
       private String memo;
+      
+      @ManyToOne(fetch = LAZY)
+      @JoinColumn(name = "user_no")
+      @ApiModelProperty(name = "회원번호")
+      private User user;
+      
+      @ManyToOne(fetch = LAZY)
+      @JoinColumn(name = "item_no")
+      @ApiModelProperty(name = "상품 번호")
+      private Item item;
+      
+      @OneToOne(fetch = LAZY)
+      @JoinColumn(name = "delivery_no")
+      private Delivery delivery;
+      
+      @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "order")
+      private List<OrderItem> orderItems = new ArrayList<>();
+      
+      /*연관관계*/
+      public void setMember(User user) {
+            this.user = user;
+            user.getOrderList()
+                .add(this);
+      }
       
       
 }
