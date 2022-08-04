@@ -1,7 +1,6 @@
 package com.dongnae.jjabpang.service;
 
 import com.dongnae.jjabpang.entity.Item;
-import com.dongnae.jjabpang.entity.Order;
 import com.dongnae.jjabpang.entity.User;
 import com.dongnae.jjabpang.entity.dto.OrderRequestDto;
 import com.dongnae.jjabpang.repository.item.ItemRepository;
@@ -44,12 +43,7 @@ public class OrderService {
             User user = userRepository.findByUserNo(orderRequestDto.getUser()
                                                                    .getUserNo());
             List<Item> itemList = orderRequestDto.getItem();
-            for (Item item : itemList) {
-                  Order order = new Order();
-                  order.setUser(user);
-                  order.setItem(item);
-                  order.set
-            }
+            
             
             return 1;
       }

@@ -96,4 +96,13 @@ public class Item extends BaseTimeEntity {
       @ApiModelProperty(name = "상품 주문 목록")
       @ToString.Exclude
       private List<OrderItem> orderList = new ArrayList<>();
+      
+      public void removeStock(int quantity) {
+      
+      
+      }
+      
+      public void addStock(Integer quantity) {
+      
+      }
 }

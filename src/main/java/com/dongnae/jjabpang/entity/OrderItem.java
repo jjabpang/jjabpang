@@ -34,5 +34,32 @@ public class OrderItem extends BaseTimeEntity {
       private Item item;
       
       /*==생성 메서드==*/
+      public static OrderItem createOrderItem(Item item, int price, int quantity) {
+            OrderItem orderItem = new OrderItem();
+            orderItem.setItem(item);
+            orderItem.setPrice(price);
+            orderItem.setQuantity(quantity);
+            
+            item.removeStock(quantity);
+            return orderItem;
+      }
+      
+      /*==비즈니스 로직==*/
+      
+      /**
+       * 주문 취소
+       */
+      public void cancle() {
+            getItem().addStock(quantity);
+      }
+      
+      /*==조회 로직 ==*/
+      
+      /**
+       * 주문 상품 전체 가격 조회
+       */
+      public int getTotalPrice() {
+            return quantity * price;
+      }
       
 }
