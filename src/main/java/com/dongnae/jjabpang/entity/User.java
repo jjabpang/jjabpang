@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -104,4 +106,12 @@ public class User extends BaseTimeEntity {
       @ApiModelProperty(value = "장바구니")
       @OneToOne(fetch = LAZY, mappedBy = "user") // 연관관계의 주인이 아닌 객체를 mappedBy
       private Cart cart;
+      
+      @ApiModelProperty(value = "배송지")
+      @OneToMany(fetch = LAZY, mappedBy = "user")
+      private List<Delivery> deliveryList = new ArrayList<>();
+      
+      @ApiModelProperty(value = "주문목록")
+      @OneToMany(fetch = LAZY, mappedBy = "user")
+      private List<Order> orderList = new ArrayList<>();
 }

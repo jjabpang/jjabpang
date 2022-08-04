@@ -19,11 +19,16 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.nio.charset.StandardCharsets;
 
 @RequestMapping("/api/order/")
 @RestController
@@ -39,8 +44,15 @@ public class OrderController {
       @ApiModelProperty(name = "상품 주문")
       @PostMapping("/orderItem")
       public ResponseEntity<Message> order(@RequestBody OrderRequestDto orderRequestDto) {
-            Message message = new Message();
+            log.debug("OrderController.order ");
+            log.debug("orderRequestDto = " + orderRequestDto);
             
-            return new ResponseEntity<>()
+            Message message = new Message();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
+            
+            orderService.order(orderRequestDto);
+            
+            return new ResponseEntity<>(message, headers, HttpStatus.OK);
       }
 }
