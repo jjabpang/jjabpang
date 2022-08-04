@@ -1,7 +1,10 @@
-package com.dongnae.jjabpang.repository.querydsl.order;
+package com.dongnae.jjabpang.entity.dto;
+
+import lombok.Data;
+
 /*
- *packageName    : com.dongnae.jjabpang.repository.querydsl.order
- * fileName       : PostOrderRepository
+ *packageName    : com.dongnae.jjabpang.entity.dto
+ * fileName       : ItemSearchCondition
  * author         : ipeac
  * date           : 2022-08-04
  * description    :
@@ -10,7 +13,8 @@ package com.dongnae.jjabpang.repository.querydsl.order;
  * -----------------------------------------------------------
  * 2022-08-04        ipeac       최초 생성
  */
-
-public interface PostOrderRepository {
-
+@Data
+public class ItemSearchCondition {
+      private String categoryNo;
+      private String name;
 }

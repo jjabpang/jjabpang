@@ -14,7 +14,7 @@ package com.dongnae.jjabpang.repository.querydsl.user;
 
 import org.springframework.data.jpa.repository.Query;
 
-public interface PostUserRepository {
+public interface QUserRepository {
       @Query(name = "핸드폰 번호로 이메일을 가져옵니다.")
       String findEmailByPhoneNm(String phoneNm);
       

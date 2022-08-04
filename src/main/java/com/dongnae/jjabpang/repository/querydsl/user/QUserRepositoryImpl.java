@@ -19,7 +19,7 @@ import static com.dongnae.jjabpang.entity.QUser.user;
  */
 @Repository
 @RequiredArgsConstructor
-public class PostUserRepositoryImpl implements PostUserRepository {
+public class QUserRepositoryImpl implements QUserRepository {
       
       private final JPAQueryFactory qf;
       
