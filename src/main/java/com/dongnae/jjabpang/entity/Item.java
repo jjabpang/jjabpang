@@ -31,13 +31,13 @@ import static javax.persistence.FetchType.LAZY;
 @ApiModel("상품엔티티")
 public class Item extends BaseTimeEntity {
       @Id
-      @Column(name = "itemNo", nullable = false)
+      @Column(name = "item_no", nullable = false)
       @GeneratedValue(strategy = GenerationType.IDENTITY)
       @ApiModelProperty(name = "상품 번호", required = true)
       private Long itemNo;
       
       @ApiModelProperty(value = "브랜드 이름")
-      @Column(name = "brandName", columnDefinition = "VARCHAR(100)")
+      @Column(name = "brand_name", columnDefinition = "VARCHAR(100)")
       private String brandName;
       
       @ApiModelProperty(value = "상품 제목")
@@ -53,23 +53,23 @@ public class Item extends BaseTimeEntity {
       private Integer price;
       
       @ApiModelProperty(value = "상품 할인율")
-      @Column(name = "discountRate", columnDefinition = "NUMERIC(5,2) DEFAULT 0.00")
+      @Column(name = "discount_rate", columnDefinition = "NUMERIC(5,2) DEFAULT 0.00")
       private float discountRate;
       
       @ApiModelProperty(value = "배송비")
-      @Column(name = "deliveryFee", columnDefinition = "INT")
+      @Column(name = "delivery_fee", columnDefinition = "INT")
       private Integer deliveryFee;
       
       @ApiModelProperty(value = "특가")
-      @Column(name = "specialPrice", columnDefinition = "INT")
+      @Column(name = "special_price", columnDefinition = "INT")
       private Integer specialFee;
       
       @ApiModelProperty(value = "별점 합")
-      @Column(name = "ratingSum", columnDefinition = "NUMERIC(4,2) DEFAULT 0.00")
+      @Column(name = "rating_sum", columnDefinition = "NUMERIC(4,2) DEFAULT 0.00")
       private float ratingSum;
       
       @ApiModelProperty(value = "별점 개수")
-      @Column(name = "ratingCnt", columnDefinition = "INT DEFAULT 0")
+      @Column(name = "rating_cnt", columnDefinition = "INT DEFAULT 0")
       private Integer ratingCnt;
       
       @ApiModelProperty(value = "상품 디테일 사항")

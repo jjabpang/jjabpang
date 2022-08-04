@@ -11,14 +11,15 @@ package com.dongnae.jjabpang.entity.dto;
  * 2022-08-04        ipeac       최초 생성
  */
 
+import com.dongnae.jjabpang.entity.BaseTimeEntity;
 import com.querydsl.core.annotations.QueryProjection;
-import lombok.Data;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Data
-public class ItemCategoryOrNameRequestDto implements Serializable {
+@Getter
+public class ItemCategoryOrNameRequestDto extends BaseTimeEntity implements Serializable {
       private final LocalDateTime cdt;
       private final LocalDateTime udt;
       private final Long itemNo;
@@ -44,5 +45,6 @@ public class ItemCategoryOrNameRequestDto implements Serializable {
             this.specialFee = specialFee;
             this.ratingSum = ratingSum;
             this.ratingCnt = ratingCnt;
+            
       }
 }
