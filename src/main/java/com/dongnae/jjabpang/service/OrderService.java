@@ -13,7 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /*
  *packageName    : com.dongnae.jjabpang.service
@@ -43,11 +45,10 @@ public class OrderService {
       @Transactional
       public Integer order(OrderRequestDto orderRequestDto) {
             // 유저번호로 유저찾기
-            User user = userRepository.findByUserNo(orderRequestDto.getUser()
-                                                                   .getUserNo());
+            User user = userRepository.findByUserNo(orderRequestDto.getUserNo());
             
             // 구매하려고 하는 아아템의 리스트
-            Map<Item, Integer> itemAndCountMap = orderRequestDto.getItemAndCountMap();
+            Map<String, Integer> itemAndCountMap = orderRequestDto.getItemNoAndCountMap();
             log.debug("itemAndCountMap = " + itemAndCountMap);
             
             Delivery delivery = new Delivery();
@@ -56,13 +57,20 @@ public class OrderService {
             delivery.setDeliveryStatus(DeliveryStatus.READY);
             
             // 다건 상품  | 주문 상품 생성
-            for (Map.Entry<Item, Integer> item : itemAndCountMap.entrySet()) {
-                  OrderItem orderItem = OrderItem.createOrderItem(item.getKey(), item.getKey()
-                                                                                     .getPrice(), item.getValue());
+            for (Map.Entry<String, Integer> item : itemAndCountMap.entrySet()) {
+                  
+                  List<Item> result = itemRepository.findById(Long.valueOf(item.getKey()))
+                                                    .stream()
+                                                    .collect(Collectors.toList());
+                  
+                  OrderItem orderItem = OrderItem.createOrderItem(result.get(0), result.get(0)
+                                                                                       .getPrice(), result.get(0)
+                                                                                                          .getQuantity());
                   
                   Order order = Order.createOrder(user, delivery, orderItem);
                   
                   orderRepository.save(order);
+                  
             }
             
             //전체 상품 개수

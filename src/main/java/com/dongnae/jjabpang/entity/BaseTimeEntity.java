@@ -7,10 +7,9 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * packageName    : com.dongnae.jjabpang.entity
@@ -36,10 +35,10 @@ import java.time.LocalDateTime;
 public abstract class BaseTimeEntity {
       @CreatedDate
       @Column(name = "cdt", updatable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
-      private LocalDateTime cdt;
+      private String cdt;
       @LastModifiedDate
       @Column(name = "udt", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
-      private LocalDateTime udt;
+      private String udt;
       
       @CreatedBy
       @Column(name = "crt_by")
@@ -48,4 +47,17 @@ public abstract class BaseTimeEntity {
       @LastModifiedBy
       @Column(name = "upt_by")
       private String uptBy;
+      
+      @PrePersist
+      public void onPrePersist() {
+            this.cdt = LocalDateTime.now()
+                                    .format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+            this.udt = this.cdt;
+      }
+      
+      @PreUpdate
+      public void onPreUpdate() {
+            this.udt = LocalDateTime.now()
+                                    .format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+      }
 }

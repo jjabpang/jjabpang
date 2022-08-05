@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * packageName    : com.dongnae.jjabpang.entity
@@ -20,19 +19,19 @@ import java.time.LocalDateTime;
  */
 @Data
 public class OrderListByEmailAndPagingResponseDto implements Serializable {
-      private final LocalDateTime cdt;
-      private final LocalDateTime udt;
-      private final Long orderNo;
-      private final Status status;
-      private final String memo;
-      private final String itemTitle;
-      private final String itemImage;
-      private final int orderQuantity;
-      private final int orderPrice;
+      private String cdt;
+      private String udt;
+      private Long orderNo;
+      private Status status;
+      private String memo;
+      private String itemTitle;
+      private String itemImage;
+      private int orderQuantity;
+      private int orderPrice;
       
       @QueryProjection
       @Builder
-      public OrderListByEmailAndPagingResponseDto(LocalDateTime cdt, LocalDateTime udt, Long orderNo, Status status, String memo, String itemTitle, String itemImage, int orderQuantity, int orderPrice) {
+      public OrderListByEmailAndPagingResponseDto(String cdt, String udt, Long orderNo, Status status, String memo, String itemTitle, String itemImage, int orderQuantity, int orderPrice) {
             this.cdt = cdt;
             this.udt = udt;
             this.orderNo = orderNo;
