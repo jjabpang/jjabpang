@@ -2,7 +2,7 @@ package com.dongnae.jjabpang.repository.querydsl.item;
 
 import com.dongnae.jjabpang.entity.Item;
 import com.dongnae.jjabpang.entity.dto.ItemCategoryOrNameResponseDto;
-import com.dongnae.jjabpang.entity.dto.QItemCategoryOrNameRequestDto;
+import com.dongnae.jjabpang.entity.dto.QItemCategoryOrNameResponseDto;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -40,7 +40,7 @@ public class QItemRepositoryImpl implements QItemRepository {
        */
       @Override
       public Page<ItemCategoryOrNameResponseDto> findByCategoryAndNameOrderByCdtDESC(String categoryNo, String name, Pageable pageable) {
-            List<ItemCategoryOrNameResponseDto> content = queryFactory.select(new QItemCategoryOrNameRequestDto(item.cdt, item.udt, item.itemNo, item.title, item.image, item.price, item.discountRate, item.deliveryFee, item.specialFee, item.ratingSum, item.ratingCnt))
+            List<ItemCategoryOrNameResponseDto> content = queryFactory.select(new QItemCategoryOrNameResponseDto(item.itemNo, item.title, item.image, item.price, item.discountRate, item.deliveryFee, item.specialFee, item.ratingSum, item.ratingCnt))
                                                                       .from(item)
                                                                       .leftJoin(item.category, category)
                                                                       .where(

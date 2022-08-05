@@ -1,13 +1,10 @@
 package com.dongnae.jjabpang.entity.dto;
 
-import com.dongnae.jjabpang.entity.Item;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
@@ -22,21 +19,12 @@ import java.util.Map;
  * 2022-08-05        jihye94       최초 생성
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderRequestDto implements Serializable {
-      @CreatedDate
-      private final LocalDateTime cdt;
-      @LastModifiedDate
-      private final LocalDateTime udt;
-      private final String memo;
-      private final UserForOrderDto user;
-      private final Map<Item, Integer> itemAndCountMap;
+      private String memo;
+      private Long userNo;
+      private Map<String, Integer> itemNoAndCountMap; // 아이템 번호와 카운트수 반환
       
-      @Builder
-      public OrderRequestDto(LocalDateTime cdt, LocalDateTime udt, String memo, UserForOrderDto user, Map<Item, Integer> itemAndCountMap) {
-            this.cdt = cdt;
-            this.udt = udt;
-            this.memo = memo;
-            this.user = user;
-            this.itemAndCountMap = itemAndCountMap;
-      }
+      
 }

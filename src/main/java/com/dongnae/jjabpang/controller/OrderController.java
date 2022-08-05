@@ -45,7 +45,7 @@ public class OrderController {
       
       @ApiModelProperty(name = "상품 주문")
       @PostMapping("/orderItem")
-      public ResponseEntity<Message> order(@RequestBody OrderRequestDto orderRequestDto) {
+      public ResponseEntity<Message> order(@RequestBody OrderRequestDto orderRequestDto) throws Exception {
             log.debug("OrderController.order ");
             log.debug("orderRequestDto = " + orderRequestDto);
             

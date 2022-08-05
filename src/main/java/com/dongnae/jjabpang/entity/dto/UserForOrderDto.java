@@ -18,8 +18,4 @@ import java.io.Serializable;
 @Data
 public class UserForOrderDto implements Serializable {
       private final Long userNo;
-      private final String birth;
-      private final String nickname;
-      private final String delYn;
-      private final String phoneNm;
 }

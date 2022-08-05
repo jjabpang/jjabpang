@@ -1,15 +1,18 @@
 package com.dongnae.jjabpang.service;
 
 import com.dongnae.jjabpang.entity.User;
+import com.dongnae.jjabpang.entity.UserListDto;
 import com.dongnae.jjabpang.entity.dto.UserInfoModificationDto;
 import com.dongnae.jjabpang.entity.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.exception.UsernameNotFoundException;
 import com.dongnae.jjabpang.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,11 +22,17 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class UserService {
       
+      private final ModelMapper modelMapper;
       private final UserRepository userRepository;
       
-      public List<User> findAll() {
-            
-            return userRepository.findAll();
+      public List<UserListDto> findAll() {
+            List<User> result = userRepository.findAll();
+            List<UserListDto> result2 = new ArrayList<>();
+            for (User user : result) {
+                  UserListDto userListDto = modelMapper.map(user, UserListDto.class);
+                  result2.add(userListDto);
+            }
+            return result2;
       }
       
       
