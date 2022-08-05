@@ -1,7 +1,7 @@
 package com.dongnae.jjabpang.repository.querydsl.item;
 
 import com.dongnae.jjabpang.entity.Item;
-import com.dongnae.jjabpang.entity.dto.ItemCategoryOrNameRequestDto;
+import com.dongnae.jjabpang.entity.dto.ItemCategoryOrNameResponseDto;
 import com.dongnae.jjabpang.entity.dto.QItemCategoryOrNameRequestDto;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -39,17 +39,17 @@ public class QItemRepositoryImpl implements QItemRepository {
        * 페이징 적용 카테고리
        */
       @Override
-      public Page<ItemCategoryOrNameRequestDto> findByCategoryAndNameOrderByCdtDESC(String categoryNo, String name, Pageable pageable) {
-            List<ItemCategoryOrNameRequestDto> content = queryFactory.select(new QItemCategoryOrNameRequestDto(item.cdt, item.udt, item.itemNo, item.title, item.image, item.price, item.discountRate, item.deliveryFee, item.specialFee, item.ratingSum, item.ratingCnt))
-                                                                     .from(item)
-                                                                     .leftJoin(item.category, category)
-                                                                     .where(
-                                                                           categoryNoEq(categoryNo)
-                                                                           , nameContains(name)
-                                                                     )
-                                                                     .offset(pageable.getOffset())
-                                                                     .limit(pageable.getPageSize())
-                                                                     .fetch();
+      public Page<ItemCategoryOrNameResponseDto> findByCategoryAndNameOrderByCdtDESC(String categoryNo, String name, Pageable pageable) {
+            List<ItemCategoryOrNameResponseDto> content = queryFactory.select(new QItemCategoryOrNameRequestDto(item.cdt, item.udt, item.itemNo, item.title, item.image, item.price, item.discountRate, item.deliveryFee, item.specialFee, item.ratingSum, item.ratingCnt))
+                                                                      .from(item)
+                                                                      .leftJoin(item.category, category)
+                                                                      .where(
+                                                                            categoryNoEq(categoryNo)
+                                                                            , nameContains(name)
+                                                                      )
+                                                                      .offset(pageable.getOffset())
+                                                                      .limit(pageable.getPageSize())
+                                                                      .fetch();
             
             JPAQuery<Item> countQuery = queryFactory
                                               .selectFrom(item)

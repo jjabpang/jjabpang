@@ -1,6 +1,6 @@
 package com.dongnae.jjabpang.controller;
 
-import com.dongnae.jjabpang.entity.dto.ItemCategoryOrNameRequestDto;
+import com.dongnae.jjabpang.entity.dto.ItemCategoryOrNameResponseDto;
 import com.dongnae.jjabpang.entity.dto.ItemSearchCondition;
 import com.dongnae.jjabpang.repository.item.ItemRepository;
 import com.dongnae.jjabpang.repository.querydsl.item.QItemRepository;
@@ -44,7 +44,7 @@ public class ItemController {
       @ApiOperation(value = "카테고리 및 제품명별 상품 조회")
       public Result findItemsByCategory(@RequestBody ItemSearchCondition itemSearchCondition, Pageable pageable) {
             
-            Page<ItemCategoryOrNameRequestDto> result = itemService.findByCategoryAndNameOrderByCdtDESC(itemSearchCondition.getCategoryNo(), itemSearchCondition.getName(), pageable);
+            Page<ItemCategoryOrNameResponseDto> result = itemService.findByCategoryAndNameOrderByCdtDESC(itemSearchCondition.getCategoryNo(), itemSearchCondition.getName(), pageable);
             
             return new Result(result);
       }

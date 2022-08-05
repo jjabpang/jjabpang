@@ -2,6 +2,8 @@ package com.dongnae.jjabpang.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -11,6 +13,9 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @Table(name = "delivery")
 @ApiModel("배송지 엔티티")
+@Setter
+@Getter
+@ToString
 public class Delivery extends BaseTimeEntity {
       
       @Id
@@ -43,6 +48,12 @@ public class Delivery extends BaseTimeEntity {
       @Column(name = "default_delivery", columnDefinition = "CHAR(3) DEFAULT 'Y' ")
       private String defaultDelivery;
       
+      /* 배송 상태*/
+      @Enumerated(EnumType.STRING)
+      @Column(name = "delivery_status", columnDefinition = "VARCHAR(10)")
+      private DeliveryStatus deliveryStatus;
+      
+      
       @ManyToOne(fetch = LAZY)
       @JoinColumn(name = "user_no")
       @ApiModelProperty(name = "회원")
@@ -51,5 +62,6 @@ public class Delivery extends BaseTimeEntity {
       
       @OneToOne(fetch = LAZY, mappedBy = "delivery")
       @ApiModelProperty(name = "주문")
+      @ToString.Exclude
       private Order order;
 }

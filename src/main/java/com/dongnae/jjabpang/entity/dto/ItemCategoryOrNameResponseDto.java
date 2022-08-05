@@ -16,12 +16,9 @@ import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Getter
-public class ItemCategoryOrNameRequestDto extends BaseTimeEntity implements Serializable {
-      private final LocalDateTime cdt;
-      private final LocalDateTime udt;
+public class ItemCategoryOrNameResponseDto extends BaseTimeEntity implements Serializable {
       private final Long itemNo;
       private final String title;
       private final String image;
@@ -33,9 +30,7 @@ public class ItemCategoryOrNameRequestDto extends BaseTimeEntity implements Seri
       private final Integer ratingCnt;
       
       @QueryProjection
-      public ItemCategoryOrNameRequestDto(LocalDateTime cdt, LocalDateTime udt, Long itemNo, String title, String image, Integer price, float discountRate, Integer deliveryFee, Integer specialFee, float ratingSum, Integer ratingCnt) {
-            this.cdt = cdt;
-            this.udt = udt;
+      public ItemCategoryOrNameResponseDto(Long itemNo, String title, String image, Integer price, float discountRate, Integer deliveryFee, Integer specialFee, float ratingSum, Integer ratingCnt) {
             this.itemNo = itemNo;
             this.title = title;
             this.image = image;

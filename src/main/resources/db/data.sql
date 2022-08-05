@@ -12,6 +12,8 @@ alter table jjabpang.orders
     convert to charset utf8mb4;
 alter table jjabpang.delivery
     convert to charset utf8mb4;
+alter table jjabpang.order_item
+    convert to charset utf8mb4;
 
 -- 카테고리 추가
 INSERT INTO jjabpang.category (category_no, cdt, udt, category_depth, category_name, parent_no)
@@ -24,18 +26,42 @@ INSERT INTO jjabpang.category (category_no, cdt, udt, category_depth, category_n
 VALUES (null, null, null, 3, '스틱청소기', 2);
 
 -- 유저 추가
-insert into jjabpang.user value (1, current_date, current_date, '0', '0', '0', '19951103', 'n',
-                                 'qkrtkdwns3410@naver.com', 'm',
-                                 'qkrtkdw', '1234', '01011111111', 'b');
-insert into jjabpang.user value (2, current_date, current_date, '0', '0', '0', '19951203', 'n',
-                                 'qkrtkdwns3410@naver1.com',
-                                 'm', 'qkrtkdw2', '1234', '01011111111', 'b');
-insert into jjabpang.user value (3, current_date, current_date, '0', '0', '0', '19941103', 'n',
-                                 'qkrtkdwns3410@naver2.com',
-                                 'm', 'qkrtkdw3', '1234', '01011111111', 'b');
-insert into jjabpang.user value (4, current_date, current_date, '0', '0', '0', '19931103', 'n',
-                                 'qkrtkdwns3410@naver3.com',
-                                 'm', 'qkrtkdw4', '1234', '01011111111', 'b');
+insert into jjabpang.user(user_no, cdt, udt, agree_tos, agree_picu, agree_promotion, birth, del_yn, email, gender,
+                          nickname, password, phone_nm, role, address1, address2) value (1,
+                                                                                         current_date,
+                                                                                         current_date,
+                                                                                         '0', '0',
+                                                                                         '0', '19951103',
+                                                                                         'n',
+                                                                                         'qkrtkdwns3410@naver.com',
+                                                                                         'm',
+                                                                                         'qkrtkdw', '1234',
+                                                                                         '01011111111', 'b', '관악구 신림동',
+                                                                                         '동성오피스텔');
+insert into jjabpang.user(user_no, cdt, udt, agree_tos, agree_picu, agree_promotion, birth, del_yn, email, gender,
+                          nickname, password, phone_nm, role, address1, address2) value (2, current_date, current_date,
+                                                                                         '0', '0', '0',
+                                                                                         '19951203', 'n',
+                                                                                         'qkrtkdwns3410@naver1.com',
+                                                                                         'm', 'qkrtkdw2', '1234',
+                                                                                         '01011111111', 'b', '관악구 신림동',
+                                                                                         '동성오피스텔');
+insert into jjabpang.user(user_no, cdt, udt, agree_tos, agree_picu, agree_promotion, birth, del_yn, email, gender,
+                          nickname, password, phone_nm, role, address1, address2) value (3, current_date, current_date,
+                                                                                         '0', '0', '0',
+                                                                                         '19941103', 'n',
+                                                                                         'qkrtkdwns3410@naver2.com',
+                                                                                         'm', 'qkrtkdw3', '1234',
+                                                                                         '01011111111', 'b', '관악구 신림동',
+                                                                                         '동성오피스텔');
+insert into jjabpang.user(user_no, cdt, udt, agree_tos, agree_picu, agree_promotion, birth, del_yn, email, gender,
+                          nickname, password, phone_nm, role, address1, address2) value (4, current_date, current_date,
+                                                                                         '0', '0', '0',
+                                                                                         '19931103', 'n',
+                                                                                         'qkrtkdwns3410@naver3.com',
+                                                                                         'm', 'qkrtkdw4', '1234',
+                                                                                         '01011111111', 'b', '관악구 신림동',
+                                                                                         '동성오피스텔');
 -- 상품 추가
 INSERT INTO jjabpang.item (item_no, cdt, udt, brand_name, delivery_fee, detail, discount_rate, image, price, quantity,
                            rating_cnt, rating_sum, special_price, title, category)
@@ -445,26 +471,51 @@ INSERT INTO jjabpang.delivery (cdt, udt, address1, address2, default_delivery, d
 VALUES (DEFAULT, DEFAULT, '서울특별시 관악구 신림동', '우리우리집', 'N', '4번', '01022222222', '''10013021''', 4);
 
 -- 주문 추가
-INSERT INTO jjabpang.orders (cdt, udt, memo, quantity, status, item_no, user_no)
-VALUES (DEFAULT, DEFAULT, '메모', 4, 'ORDER', 1, 1);
+INSERT INTO jjabpang.orders (cdt, udt, memo, status, user_no)
+VALUES (DEFAULT, DEFAULT, '메모', 'ORDER', 1);
 
-INSERT INTO jjabpang.orders (cdt, udt, memo, quantity, status, item_no, user_no)
-VALUES (DEFAULT, DEFAULT, '메모', 50, 'ORDER', 2, 1);
+INSERT INTO jjabpang.orders (cdt, udt, memo, status, user_no)
+VALUES (DEFAULT, DEFAULT, '메모', 'ORDER', 1);
 
-INSERT INTO jjabpang.orders (cdt, udt, memo, quantity, status, item_no, user_no)
-VALUES (DEFAULT, DEFAULT, '메모', 1, 'ORDER', 3, 1);
+INSERT INTO jjabpang.orders (cdt, udt, memo, status, user_no)
+VALUES (DEFAULT, DEFAULT, '메모', 'ORDER', 1);
 
-INSERT INTO jjabpang.orders (cdt, udt, memo, quantity, status, item_no, user_no)
-VALUES (DEFAULT, DEFAULT, '메모', 2, 'ORDER', 1, 2);
+INSERT INTO jjabpang.orders (cdt, udt, memo, status, user_no)
+VALUES (DEFAULT, DEFAULT, '메모', 'ORDER', 2);
 
-INSERT INTO jjabpang.orders (cdt, udt, memo, quantity, status, item_no, user_no)
-VALUES (DEFAULT, DEFAULT, '메모', 5, 'ORDER', 2, 2);
+INSERT INTO jjabpang.orders (cdt, udt, memo, status, user_no)
+VALUES (DEFAULT, DEFAULT, '메모', 'ORDER', 2);
 
-INSERT INTO jjabpang.orders (cdt, udt, memo, quantity, status, item_no, user_no)
-VALUES (DEFAULT, DEFAULT, '메모', 3, 'ORDER', 3, 3);
+INSERT INTO jjabpang.orders (cdt, udt, memo, status, user_no)
+VALUES (DEFAULT, DEFAULT, '메모', 'ORDER', 3);
 
-INSERT INTO jjabpang.orders (cdt, udt, memo, quantity, status, item_no, user_no)
-VALUES (DEFAULT, DEFAULT, '메모', 2, 'ORDER', 2, 4);
+INSERT INTO jjabpang.orders (cdt, udt, memo, status, user_no)
+VALUES (DEFAULT, DEFAULT, '메모', 'ORDER', 4);
+-- 주문 아이템 추가
+INSERT INTO jjabpang.order_item (cdt, crt_by, udt, upt_by, price, quantity, item_no, order_no)
+VALUES (DEFAULT, null, DEFAULT, null, 5000, 2, 1, 1);
+
+INSERT INTO jjabpang.order_item (cdt, crt_by, udt, upt_by, price, quantity, item_no, order_no)
+VALUES (DEFAULT, null, DEFAULT, null, 10000, 3, 1, 2);
+
+INSERT INTO jjabpang.order_item (cdt, crt_by, udt, upt_by, price, quantity, item_no, order_no)
+VALUES (DEFAULT, null, DEFAULT, null, 3000, 4, 1, 3);
+
+INSERT INTO jjabpang.order_item (cdt, crt_by, udt, upt_by, price, quantity, item_no, order_no)
+VALUES (DEFAULT, null, DEFAULT, null, 4000, 5, 2, 4);
+
+INSERT INTO jjabpang.order_item (cdt, crt_by, udt, upt_by, price, quantity, item_no, order_no)
+VALUES (DEFAULT, null, DEFAULT, null, 10000, 6, 2, 5);
+
+INSERT INTO jjabpang.order_item (cdt, crt_by, udt, upt_by, price, quantity, item_no, order_no)
+VALUES (DEFAULT, null, DEFAULT, null, 20000, 7, 3, 6);
+
+INSERT INTO jjabpang.order_item (cdt, crt_by, udt, upt_by, price, quantity, item_no, order_no)
+VALUES (DEFAULT, null, DEFAULT, null, 5000, 8, 3, 7);
+
+INSERT INTO jjabpang.order_item (cdt, crt_by, udt, upt_by, price, quantity, item_no, order_no)
+VALUES (DEFAULT, null, DEFAULT, null, 5000, 2, 3, 1);
+
 
 
 commit;

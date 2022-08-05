@@ -16,6 +16,7 @@ import static javax.persistence.FetchType.LAZY;
 @Table(name = "order_item")
 public class OrderItem extends BaseTimeEntity {
       @Id
+      @GeneratedValue(strategy = GenerationType.IDENTITY)
       @Column(name = "order_item_no", nullable = false)
       private Long OrderItemNo;
       

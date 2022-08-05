@@ -1,7 +1,9 @@
 package com.dongnae.jjabpang.entity;
 
 import lombok.Getter;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -39,4 +41,11 @@ public abstract class BaseTimeEntity {
       @Column(name = "udt", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
       private LocalDateTime udt;
       
+      @CreatedBy
+      @Column(name = "crt_by")
+      private String crtBy;
+      
+      @LastModifiedBy
+      @Column(name = "upt_by")
+      private String uptBy;
 }

@@ -11,22 +11,24 @@ package com.dongnae.jjabpang.controller;
  * 2022-08-04        ipeac       최초 생성
  */
 
+import com.dongnae.jjabpang.controller.UserController.Result;
+import com.dongnae.jjabpang.entity.OrderListByEmailAndPagingResponseDto;
 import com.dongnae.jjabpang.entity.dto.OrderRequestDto;
 import com.dongnae.jjabpang.repository.order.OrderRepository;
 import com.dongnae.jjabpang.response.Message;
+import com.dongnae.jjabpang.response.StatusEnum;
 import com.dongnae.jjabpang.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.StandardCharsets;
 
@@ -51,8 +53,20 @@ public class OrderController {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
             
-            orderService.order(orderRequestDto);
+            Integer resultRow = orderService.order(orderRequestDto);
             
+            message.setStatus(StatusEnum.OK);
+            message.setMessage("주문 성공 (Data : 반영 행수)");
+            message.setData(resultRow);
             return new ResponseEntity<>(message, headers, HttpStatus.OK);
+      }
+      
+      @ApiModelProperty(name = "상품 주문 목록  전체 조회")
+      @GetMapping("/orderItem/{userNo}")
+      public Result findAllOrders(@PathVariable String userNo, Pageable pageable) {
+            
+            Page<OrderListByEmailAndPagingResponseDto> result = orderService.findOrderByUserNoOrderByCdtDESC(userNo, pageable);
+            
+            return new Result<>(result);
       }
 }
