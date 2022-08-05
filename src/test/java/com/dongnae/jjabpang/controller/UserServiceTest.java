@@ -1,7 +1,5 @@
 package com.dongnae.jjabpang.controller;
 
-import com.dongnae.jjabpang.entity.Cart;
-import com.dongnae.jjabpang.entity.Role;
 import com.dongnae.jjabpang.entity.User;
 import com.dongnae.jjabpang.entity.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.repository.user.UserCustomRepositoryImpl;
@@ -13,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -78,17 +75,17 @@ public class UserServiceTest {
       
       @Test
       void findAll() {
-            
-            User user = new User(1L, "qkrtkdwns3410@navber", "1234", "951103", "박", "0", "0", "0", "m", Role.b, "n", "01011111111", new Cart());
-            User user2 = new User(2L, "qkrtkdwns3410@navber", "1234", "951103", "박", "0", "0", "0", "m", Role.b, "n", "01011111111", new Cart());
-            
-            userRepository.save(user);
-            userRepository.save(user2);
-            
-            List<User> findMember = userService.findAll();
-            for (User user1 : findMember) {
-                  System.out.println("user = " + user1);
-            }
+
+//            User user = new User(1L, "qkrtkdwns3410@navber", "1234", "951103", "박", "0", "0", "0", "m", Role.b, "n", "01011111111", new Cart(), new ArrayList<>(), new ArrayList<>());
+//            User user2 = new User(2L, "qkrtkdwns3410@navber", "1234", "951103", "박", "0", "0", "0", "m", Role.b, "n", "01011111111", new Cart(), new ArrayList<>(), new ArrayList<>());
+//
+//            userRepository.save(user);
+//            userRepository.save(user2);
+//
+//            List<User> findMember = userService.findAll();
+//            for (User user1 : findMember) {
+//                  System.out.println("user = " + user1);
+//            }
       }
       
       @Test

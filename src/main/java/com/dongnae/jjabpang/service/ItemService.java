@@ -1,6 +1,6 @@
 package com.dongnae.jjabpang.service;
 
-import com.dongnae.jjabpang.entity.dto.ItemCategoryOrNameRequestDto;
+import com.dongnae.jjabpang.entity.dto.ItemCategoryOrNameResponseDto;
 import com.dongnae.jjabpang.repository.item.ItemRepository;
 import com.dongnae.jjabpang.repository.querydsl.item.QItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +32,7 @@ public class ItemService {
       
       
       /*카테고리 별 상품 조회*/
-      public Page<ItemCategoryOrNameRequestDto> findByCategoryAndNameOrderByCdtDESC(String categoryNo, String name, Pageable pageable) {
+      public Page<ItemCategoryOrNameResponseDto> findByCategoryAndNameOrderByCdtDESC(String categoryNo, String name, Pageable pageable) {
             
             return qItemRepository.findByCategoryAndNameOrderByCdtDESC(categoryNo, name, pageable);
             

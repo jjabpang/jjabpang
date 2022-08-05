@@ -103,15 +103,31 @@ public class User extends BaseTimeEntity {
       @Column(name = "phone_nm", nullable = false)
       private String phoneNm;
       
+      /**
+       * 주소1
+       */
+      @Column(name = "address1", nullable = true, columnDefinition = "varchar(100)")
+      private String address1;
+      
+      /**
+       * 주소2
+       */
+      @Column(name = "address2", nullable = true, columnDefinition = "varchar(100)")
+      private String address2;
+      
+      
       @ApiModelProperty(value = "장바구니")
-      @OneToOne(fetch = LAZY, mappedBy = "user") // 연관관계의 주인이 아닌 객체를 mappedBy
+      @OneToOne(fetch = LAZY, mappedBy = "user")
+      @ToString.Exclude // 연관관계의 주인이 아닌 객체를 mappedBy
       private Cart cart;
       
       @ApiModelProperty(value = "배송지")
       @OneToMany(fetch = LAZY, mappedBy = "user")
+      @ToString.Exclude
       private List<Delivery> deliveryList = new ArrayList<>();
       
       @ApiModelProperty(value = "주문목록")
       @OneToMany(fetch = LAZY, mappedBy = "user")
+      @ToString.Exclude
       private List<Order> orderList = new ArrayList<>();
 }

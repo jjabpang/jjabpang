@@ -37,10 +37,6 @@ public class Order extends BaseTimeEntity {
       @ApiModelProperty(name = "주문 번호", required = true)
       private Long orderNo;
       
-      @ApiModelProperty(name = "상품 개수")
-      @Column(name = "quantity", columnDefinition = "INT DEFAULT 0")
-      private Integer quantity;
-      
       @Enumerated(EnumType.STRING)
       @Column(name = "status", columnDefinition = "VARCHAR(10)")
       @ApiModelProperty(name = "상품 상태")
@@ -55,12 +51,7 @@ public class Order extends BaseTimeEntity {
       @ApiModelProperty(name = "회원번호")
       private User user;
       
-      @ManyToOne(fetch = LAZY)
-      @JoinColumn(name = "item_no")
-      @ApiModelProperty(name = "상품 번호")
-      private Item item;
-      
-      @OneToOne(fetch = LAZY)
+      @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
       @JoinColumn(name = "delivery_no")
       private Delivery delivery;
       
@@ -68,11 +59,66 @@ public class Order extends BaseTimeEntity {
       private List<OrderItem> orderItems = new ArrayList<>();
       
       /*연관관계*/
-      public void setMember(User user) {
+      public void setUser(User user) {
             this.user = user;
             user.getOrderList()
                 .add(this);
       }
       
+      public void addOrderItem(OrderItem orderItem) {
+            
+            orderItems.add(orderItem);
+            orderItem.setOrder(this);
+      }
       
+      public void setDelivery(Delivery delivery) {
+            this.delivery = delivery;
+            delivery.setOrder(this);
+      }
+      
+      /*==생성 메서드==*/
+      public static Order createOrder(User user, Delivery delivery, OrderItem... orderItems) {
+            Order order = new Order();
+            order.setUser(user);
+            order.setDelivery(delivery);
+            
+            for (OrderItem orderItem : orderItems) {
+                  order.addOrderItem(orderItem);
+            }
+            
+            order.setStatus(Status.ORDER);
+            
+            return order;
+      }
+      /*==비즈니스 로직==*/
+      
+      /**
+       * 주문취소
+       */
+      public void cancel() {
+            //
+            if (delivery.getDeliveryStatus() == DeliveryStatus.COMP) {
+                  throw new IllegalStateException("이미 배송된 상품은 취소가 불가능합니다.");
+            }
+            
+            this.setStatus(Status.CANCEL);
+            for (OrderItem orderItem : orderItems) {
+                  orderItem.cancle();
+            }
+            
+      }
+      
+      /*==조회 로직 ==*/
+      
+      /**
+       * 전체 주문 가격 조회
+       */
+      public int getTotalPrice() {
+            int totalPrice = 0;
+            
+            for (OrderItem orderItem : orderItems) {
+                  totalPrice += orderItem.getTotalPrice();
+            }
+            return totalPrice;
+      }
 }

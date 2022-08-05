@@ -54,7 +54,7 @@ public class UserService {
        * 회원 탈퇴 기능
        */
       @Transactional
-      public Integer delete(Integer id) {
+      public Integer delete(Long id) {
             
             return userRepository.deleteUserByUserNo(id);
       }

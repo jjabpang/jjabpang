@@ -11,7 +11,7 @@ package com.dongnae.jjabpang.repository.querydsl.item;
  * 2022-08-04        ipeac       최초 생성
  */
 
-import com.dongnae.jjabpang.entity.dto.ItemCategoryOrNameRequestDto;
+import com.dongnae.jjabpang.entity.dto.ItemCategoryOrNameResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -19,5 +19,5 @@ import org.springframework.data.jpa.repository.Query;
 public interface QItemRepository {
       
       @Query(name = "해당 카테고리 번호를 가진 목록만 불러옵니다. 페이징 적용")
-      Page<ItemCategoryOrNameRequestDto> findByCategoryAndNameOrderByCdtDESC(String categoryNo, String name, Pageable pageable);
+      Page<ItemCategoryOrNameResponseDto> findByCategoryAndNameOrderByCdtDESC(String categoryNo, String name, Pageable pageable);
 }

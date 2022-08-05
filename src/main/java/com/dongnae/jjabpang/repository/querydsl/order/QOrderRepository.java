@@ -11,6 +11,13 @@ package com.dongnae.jjabpang.repository.querydsl.order;
  * 2022-08-04        ipeac       최초 생성
  */
 
-public interface QOrderRepository {
+import com.dongnae.jjabpang.entity.OrderListByEmailAndPagingResponseDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 
+public interface QOrderRepository {
+      
+      @Query(name = "주문 목록을 조회합니다. (해당 유저의 번호로 조회 및 페이징)")
+      Page<OrderListByEmailAndPagingResponseDto> findOrderByUserNoOrderByCdtDESC(String userNo, Pageable pageable);
 }

@@ -83,7 +83,7 @@ public class UserController {
        */
       @ApiOperation(value = "회원 탈퇴 기능")
       @DeleteMapping("/users/{id}")
-      public ResponseEntity<Message> deleteUser(@PathVariable int id) {
+      public ResponseEntity<Message> deleteUser(@PathVariable Long id) {
             Message message = new Message();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
@@ -109,13 +109,16 @@ public class UserController {
             
             User findUser = userService.findByEmail(dto.getEmail())
                                        .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 사용자 입니다."));
+            
             if (!findUser.getPassword()
                          .equals(dto.getPassword())) {
                   throw new IllegalArgumentException("잘못된 비밀번호 입니다.");
             }
+            
             message.setStatus(StatusEnum.OK);
             message.setMessage("로그인 성공");
             message.setData(findUser.getUserNo());
+            
             return new ResponseEntity<>(message, headers, HttpStatus.OK);
       }
       
