@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,7 +25,6 @@ import java.util.Map;
 public class OrderRequestDto implements Serializable {
       private String memo;
       private Long userNo;
-      private Map<String, Integer> itemNoAndCountMap; // 아이템 번호와 카운트수 반환
-      
+      private List<Map<String, Integer>> data; // 아이템 번호와 카운트수 | 가격반환
       
 }
