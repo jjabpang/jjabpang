@@ -48,7 +48,7 @@ public class OrderService {
             User user = userRepository.findByUserNo(orderRequestDto.getUserNo());
             
             // 구매하려고 하는 아아템의 리스트
-            Map<String, Integer> itemAndCountMap = orderRequestDto.getItemNoAndCountMap();
+            List<Map<String, Integer>> itemAndCountMap = orderRequestDto.getData();
             log.debug("itemAndCountMap = " + itemAndCountMap);
             
             Delivery delivery = new Delivery();
@@ -57,15 +57,13 @@ public class OrderService {
             delivery.setDeliveryStatus(DeliveryStatus.READY);
             
             // 다건 상품  | 주문 상품 생성
-            for (Map.Entry<String, Integer> item : itemAndCountMap.entrySet()) {
+            for (Map<String, Integer> item : itemAndCountMap) {
                   
-                  List<Item> result = itemRepository.findById(Long.valueOf(item.getKey()))
+                  List<Item> result = itemRepository.findById(Long.valueOf(item.get("itemNo")))
                                                     .stream()
                                                     .collect(Collectors.toList());
                   
-                  OrderItem orderItem = OrderItem.createOrderItem(result.get(0), result.get(0)
-                                                                                       .getPrice(), result.get(0)
-                                                                                                          .getQuantity());
+                  OrderItem orderItem = OrderItem.createOrderItem(result.get(0), item.get("itemPrice"), item.get("itemQuantity"));
                   
                   Order order = Order.createOrder(user, delivery, orderItem);
                   
