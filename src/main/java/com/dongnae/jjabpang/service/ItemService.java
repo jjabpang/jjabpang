@@ -1,12 +1,15 @@
 package com.dongnae.jjabpang.service;
 
 import com.dongnae.jjabpang.entity.dto.ItemCategoryOrNameResponseDto;
+import com.dongnae.jjabpang.entity.dto.ItemSearchCondition;
 import com.dongnae.jjabpang.repository.item.ItemRepository;
 import com.dongnae.jjabpang.repository.querydsl.item.QItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,9 +35,11 @@ public class ItemService {
       
       
       /*카테고리 별 상품 조회*/
-      public Page<ItemCategoryOrNameResponseDto> findByCategoryAndNameOrderByCdtDESC(String categoryNo, String name, Pageable pageable) {
+      public Page<ItemCategoryOrNameResponseDto> findByCategoryAndNameOrderByCdtDESC(ItemSearchCondition searchCondition, Pageable pageable) {
             
-            return qItemRepository.findByCategoryAndNameOrderByCdtDESC(categoryNo, name, pageable);
+            PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.fromString(searchCondition.getOrderBy()), searchCondition.getSort()));
+            
+            return qItemRepository.findByCategoryAndNameOrderByCdtDESC(searchCondition, pageRequest);
             
       }
 }

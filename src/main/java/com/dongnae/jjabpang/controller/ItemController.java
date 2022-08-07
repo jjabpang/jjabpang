@@ -44,7 +44,7 @@ public class ItemController {
       @ApiOperation(value = "카테고리 및 제품명별 상품 조회")
       public Result findItemsByCategory(@RequestBody ItemSearchCondition itemSearchCondition, Pageable pageable) {
             
-            Page<ItemCategoryOrNameResponseDto> result = itemService.findByCategoryAndNameOrderByCdtDESC(itemSearchCondition.getCategoryNo(), itemSearchCondition.getName(), pageable);
+            Page<ItemCategoryOrNameResponseDto> result = itemService.findByCategoryAndNameOrderByCdtDESC(itemSearchCondition, pageable);
             
             return new Result(result);
       }

@@ -17,4 +17,6 @@ import lombok.Data;
 public class ItemSearchCondition {
       private String categoryNo;
       private String name;
+      private String orderBy;
+      private String sort;
 }

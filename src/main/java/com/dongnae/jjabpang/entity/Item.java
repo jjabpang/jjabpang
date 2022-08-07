@@ -79,6 +79,12 @@ public class Item extends BaseTimeEntity {
       @ApiModelProperty(value = "상품 재고")
       @Column(name = "quantity", columnDefinition = "INT")
       private Integer quantity;
+
+//      /**
+//       * 판매량
+//       */
+//      @Column(name = "sell_count", columnDefinition = "INT DEFAULT 0")
+//      private Integer sell_count;
       
       @OneToMany(fetch = LAZY, mappedBy = "item")
       @ApiModelProperty(name = "장바구니_상품")
