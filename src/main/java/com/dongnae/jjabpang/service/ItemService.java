@@ -1,7 +1,7 @@
 package com.dongnae.jjabpang.service;
 
-import com.dongnae.jjabpang.entity.dto.ItemCategoryOrNameResponseDto;
-import com.dongnae.jjabpang.entity.dto.ItemSearchCondition;
+import com.dongnae.jjabpang.dto.ItemCategoryOrNameResponseDto;
+import com.dongnae.jjabpang.dto.ItemSearchCondition;
 import com.dongnae.jjabpang.repository.item.ItemRepository;
 import com.dongnae.jjabpang.repository.querydsl.item.QItemRepository;
 import lombok.RequiredArgsConstructor;

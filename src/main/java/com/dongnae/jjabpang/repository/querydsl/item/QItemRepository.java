@@ -11,8 +11,8 @@ package com.dongnae.jjabpang.repository.querydsl.item;
  * 2022-08-04        ipeac       최초 생성
  */
 
-import com.dongnae.jjabpang.entity.dto.ItemCategoryOrNameResponseDto;
-import com.dongnae.jjabpang.entity.dto.ItemSearchCondition;
+import com.dongnae.jjabpang.dto.ItemCategoryOrNameResponseDto;
+import com.dongnae.jjabpang.dto.ItemSearchCondition;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

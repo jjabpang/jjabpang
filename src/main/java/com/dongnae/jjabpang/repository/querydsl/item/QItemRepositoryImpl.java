@@ -1,8 +1,8 @@
 package com.dongnae.jjabpang.repository.querydsl.item;
 
+import com.dongnae.jjabpang.dto.ItemCategoryOrNameResponseDto;
+import com.dongnae.jjabpang.dto.ItemSearchCondition;
 import com.dongnae.jjabpang.entity.Item;
-import com.dongnae.jjabpang.entity.dto.ItemCategoryOrNameResponseDto;
-import com.dongnae.jjabpang.entity.dto.ItemSearchCondition;
 import com.dongnae.jjabpang.entity.dto.QItemCategoryOrNameResponseDto;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;

@@ -1,4 +1,4 @@
-package com.dongnae.jjabpang.entity.dto;
+package com.dongnae.jjabpang.dto;
 
 import lombok.Data;
 

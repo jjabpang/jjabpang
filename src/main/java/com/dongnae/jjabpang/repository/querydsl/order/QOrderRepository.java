@@ -11,7 +11,7 @@ package com.dongnae.jjabpang.repository.querydsl.order;
  * 2022-08-04        ipeac       최초 생성
  */
 
-import com.dongnae.jjabpang.entity.OrderListByEmailAndPagingResponseDto;
+import com.dongnae.jjabpang.dto.OrderListByEmailAndPagingResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

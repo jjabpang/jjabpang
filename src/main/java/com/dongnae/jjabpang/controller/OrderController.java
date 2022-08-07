@@ -12,14 +12,15 @@ package com.dongnae.jjabpang.controller;
  */
 
 import com.dongnae.jjabpang.controller.UserController.Result;
-import com.dongnae.jjabpang.entity.OrderListByEmailAndPagingResponseDto;
-import com.dongnae.jjabpang.entity.dto.OrderRequestDto;
+import com.dongnae.jjabpang.dto.OrderListByEmailAndPagingResponseDto;
+import com.dongnae.jjabpang.dto.OrderRequestDto;
 import com.dongnae.jjabpang.repository.order.OrderRepository;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
 import com.dongnae.jjabpang.service.OrderService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -43,7 +44,7 @@ public class OrderController {
       
       private final OrderRepository orderRepository;
       
-      @ApiModelProperty(name = "상품 주문")
+      @ApiOperation(value = "상품 주문")
       @PostMapping("/orderItem")
       public ResponseEntity<Message> order(@RequestBody OrderRequestDto orderRequestDto) throws Exception {
             log.debug("OrderController.order ");
@@ -61,7 +62,8 @@ public class OrderController {
             return new ResponseEntity<>(message, headers, HttpStatus.OK);
       }
       
-      @ApiModelProperty(name = "상품 주문 목록  전체 조회")
+      @ApiOperation(value = "상품 주문 목록  전체 조회")
+      @ApiImplicitParam(name = "userNo", dataTypeClass = Long.class, value = "회원 번호", paramType = "query", required = true)
       @GetMapping("/orderItem/{userNo}")
       public Result findAllOrders(@PathVariable String userNo, Pageable pageable) {
             
