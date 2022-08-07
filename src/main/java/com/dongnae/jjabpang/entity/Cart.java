@@ -38,10 +38,16 @@ public class Cart extends BaseTimeEntity {
       
       @ApiModelProperty(value = "회원")
       @OneToOne(fetch = LAZY)
-      @JoinColumn(name = "user")
+      @JoinColumn(name = "user_no")
       private User user;
       
       @ApiModelProperty(value = "장바구니_상품")
       @OneToMany(fetch = LAZY, mappedBy = "cart")
       private List<CartItem> cartItemList = new ArrayList<>();
+      
+      public static Cart createCart(User user) {
+            Cart cart = new Cart();
+            cart.setUser(user);
+            return cart;
+      }
 }

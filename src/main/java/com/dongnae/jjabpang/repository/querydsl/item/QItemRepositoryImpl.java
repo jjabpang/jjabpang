@@ -2,8 +2,8 @@ package com.dongnae.jjabpang.repository.querydsl.item;
 
 import com.dongnae.jjabpang.dto.ItemCategoryOrNameResponseDto;
 import com.dongnae.jjabpang.dto.ItemSearchCondition;
+import com.dongnae.jjabpang.dto.QItemCategoryOrNameResponseDto;
 import com.dongnae.jjabpang.entity.Item;
-import com.dongnae.jjabpang.entity.dto.QItemCategoryOrNameResponseDto;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -92,7 +92,7 @@ public class QItemRepositoryImpl implements QItemRepository {
        * @param page
        * @return
        */
-      private OrderSpecifier<?> boardSort(Pageable page) {
+      private static OrderSpecifier<?> boardSort(Pageable page) {
             //서비스에서 보내준 Pageable 객체에 정렬조건 null 값 체크
             if (!page.getSort()
                      .isEmpty()) {
@@ -103,9 +103,9 @@ public class QItemRepositoryImpl implements QItemRepository {
                                                .isAscending() ? Order.ASC : Order.DESC;
                         // 서비스에서 넣어준 정렬 조건을 스위치 케이스 문을 활용하여 셋팅하여 준다.
                         switch (order.getProperty()) {
-                              case "cdt":
+                              case "item.cdt":
                                     return new OrderSpecifier(direction, item.cdt);
-                              case "price":
+                              case "item.price":
                                     return new OrderSpecifier(direction, item.price);
                         }
                   }

@@ -1,8 +1,8 @@
 package com.dongnae.jjabpang.repository.querydsl.order;
 
 import com.dongnae.jjabpang.dto.OrderListByEmailAndPagingResponseDto;
+import com.dongnae.jjabpang.dto.QOrderListByEmailAndPagingResponseDto;
 import com.dongnae.jjabpang.entity.OrderItem;
-import com.dongnae.jjabpang.entity.dto.QOrderListByEmailAndPagingResponseDto;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
