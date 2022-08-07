@@ -47,6 +47,7 @@ public class QItemRepositoryImpl implements QItemRepository {
                                                                             categoryNoEq(categoryNo)
                                                                             , nameContains(name)
                                                                       )
+                                                                      .orderBy(item.cdt.desc())
                                                                       .offset(pageable.getOffset())
                                                                       .limit(pageable.getPageSize())
                                                                       .fetch();
@@ -57,11 +58,13 @@ public class QItemRepositoryImpl implements QItemRepository {
                                               .where(
                                                     categoryNoEq(categoryNo)
                                                     , nameContains(name)
-                                              );
+                                              )
+                                              .orderBy(item.cdt.desc());
             
             return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
             
       }
+      
       
       private BooleanExpression categoryNoEq(String categoryNo) {
             if (isEmpty(categoryNo)) {
