@@ -1,4 +1,4 @@
-package com.dongnae.jjabpang.entity.dto;
+package com.dongnae.jjabpang.dto;
 
 import lombok.Data;
 
@@ -17,4 +17,6 @@ import lombok.Data;
 public class ItemSearchCondition {
       private String categoryNo;
       private String name;
+      private String orderBy;
+      private String sort;
 }

@@ -1,15 +1,16 @@
 package com.dongnae.jjabpang.controller;
 
+import com.dongnae.jjabpang.dto.UserInfoModificationDto;
+import com.dongnae.jjabpang.dto.UserLoginRequestDto;
+import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.User;
-import com.dongnae.jjabpang.entity.dto.UserInfoModificationDto;
-import com.dongnae.jjabpang.entity.dto.UserLoginRequestDto;
-import com.dongnae.jjabpang.entity.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.exception.UsernameNotFoundException;
 import com.dongnae.jjabpang.repository.querydsl.user.QUserRepository;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
 import com.dongnae.jjabpang.service.UserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
@@ -82,13 +83,14 @@ public class UserController {
        * 회원 탈퇴 기능
        */
       @ApiOperation(value = "회원 탈퇴 기능")
-      @DeleteMapping("/users/{id}")
-      public ResponseEntity<Message> deleteUser(@PathVariable Long id) {
+      @ApiImplicitParam(name = "userNo", dataTypeClass = Long.class, value = "회원 번호", paramType = "query", required = true)
+      @DeleteMapping("/users/{userNo}")
+      public ResponseEntity<Message> deleteUser(@PathVariable Long userNo) {
             Message message = new Message();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
             
-            Integer row = userService.delete(id);
+            Integer row = userService.delete(userNo);
             if (row == 0) {
                   throw new IllegalStateException("회원 탈퇴 실패");
             } else {
@@ -123,13 +125,14 @@ public class UserController {
       }
       
       @ApiOperation(value = "회원 정보 수정")
-      @PutMapping("/users/{id}")
-      public ResponseEntity<Message> modify(@PathVariable Long id, @RequestBody UserInfoModificationDto dto) {
+      @ApiImplicitParam(name = "userNo", dataTypeClass = Long.class, value = "회원 번호", paramType = "query", required = true)
+      @PutMapping("/users/{userNo}")
+      public ResponseEntity<Message> modify(@PathVariable Long userNo, @RequestBody UserInfoModificationDto dto) {
             Message message = new Message();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
             
-            Integer affectedRow = userService.updateUserInfo(id, dto);
+            Integer affectedRow = userService.updateUserInfo(userNo, dto);
             if (affectedRow == 0) {
                   throw new IllegalArgumentException("회원정보 수정 실패");
             } else {

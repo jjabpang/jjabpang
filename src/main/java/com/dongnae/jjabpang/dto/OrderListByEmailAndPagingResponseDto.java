@@ -1,5 +1,6 @@
-package com.dongnae.jjabpang.entity;
+package com.dongnae.jjabpang.dto;
 
+import com.dongnae.jjabpang.entity.Status;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Builder;
 import lombok.Data;

@@ -47,5 +47,11 @@ public class CartItem extends BaseTimeEntity {
       private Cart cart;
       
       @ApiModelProperty(name = "장바구니 안의 아이템의 개수")
-      private int cartItemCount;
+      @Column(name = "item_count")
+      private int itemCount;
+      
+      @ApiModelProperty(name = "장바구니 안의 아이템의 단가")
+      @Column(name = "item_price")
+      private int itemPrice;
+      
 }

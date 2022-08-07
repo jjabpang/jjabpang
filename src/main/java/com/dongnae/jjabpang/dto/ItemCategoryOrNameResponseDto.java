@@ -1,4 +1,4 @@
-package com.dongnae.jjabpang.entity.dto;
+package com.dongnae.jjabpang.dto;
 /*
  *packageName    : com.dongnae.jjabpang.entity
  * fileName       : ItemCategoryAndNameRequestDto
@@ -11,14 +11,13 @@ package com.dongnae.jjabpang.entity.dto;
  * 2022-08-04        ipeac       최초 생성
  */
 
-import com.dongnae.jjabpang.entity.BaseTimeEntity;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 
 import java.io.Serializable;
 
 @Getter
-public class ItemCategoryOrNameResponseDto extends BaseTimeEntity implements Serializable {
+public class ItemCategoryOrNameResponseDto implements Serializable {
       private final Long itemNo;
       private final String title;
       private final String image;
@@ -28,6 +27,7 @@ public class ItemCategoryOrNameResponseDto extends BaseTimeEntity implements Ser
       private final Integer specialFee;
       private final float ratingSum;
       private final Integer ratingCnt;
+      
       
       @QueryProjection
       public ItemCategoryOrNameResponseDto(Long itemNo, String title, String image, Integer price, float discountRate, Integer deliveryFee, Integer specialFee, float ratingSum, Integer ratingCnt) {

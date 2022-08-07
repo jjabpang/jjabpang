@@ -1,5 +1,6 @@
-package com.dongnae.jjabpang.entity;
+package com.dongnae.jjabpang.dto;
 
+import com.dongnae.jjabpang.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
