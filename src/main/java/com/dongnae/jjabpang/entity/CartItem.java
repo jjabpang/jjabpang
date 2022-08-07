@@ -54,4 +54,18 @@ public class CartItem extends BaseTimeEntity {
       @Column(name = "item_price")
       private int itemPrice;
       
+      public static CartItem createCartItem(Cart cart, Item item, int count, int price) {
+            CartItem cartItem = new CartItem();
+            cartItem.setCart(cart);
+            cartItem.setItem(item);
+            cartItem.setItemCount(count);
+            cartItem.setItemPrice(price);
+            
+            return cartItem;
+      }
+      
+      public void addCount(int itemCount) {
+            this.itemCount += itemCount;
+      }
+      
 }
