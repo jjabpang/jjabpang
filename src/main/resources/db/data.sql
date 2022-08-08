@@ -272,6 +272,23 @@ VALUES (DEFAULT, null, DEFAULT, null, 5000, 8, 3, 7);
 INSERT INTO jjabpang.order_item (cdt, crt_by, udt, upt_by, price, quantity, item_no, order_no)
 VALUES (DEFAULT, null, DEFAULT, null, 5000, 2, 3, 1);
 
+--장바구니 추가
+INSERT INTO jjabpang.cart (cart_no, cdt, crt_by, udt, upt_by, user_no)
+VALUES (1, '2022-08-08 17:29:20', null, '2022-08-08 17:29:20', null, 1);
+
+--장바구니 아이템 추가
+INSERT INTO jjabpang.cart_item (cart_item_no, cdt, crt_by, udt, upt_by, item_count, item_price, cart, item)
+VALUES (1, '2022-08-08 17:29:20', null, '2022-08-08 17:29:25', null, 12, 1000, 1, 1);
+
+INSERT INTO jjabpang.cart_item (cart_item_no, cdt, crt_by, udt, upt_by, item_count, item_price, cart, item)
+VALUES (null, '2022-08-08 17:29:20', null, '2022-08-08 17:29:25', null, 12, 1000, 1, 2);
+
+INSERT INTO jjabpang.cart_item (cart_item_no, cdt, crt_by, udt, upt_by, item_count, item_price, cart, item)
+VALUES (null, '2022-08-08 17:29:20', null, '2022-08-08 17:29:25', null, 12, 1000, 1, 3);
+
+INSERT INTO jjabpang.cart_item (cart_item_no, cdt, crt_by, udt, upt_by, item_count, item_price, cart, item)
+VALUES (null, '2022-08-08 17:29:20', null, '2022-08-08 17:29:25', null, 12, 1000, 1, 41);
+
 
 
 commit;

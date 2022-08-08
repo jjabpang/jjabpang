@@ -1,5 +1,6 @@
 package com.dongnae.jjabpang.service;
 
+import com.dongnae.jjabpang.dto.CartDetailDto;
 import com.dongnae.jjabpang.dto.CartItemDto;
 import com.dongnae.jjabpang.entity.Cart;
 import com.dongnae.jjabpang.entity.CartItem;
@@ -10,9 +11,12 @@ import com.dongnae.jjabpang.repository.cartItem.CartItemRepository;
 import com.dongnae.jjabpang.repository.item.ItemRepository;
 import com.dongnae.jjabpang.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /*
@@ -28,6 +32,7 @@ import java.util.Optional;
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 @Transactional(readOnly = true)
 public class CartService {
       
@@ -40,7 +45,8 @@ public class CartService {
       /**
        * email 은 현재 로그인한 친구
        */
-      public Long addCart(CartItemDto cartItemDto, String email) {
+      @Transactional
+      public Long addCart(CartItemDto cartItemDto, String email) throws Exception {
             Item item = itemRepository.findById(cartItemDto.getItemNo())
                                       .orElseThrow(() -> {
                                             throw new IllegalArgumentException("엔티티 조회 불가능");
@@ -71,6 +77,30 @@ public class CartService {
                   
             } else {
                   throw new IllegalStateException("로그인한 유저 데이터 없음");
+            }
+            
+      }
+      
+      public List<CartDetailDto> getCartList(Long userNo) throws Exception {
+            List<CartDetailDto> cartDetailDtoList = new ArrayList<>();
+            
+            Optional<User> findUser = userRepository.findById(userNo);
+            
+            if (findUser.isPresent()) {
+                  Optional<Cart> cart = cartRepository.findById(findUser.get()
+                                                                        .getUserNo());
+                  if (cart.isEmpty()) {
+                        return cartDetailDtoList;
+                  }
+                  cartDetailDtoList = cartItemRepository.findCartDetailDtoList(cart.get()
+                                                                                   .getCartNo());
+                  
+                  log.debug("cartDetailDtoList = " + cartDetailDtoList);
+                  
+                  return cartDetailDtoList;
+                  
+            } else {
+                  throw new IllegalStateException("존재하지 않는 아이디입니다.");
             }
             
       }
