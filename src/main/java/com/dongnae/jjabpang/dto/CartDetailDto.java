@@ -22,12 +22,14 @@ public class CartDetailDto {
       private String itemImg;
       private int itemPrice;
       private int itemCount;
+      private int deliveryfee;
       
-      public CartDetailDto(Long cartItemNo, String itemTitle, String itemImg, int itemPrice, int itemCount) {
+      public CartDetailDto(Long cartItemNo, String itemTitle, String itemImg, int itemPrice, int itemCount, int deliveryfee) {
             this.cartItemNo = cartItemNo;
             this.itemTitle = itemTitle;
             this.itemImg = itemImg;
             this.itemPrice = itemPrice;
             this.itemCount = itemCount;
+            this.deliveryfee = deliveryfee;
       }
 }

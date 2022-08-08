@@ -18,7 +18,7 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
        * 장바구니 장바구니 번호 기준 상품 조회
        */
       @Query(value =
-                   "select new com.dongnae.jjabpang.dto.CartDetailDto(ci.cartItemNo,i.title,i.image,i.price,ci.itemCount) " +
+                   "select new com.dongnae.jjabpang.dto.CartDetailDto(ci.cartItemNo,i.title,i.image,i.price,ci.itemCount,i.deliveryFee) " +
                    "from CartItem ci " +
                    "left join ci.item  i " +
                    "left join ci.cart  c " +
@@ -26,4 +26,5 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
                    "and i.itemNo = ci.item.itemNo " +
                    "order by ci.udt DESC ")
       List<CartDetailDto> findCartDetailDtoList(@Param(value = "cartNo") Long cartNo);
+      
 }
