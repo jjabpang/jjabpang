@@ -14,6 +14,7 @@ package com.dongnae.jjabpang.controller;
 import com.dongnae.jjabpang.controller.UserController.Result;
 import com.dongnae.jjabpang.dto.OrderListByEmailAndPagingResponseDto;
 import com.dongnae.jjabpang.dto.OrderRequestDto;
+import com.dongnae.jjabpang.exception.OutOfStockException;
 import com.dongnae.jjabpang.repository.order.OrderRepository;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
@@ -46,7 +47,7 @@ public class OrderController {
       
       @ApiOperation(value = "상품 주문")
       @PostMapping("/orderItem")
-      public ResponseEntity<Message> order(@RequestBody OrderRequestDto orderRequestDto) throws Exception {
+      public ResponseEntity<Message> order(@RequestBody OrderRequestDto orderRequestDto) throws Exception, OutOfStockException {
             log.debug("OrderController.order ");
             log.debug("orderRequestDto = " + orderRequestDto);
             
@@ -62,7 +63,26 @@ public class OrderController {
             return new ResponseEntity<>(message, headers, HttpStatus.OK);
       }
       
-      @ApiOperation(value = "상품 주문 목록  전체 조회")
+      @ApiOperation(value = "상품 주문 취소")
+      @PostMapping("/orderItem/{orderNo}/{userNo}")
+      public ResponseEntity order(@PathVariable Long orderNo, @PathVariable Long userNo) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
+            Message message = new Message();
+            
+            if (!orderService.validateOrder(orderNo, userNo)) {
+                  return new ResponseEntity<String>("주문 취소 권한이 없습니다.", HttpStatus.FORBIDDEN);
+            }
+            orderService.cancelOrder(orderNo);
+            
+            
+            message.setStatus(StatusEnum.OK);
+            message.setMessage("주문 취소 완료");
+            
+            return new ResponseEntity<Message>(message, headers, HttpStatus.OK);
+      }
+      
+      @ApiOperation(value = "상품 주문 목록 전체 조회")
       @ApiImplicitParam(name = "userNo", dataTypeClass = Long.class, value = "회원 번호", paramType = "query", required = true)
       @GetMapping("/orderItem/{userNo}")
       public Result findAllOrders(@PathVariable String userNo, Pageable pageable) {

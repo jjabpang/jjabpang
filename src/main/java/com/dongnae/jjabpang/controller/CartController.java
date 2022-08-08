@@ -42,6 +42,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Slf4j
 @Api(tags = "장바구니")
+@RequestMapping("/api/cart")
 public class CartController {
       
       private final CartService cartService;

@@ -1,5 +1,6 @@
 package com.dongnae.jjabpang.entity;
 
+import com.dongnae.jjabpang.exception.OutOfStockException;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,10 +21,10 @@ public class OrderItem extends BaseTimeEntity {
       @Column(name = "order_item_no", nullable = false)
       private Long OrderItemNo;
       
-      @Column(name = "quantity")
+      @Column(name = "quantity", columnDefinition = "INT")
       private Integer quantity;
       
-      @Column(name = "price")
+      @Column(name = "price", columnDefinition = "INT")
       private Integer price;
       
       @ManyToOne(fetch = LAZY)
@@ -35,7 +36,7 @@ public class OrderItem extends BaseTimeEntity {
       private Item item;
       
       /*==생성 메서드==*/
-      public static OrderItem createOrderItem(Item item, int price, int quantity) {
+      public static OrderItem createOrderItem(Item item, int price, int quantity) throws OutOfStockException {
             OrderItem orderItem = new OrderItem();
             orderItem.setItem(item);
             orderItem.setPrice(price);
@@ -51,7 +52,8 @@ public class OrderItem extends BaseTimeEntity {
        * 주문 취소
        */
       public void cancle() {
-            getItem().addStock(quantity);
+            this.getItem()
+                .addStock(quantity);
       }
       
       /*==조회 로직 ==*/

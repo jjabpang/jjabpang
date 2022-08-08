@@ -42,7 +42,7 @@ public class Order extends BaseTimeEntity {
       @ApiModelProperty(name = "상품 상태")
       private Status status;
       
-      @Column(name = "memo", length = 100, columnDefinition = "VARCHAR(300)")
+      @Column(name = "memo", length = 100, columnDefinition = "NVARCHAR(300)")
       @ApiModelProperty(name = "상품 메모")
       private String memo;
       
@@ -90,23 +90,25 @@ public class Order extends BaseTimeEntity {
             
             return order;
       }
+      
       /*==비즈니스 로직==*/
       
       /**
        * 주문취소
        */
-      public void cancel() {
+      public void cancelOrder() {
             //
             if (status == Status.COMP) {
                   throw new IllegalStateException("이미 배송된 상품은 취소가 불가능합니다.");
             }
             
-            this.setStatus(Status.CANCEL);
+            this.status = Status.CANCEL;
             for (OrderItem orderItem : orderItems) {
                   orderItem.cancle();
             }
             
       }
+      
       
       /*==조회 로직 ==*/
       

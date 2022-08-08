@@ -36,27 +36,27 @@ public class User extends BaseTimeEntity {
       /**
        * 이메일
        */
-      @Column(name = "email", length = 50)
+      @Column(name = "email", length = 50, columnDefinition = "VARCHAR(50)")
       @ApiModelProperty(value = "이메일")
       private String email;
       
       /**
        * 비밀번호
        */
-      @Column(name = "password", length = 500)
+      @Column(name = "password", length = 500, columnDefinition = "VARCHAR(500)")
       @ApiModelProperty(value = "비밀번호")
       private String password;
       
       /**
        * 생년월일
        */
-      @Column(name = "birth", length = 10)
+      @Column(name = "birth", length = 10, columnDefinition = "VARCHAR(20)")
       private String birth;
       
       /**
        * 닉네임
        */
-      @Column(name = "nickname", length = 50)
+      @Column(name = "nickname", length = 50, columnDefinition = "NVARCHAR(50)")
       private String nickname;
       
       /**
@@ -93,14 +93,14 @@ public class User extends BaseTimeEntity {
       /**
        * 회원상태
        */
-      @Column(name = "del_yn", columnDefinition = "varchar(5) default 'n'")
+      @Column(name = "del_yn", columnDefinition = "NVARCHAR(5) DEFAULT 'n'")
       private String delYn;
       
       
       /**
        * 휴대폰 번호
        */
-      @Column(name = "phone_nm", nullable = false)
+      @Column(name = "phone_nm", nullable = false, columnDefinition = "VARCHAR(20)")
       private String phoneNm;
       
       @ApiModelProperty(value = "장바구니")
