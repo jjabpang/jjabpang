@@ -1,5 +1,6 @@
 package com.dongnae.jjabpang.service;
 
+import com.dongnae.jjabpang.entity.Review;
 import com.dongnae.jjabpang.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,5 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReviewService {
       private final ReviewRepository reviewRepository;
       
-      
+      /**
+       * 리뷰작성
+       */
+      public Review addReview()
 }

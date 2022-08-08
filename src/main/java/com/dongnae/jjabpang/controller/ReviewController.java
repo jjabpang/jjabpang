@@ -1,9 +1,14 @@
 package com.dongnae.jjabpang.controller;
 
+import com.dongnae.jjabpang.dto.ReviewDto;
 import com.dongnae.jjabpang.service.ReviewService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,4 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "리뷰")
 public class ReviewController {
       private final ReviewService reviewService;
+      
+      @PostMapping(name = "/review")
+      @ApiOperation(value = "리뷰작성")
+      public ResponseEntity addReview(@RequestBody ReviewDto reviewDto) {
+      
+      }
 }

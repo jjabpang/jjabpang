@@ -49,13 +49,16 @@ public class Order extends BaseTimeEntity {
       @ManyToOne(fetch = LAZY)
       @JoinColumn(name = "user_no")
       @ApiModelProperty(name = "회원번호")
+      @ToString.Exclude
       private User user;
       
       @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
       @JoinColumn(name = "delivery_no")
+      @ToString.Exclude
       private Delivery delivery;
       
       @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "order")
+      @ToString.Exclude
       private List<OrderItem> orderItems = new ArrayList<>();
       
       /*연관관계*/
