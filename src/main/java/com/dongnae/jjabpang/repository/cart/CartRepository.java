@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface CartRepository extends JpaRepository<Cart, Long> {
       /**
-       * 장바구니에 들어갈 상품 조회
+       * 유저번호로 장바구니 찾기 유저당.. 장바구니는 하나씩임
        */
       @Query("select c from Cart c where c.user.userNo = ?1")
       Cart findByUser_UserNo(Long userNo);
