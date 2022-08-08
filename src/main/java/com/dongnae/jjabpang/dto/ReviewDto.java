@@ -1,6 +1,7 @@
 package com.dongnae.jjabpang.dto;
 
 import io.swagger.annotations.ApiModel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +18,10 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@AllArgsConstructor
 @ApiModel(value = "리뷰 요청 DTO")
 public class ReviewDto {
-
+      private String detail;
+      private String image;
+      private Long itemNo;
 }

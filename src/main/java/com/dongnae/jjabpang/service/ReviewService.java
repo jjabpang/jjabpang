@@ -1,5 +1,6 @@
 package com.dongnae.jjabpang.service;
 
+import com.dongnae.jjabpang.dto.ReviewDto;
 import com.dongnae.jjabpang.entity.Review;
 import com.dongnae.jjabpang.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +29,7 @@ public class ReviewService {
       /**
        * 리뷰작성
        */
-      public Review addReview()
+      public Review addReview(ReviewDto reviewDto) {
+      
+      }
 }

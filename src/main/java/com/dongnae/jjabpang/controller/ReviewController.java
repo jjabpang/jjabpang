@@ -34,6 +34,6 @@ public class ReviewController {
       @PostMapping(name = "/review")
       @ApiOperation(value = "리뷰작성")
       public ResponseEntity addReview(@RequestBody ReviewDto reviewDto) {
-      
+            reviewService.addReview(reviewDto);
       }
 }
