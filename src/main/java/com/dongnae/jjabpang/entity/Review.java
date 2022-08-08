@@ -49,4 +49,21 @@ public class Review extends BaseTimeEntity {
       @ToString.Exclude
       private Item item;
       
+      /* 연관관계*/
+      public void setItem(Item item) {
+            this.item = item;
+            item.getReviews()
+                .add(this);
+      }
+      
+      /*생성 메서드*/
+      public static Review createReview(Item item) {
+            Review review = new Review();
+            review.setItem(item);
+            
+            return review;
+      }
+      
+      /*비즈니스 로직*/
+      
 }
