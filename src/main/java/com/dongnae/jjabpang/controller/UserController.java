@@ -180,13 +180,17 @@ public class UserController {
       
       @ApiOperation(value = "회원 배송지 추가")
       @PostMapping("/users/add-cart")
-      public ResponseEntity<Message> addCart(@RequestBody UserDeliveryDto userDeliveryDto) {
+      public ResponseEntity<Message> addCart(@RequestBody UserDeliveryDto userDeliveryDto) throws Exception {
             Message message = new Message();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
             
-            //TODO  :배송지 추가
-            return null;
+            Long deliveryNo = deliveryService.addDelivery(userDeliveryDto);
+            
+            message.setStatus(StatusEnum.OK);
+            message.setData(deliveryNo);
+            message.setMessage("배송지 등록 성공, 배송지 리턴");
+            return new ResponseEntity<>(message, headers, HttpStatus.OK);
       }
       
       @Data

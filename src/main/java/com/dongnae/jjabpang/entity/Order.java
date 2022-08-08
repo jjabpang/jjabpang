@@ -97,7 +97,7 @@ public class Order extends BaseTimeEntity {
        */
       public void cancel() {
             //
-            if (delivery.getDeliveryStatus() == DeliveryStatus.COMP) {
+            if (status == Status.COMP) {
                   throw new IllegalStateException("이미 배송된 상품은 취소가 불가능합니다.");
             }
             

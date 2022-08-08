@@ -3,6 +3,7 @@ package com.dongnae.jjabpang.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -16,6 +17,7 @@ import static javax.persistence.FetchType.LAZY;
 @Setter
 @Getter
 @ToString
+@RequiredArgsConstructor
 public class Delivery extends BaseTimeEntity {
       
       @Id
@@ -48,12 +50,6 @@ public class Delivery extends BaseTimeEntity {
       @Column(name = "default_delivery", columnDefinition = "CHAR(3) DEFAULT 'Y' ")
       private String defaultDelivery;
       
-      /* 배송 상태*/
-      @Enumerated(EnumType.STRING)
-      @Column(name = "delivery_status", columnDefinition = "VARCHAR(10)")
-      private DeliveryStatus deliveryStatus;
-      
-      
       @ManyToOne(fetch = LAZY)
       @JoinColumn(name = "user_no")
       @ApiModelProperty(name = "회원")
@@ -64,4 +60,17 @@ public class Delivery extends BaseTimeEntity {
       @ApiModelProperty(name = "주문")
       @ToString.Exclude
       private Order order;
+      
+      public static Delivery createDelivery(User user, String address1, String address2, String defaultDelivery, String deliveryName, String receiver, String phoneNumber) {
+            Delivery delivery = new Delivery();
+            delivery.setUser(user);
+            delivery.setAddress1(address1);
+            delivery.setAddress2(address2);
+            delivery.setDefaultDelivery(defaultDelivery);
+            delivery.setDeliveryName(deliveryName);
+            delivery.setReceiver(receiver);
+            delivery.setPhoneNumber(phoneNumber);
+            
+            return delivery;
+      }
 }

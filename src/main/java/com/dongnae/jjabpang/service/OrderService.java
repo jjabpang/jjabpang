@@ -53,9 +53,9 @@ public class OrderService {
             log.debug("itemAndCountMap = " + itemAndCountMap);
             
             Delivery delivery = new Delivery();
-            delivery.setAddress1(user.getAddress1());
-            delivery.setAddress2(user.getAddress2());
-            delivery.setDeliveryStatus(DeliveryStatus.READY);
+            delivery.setReceiver(orderRequestDto.getReceiver());
+            delivery.setAddress1(orderRequestDto.getAddress1());
+            delivery.setAddress2(orderRequestDto.getAddress2());
             
             // 다건 상품  | 주문 상품 생성
             for (Map<String, Integer> item : itemAndCountMap) {

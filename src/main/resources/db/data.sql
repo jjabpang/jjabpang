@@ -27,7 +27,7 @@ VALUES (null, null, null, 3, '스틱청소기', 2);
 
 -- 유저 추가
 insert into jjabpang.user(user_no, cdt, udt, agree_tos, agree_picu, agree_promotion, birth, del_yn, email, gender,
-                          nickname, password, phone_nm, role, address1, address2) value (1,
+                          nickname, password, phone_nm, role) value (1,
                                                                                          current_date,
                                                                                          current_date,
                                                                                          '0', '0',
@@ -36,32 +36,28 @@ insert into jjabpang.user(user_no, cdt, udt, agree_tos, agree_picu, agree_promot
                                                                                          'qkrtkdwns3410@naver.com',
                                                                                          'm',
                                                                                          'qkrtkdw', '1234',
-                                                                                         '01011111111', 'b', '관악구 신림동',
-                                                                                         '동성오피스텔');
+                                                                                         '01011111111', 'b');
 insert into jjabpang.user(user_no, cdt, udt, agree_tos, agree_picu, agree_promotion, birth, del_yn, email, gender,
-                          nickname, password, phone_nm, role, address1, address2) value (2, current_date, current_date,
+                          nickname, password, phone_nm, role) value (2, current_date, current_date,
                                                                                          '0', '0', '0',
                                                                                          '19951203', 'n',
                                                                                          'qkrtkdwns3410@naver1.com',
                                                                                          'm', 'qkrtkdw2', '1234',
-                                                                                         '01011111111', 'b', '관악구 신림동',
-                                                                                         '동성오피스텔');
+                                                                                         '01011111111', 'b');
 insert into jjabpang.user(user_no, cdt, udt, agree_tos, agree_picu, agree_promotion, birth, del_yn, email, gender,
-                          nickname, password, phone_nm, role, address1, address2) value (3, current_date, current_date,
+                          nickname, password, phone_nm, role) value (3, current_date, current_date,
                                                                                          '0', '0', '0',
                                                                                          '19941103', 'n',
                                                                                          'qkrtkdwns3410@naver2.com',
                                                                                          'm', 'qkrtkdw3', '1234',
-                                                                                         '01011111111', 'b', '관악구 신림동',
-                                                                                         '동성오피스텔');
+                                                                                         '01011111111', 'b');
 insert into jjabpang.user(user_no, cdt, udt, agree_tos, agree_picu, agree_promotion, birth, del_yn, email, gender,
-                          nickname, password, phone_nm, role, address1, address2) value (4, current_date, current_date,
+                          nickname, password, phone_nm, role, ) value (4, current_date, current_date,
                                                                                          '0', '0', '0',
                                                                                          '19931103', 'n',
                                                                                          'qkrtkdwns3410@naver3.com',
                                                                                          'm', 'qkrtkdw4', '1234',
-                                                                                         '01011111111', 'b', '관악구 신림동',
-                                                                                         '동성오피스텔');
+                                                                                         '01011111111', 'b');
 -- 상품 추가
 INSERT INTO jjabpang.item (item_no, cdt, crt_by, udt, upt_by, brand_name, delivery_fee, detail, discount_rate, image, price, quantity, rating_cnt, rating_sum, special_price, title, category) VALUES (1, '2022-08-07 16:07:45', null, '2022-08-03 00:00:00', null, '홈플래닛', 0, 'http://image1.coupangcdn.com/image/vendor_inventory/6331/cda2696406077a40ef9cb65295a9db9254e69262703cf6a58638ec512217.jpg', 2.00, 'https://thumbnail9.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/852201942122386-8187777a-6bf5-4fb9-b042-7f45da3c8cc8.jpg', 42900, 100, 6934, 4.00, null, '홈플래닛 2 in 1 무선 진공청소기 858B-DC, 화이트', 3);
 
