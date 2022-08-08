@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
@@ -91,6 +92,10 @@ public class Item extends BaseTimeEntity {
       @ApiModelProperty(name = "카테고리")
       @ToString.Exclude
       private Category category;
+      
+      @OneToMany(mappedBy = "item", fetch = LAZY)
+      @ToString.Exclude
+      private List<Review> reviews = new ArrayList<>();
       
       public void removeStock(int quantity) throws OutOfStockException {
             int restQuantity = this.quantity - quantity;

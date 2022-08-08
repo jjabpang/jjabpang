@@ -1,11 +1,11 @@
 package com.dongnae.jjabpang.entity;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import io.swagger.annotations.ApiModel;
+import lombok.*;
 
 import javax.persistence.*;
+
+import static javax.persistence.FetchType.LAZY;
 
 /*
  *packageName    : com.dongnae.jjabpang.entity
@@ -18,12 +18,16 @@ import javax.persistence.*;
  * -----------------------------------------------------------
  * 2022-08-08        ipeac       최초 생성
  */
-@Entity(name = "review")
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
-public class Review {
+@Entity(name = "review")
+@Table(name = "review")
+@ApiModel("리뷰엔티티")
+public class Review extends BaseTimeEntity {
       /**
        * 리뷰 번호
        */
@@ -39,7 +43,27 @@ public class Review {
       
       @Column(name = "image")
       private String image;
-
-//      @ManyToOne(fetch = LAZY)
-//      @JoinColumn()
+      
+      @ManyToOne(fetch = LAZY)
+      @JoinColumn(name = "item_no")
+      @ToString.Exclude
+      private Item item;
+      
+      /* 연관관계*/
+      public void setItem(Item item) {
+            this.item = item;
+            item.getReviews()
+                .add(this);
+      }
+      
+      /*생성 메서드*/
+      public static Review createReview(Item item) {
+            Review review = new Review();
+            review.setItem(item);
+            
+            return review;
+      }
+      
+      /*비즈니스 로직*/
+      
 }
