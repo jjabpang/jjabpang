@@ -1,5 +1,6 @@
 package com.dongnae.jjabpang.controller;
 
+import com.dongnae.jjabpang.dto.UserDeliveryDto;
 import com.dongnae.jjabpang.dto.UserInfoModificationDto;
 import com.dongnae.jjabpang.dto.UserLoginRequestDto;
 import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
@@ -8,6 +9,7 @@ import com.dongnae.jjabpang.exception.UsernameNotFoundException;
 import com.dongnae.jjabpang.repository.querydsl.user.QUserRepository;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
+import com.dongnae.jjabpang.service.DeliveryService;
 import com.dongnae.jjabpang.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -48,6 +50,7 @@ public class UserController {
       
       private final UserService userService;
       private final QUserRepository qUserRepository;
+      private final DeliveryService deliveryService;
       
       /**
        * 회원가입 기능
@@ -173,6 +176,17 @@ public class UserController {
             
             resultMap.put("pwd", pwd);
             return new Result(resultMap);
+      }
+      
+      @ApiOperation(value = "회원 배송지 추가")
+      @PostMapping("/users/add-cart")
+      public ResponseEntity<Message> addCart(@RequestBody UserDeliveryDto userDeliveryDto) {
+            Message message = new Message();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
+            
+            //TODO  :배송지 추가
+            return null;
       }
       
       @Data
