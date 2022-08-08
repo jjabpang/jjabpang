@@ -41,17 +41,17 @@ public class CartItem extends BaseTimeEntity {
       private Item item;
       
       @ManyToOne(fetch = LAZY)
-      @JoinColumn(name = "cart")
+      @JoinColumn(name = "cart", columnDefinition = "INT")
       @ApiModelProperty(name = "장바구니")
       @ToString.Exclude
       private Cart cart;
       
       @ApiModelProperty(name = "장바구니 안의 아이템의 개수")
-      @Column(name = "item_count")
+      @Column(name = "item_count", columnDefinition = "INT")
       private int itemCount;
       
       @ApiModelProperty(name = "장바구니 안의 아이템의 단가")
-      @Column(name = "item_price")
+      @Column(name = "item_price", columnDefinition = "INT")
       private int itemPrice;
       
       public static CartItem createCartItem(Cart cart, Item item, int count, int price) {

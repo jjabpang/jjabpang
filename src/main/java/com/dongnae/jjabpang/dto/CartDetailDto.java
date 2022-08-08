@@ -1,5 +1,6 @@
 package com.dongnae.jjabpang.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,18 +17,14 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@AllArgsConstructor
 public class CartDetailDto {
       private Long cartItemNo; // 장바구니 상품 고유 번호
       private String itemTitle;
       private String itemImg;
       private int itemPrice;
       private int itemCount;
+      private int deliveryfee;
       
-      public CartDetailDto(Long cartItemNo, String itemTitle, String itemImg, int itemPrice, int itemCount) {
-            this.cartItemNo = cartItemNo;
-            this.itemTitle = itemTitle;
-            this.itemImg = itemImg;
-            this.itemPrice = itemPrice;
-            this.itemCount = itemCount;
-      }
+      
 }

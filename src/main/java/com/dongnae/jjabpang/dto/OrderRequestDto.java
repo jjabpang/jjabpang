@@ -25,6 +25,10 @@ import java.util.Map;
 public class OrderRequestDto implements Serializable {
       private String memo;
       private Long userNo;
+      private String phoneNum;
+      private String address1;
+      private String address2;
+      private String receiver;
       private List<Map<String, Integer>> data; // 아이템 번호와 카운트수 | 가격반환
       
 }

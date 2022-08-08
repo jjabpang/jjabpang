@@ -3,6 +3,7 @@ package com.dongnae.jjabpang.service;
 import com.dongnae.jjabpang.dto.OrderListByEmailAndPagingResponseDto;
 import com.dongnae.jjabpang.dto.OrderRequestDto;
 import com.dongnae.jjabpang.entity.*;
+import com.dongnae.jjabpang.exception.OutOfStockException;
 import com.dongnae.jjabpang.repository.item.ItemRepository;
 import com.dongnae.jjabpang.repository.order.OrderRepository;
 import com.dongnae.jjabpang.repository.querydsl.order.QOrderRepository;
@@ -14,8 +15,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /*
@@ -44,7 +47,7 @@ public class OrderService {
        * 주문 기능
        */
       @Transactional
-      public Integer order(OrderRequestDto orderRequestDto) {
+      public Integer order(OrderRequestDto orderRequestDto) throws OutOfStockException {
             // 유저번호로 유저찾기
             User user = userRepository.findByUserNo(orderRequestDto.getUserNo());
             
@@ -53,9 +56,9 @@ public class OrderService {
             log.debug("itemAndCountMap = " + itemAndCountMap);
             
             Delivery delivery = new Delivery();
-            delivery.setAddress1(user.getAddress1());
-            delivery.setAddress2(user.getAddress2());
-            delivery.setDeliveryStatus(DeliveryStatus.READY);
+            delivery.setReceiver(orderRequestDto.getReceiver());
+            delivery.setAddress1(orderRequestDto.getAddress1());
+            delivery.setAddress2(orderRequestDto.getAddress2());
             
             // 다건 상품  | 주문 상품 생성
             for (Map<String, Integer> item : itemAndCountMap) {
@@ -69,12 +72,10 @@ public class OrderService {
                   Order order = Order.createOrder(user, delivery, orderItem);
                   
                   orderRepository.save(order);
-                  
             }
             
             //전체 상품 개수
             return itemAndCountMap.size();
-            
       }
       
       /**
@@ -84,6 +85,27 @@ public class OrderService {
             log.debug("userNo = " + userNo);
             
             return qOrderRepository.findOrderByUserNoOrderByCdtDESC(userNo, pageable);
+            
+      }
+      
+      /**
+       * 주문 취소 주문자와 현재 로그인된 사용자가 동일한지 검증
+       */
+      public boolean validateOrder(Long orderNo, Long userNo) {
+            User curUser = userRepository.findById(userNo)
+                                         .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다."));
+            Order order = orderRepository.findById(orderNo)
+                                         .orElseThrow(EntityNotFoundException::new);
+            
+            User orderUser = order.getUser();
+            return Objects.equals(curUser.getUserNo(), orderUser.getUserNo());
+      }
+      
+      @Transactional
+      public void cancelOrder(Long orderNo) {
+            Order order = orderRepository.findById(orderNo)
+                                         .orElseThrow(EntityNotFoundException::new);
+            order.cancelOrder();
             
       }
       

@@ -1,5 +1,6 @@
 package com.dongnae.jjabpang.entity;
 
+import com.dongnae.jjabpang.exception.OutOfStockException;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -37,11 +38,11 @@ public class Item extends BaseTimeEntity {
       private Long itemNo;
       
       @ApiModelProperty(value = "브랜드 이름")
-      @Column(name = "brand_name", columnDefinition = "VARCHAR(100)")
+      @Column(name = "brand_name", columnDefinition = "NVARCHAR(100)")
       private String brandName;
       
       @ApiModelProperty(value = "상품 제목")
-      @Column(name = "title", columnDefinition = "VARCHAR(500)")
+      @Column(name = "title", columnDefinition = "NVARCHAR(500)")
       private String title;
       
       @ApiModelProperty(value = "상품 이미지")
@@ -79,12 +80,6 @@ public class Item extends BaseTimeEntity {
       @ApiModelProperty(value = "상품 재고")
       @Column(name = "quantity", columnDefinition = "INT")
       private Integer quantity;
-
-//      /**
-//       * 판매량
-//       */
-//      @Column(name = "sell_count", columnDefinition = "INT DEFAULT 0")
-//      private Integer sell_count;
       
       @OneToMany(fetch = LAZY, mappedBy = "item")
       @ApiModelProperty(name = "장바구니_상품")
@@ -97,12 +92,15 @@ public class Item extends BaseTimeEntity {
       @ToString.Exclude
       private Category category;
       
-      public void removeStock(int quantity) {
-      
-      
+      public void removeStock(int quantity) throws OutOfStockException {
+            int restQuantity = this.quantity - quantity;
+            if (restQuantity < 0) {
+                  throw new OutOfStockException("상품의 재고가 부족합니다. 현재 재고 수량 : " + this.quantity + "개");
+            }
+            this.quantity -= quantity;
       }
       
       public void addStock(Integer quantity) {
-      
+            this.quantity += quantity;
       }
 }

@@ -8,6 +8,8 @@ import com.dongnae.jjabpang.response.StatusEnum;
 import com.dongnae.jjabpang.service.CartService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +42,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Slf4j
 @Api(tags = "장바구니")
+@RequestMapping("/api/cart")
 public class CartController {
       
       private final CartService cartService;
@@ -78,10 +82,20 @@ public class CartController {
       @ApiOperation(value = "회원별 장바구니 조회")
       @GetMapping("/cart/{userNo}")
       public Result findCart(@PathVariable Long userNo) throws Exception {
-            
+            List<CartResult> cartDetailDtoList = new ArrayList<>();
             List<CartDetailDto> cartList = cartService.getCartList(userNo);
+            int index = 0;
+            for (CartDetailDto cartDetailDto : cartList) {
+                  CartResult<CartDetailDto> cartDetailDtoCartResult = new CartResult<>(cartDetailDto);
+                  cartDetailDtoList.add(cartDetailDtoCartResult);
+            }
             
-            return new Result(cartList);
+            return new Result(cartDetailDtoList);
       }
       
+      @Data
+      @AllArgsConstructor
+      class CartResult<T> {
+            private T cart;
+      }
 }
