@@ -76,7 +76,6 @@ public class ReviewService {
             }
             
             return reviewImages.size();
-            
       }
       
       /**
@@ -90,5 +89,12 @@ public class ReviewService {
             findReview.setDelYn("y");
             
             return findReview.getReviewNo();
+      }
+      
+      /**
+       * 리뷰 조회 ( delYn 이 'n' 인 값만 )
+       */
+      public List<ReviewDto> findAllNotDel() {
+            reviewRepository.find();
       }
 }
