@@ -654,6 +654,22 @@ VALUES (null, '2022-08-08 17:29:20', null, '2022-08-08 17:29:25', null, 12, 1000
 INSERT INTO jjabpang.cart_item (cart_item_no, cdt, crt_by, udt, upt_by, item_count, item_price, cart, item)
 VALUES (null, '2022-08-08 17:29:20', null, '2022-08-08 17:29:25', null, 12, 1000, 1, 41);
 
+-- 리뷰 추가
+INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 4, '요약', 1, 1);
+
+INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 4, '요약', 2, 1);
+
+INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 4, '요약', 3, 1);
+
+INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 4, '요약', 4, 1);
+
+INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 4, '요약', 1, 1);
+
 
 
 commit;

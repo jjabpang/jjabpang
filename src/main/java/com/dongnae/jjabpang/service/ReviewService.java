@@ -55,6 +55,7 @@ public class ReviewService {
             createdReview.setDetail(reviewDto.getDetail());
             createdReview.setDelYn("n");
             createdReview.setSummary(reviewDto.getSummary());
+            createdReview.setStarCnt(reviewDto.getStarCnt());
             
             reviewRepository.save(createdReview);
             return createdReview.getReviewNo();
@@ -94,6 +95,6 @@ public class ReviewService {
        * 리뷰 조회 ( delYn 이 'n' 인 값만 )
        */
       public List<ReviewDto> findAllNotDel() {
-            reviewRepository.find();
+            return null;
       }
 }
