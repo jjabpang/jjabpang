@@ -87,22 +87,19 @@ public class UserController {
        */
       @ApiOperation(value = "회원 탈퇴 기능")
       @ApiImplicitParam(name = "userNo", dataTypeClass = Long.class, value = "회원 번호", paramType = "query", required = true)
-      @DeleteMapping("/users/{userNo}")
+      @PostMapping("/users/{userNo}")
       public ResponseEntity<Message> deleteUser(@PathVariable Long userNo) {
             Message message = new Message();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
             
-            Integer row = userService.delete(userNo);
-            if (row == 0) {
-                  throw new IllegalStateException("회원 탈퇴 실패");
-            } else {
-                  message.setStatus(StatusEnum.OK);
-                  message.setMessage("회원 탈퇴 성공");
-                  message.setData(row + "행 반영됨");
-                  
-                  return new ResponseEntity<>(message, headers, HttpStatus.OK);
-            }
+            Long deletedUserNo = userService.delete(userNo);
+            
+            message.setStatus(StatusEnum.OK);
+            message.setMessage("회원 탈퇴 성공 , data : 탈퇴된 회원번호");
+            message.setData(deletedUserNo);
+            
+            return new ResponseEntity<>(message, headers, HttpStatus.OK);
       }
       
       @ApiOperation(value = "회원 로그인 기능")

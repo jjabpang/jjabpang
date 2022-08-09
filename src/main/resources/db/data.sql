@@ -16,6 +16,9 @@ alter table jjabpang.order_item
     convert to charset utf8mb4;
 alter table jjabpang.review
     convert to charset utf8mb4;
+alter table jjabpang.review_image
+    convert to charset utf8mb4;
+
 
 -- 카테고리 추가
 INSERT INTO jjabpang.category (category_no, cdt, udt, category_depth, category_name, parent_no)
