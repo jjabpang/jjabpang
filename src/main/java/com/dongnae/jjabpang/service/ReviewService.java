@@ -50,7 +50,6 @@ public class ReviewService {
             User findUser = userRepository.findById(reviewDto.getUserNo())
                                           .orElseThrow(() -> new IllegalStateException("해당 회원이 존재하지 않습니다."));
             
-            
             //이미지 제외 리뷰 작성함
             Review createdReview = Review.createReview(findUser, findItem, null);
             createdReview.setDetail(reviewDto.getDetail());
