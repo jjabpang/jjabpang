@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -60,12 +61,17 @@ public class UserService {
       }
       
       /**
-       * 회원 탈퇴 기능
+       * 회원 탈퇴 기능 ( del_yn 'n' -> 'y' )
        */
       @Transactional
-      public Integer delete(Long id) {
+      public Long delete(Long id) {
+            User findUser = userRepository.findById(id)
+                                          .orElseThrow(EntityNotFoundException::new);
             
-            return userRepository.deleteUserByUserNo(id);
+            //변경 감지 -> 탈퇴 회원으로 변경
+            findUser.setDelYn("y");
+            
+            return findUser.getUserNo();
       }
       
       /**

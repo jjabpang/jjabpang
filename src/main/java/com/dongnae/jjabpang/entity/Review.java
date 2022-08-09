@@ -41,6 +41,9 @@ public class Review extends BaseTimeEntity {
       @Column(name = "detail")
       private String detail;
       
+      /**
+       * 이미지링크
+       */
       @Column(name = "image")
       private String image;
       
