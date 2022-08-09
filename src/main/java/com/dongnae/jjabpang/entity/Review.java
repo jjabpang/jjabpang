@@ -47,6 +47,12 @@ public class Review extends BaseTimeEntity {
       @Column(name = "image")
       private String image;
       
+      /**
+       * 한줄 요약
+       */
+      @Column(name = "summary")
+      private String summary;
+      
       @ManyToOne(fetch = LAZY)
       @JoinColumn(name = "item_no")
       @ToString.Exclude

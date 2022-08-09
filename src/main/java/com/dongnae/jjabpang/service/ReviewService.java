@@ -41,4 +41,11 @@ public class ReviewService {
             reviewRepository.save(createdReview);
             return createdReview.getReviewNo();
       }
+      
+      /**
+       * 리뷰 삭제
+       */
+      public void removeReview(Long reviewNo) {
+      
+      }
 }
