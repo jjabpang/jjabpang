@@ -1,7 +1,6 @@
 package com.dongnae.jjabpang.controller;
 
 import com.dongnae.jjabpang.dto.ReviewDto;
-import com.dongnae.jjabpang.dto.ReviewDto.ReviewImageDto;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
 import com.dongnae.jjabpang.service.ReviewService;
@@ -43,22 +42,15 @@ public class ReviewController {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
             
+            // 리뷰 (이미지 제외) 작성
             Long reviewNo = reviewService.addReview(reviewDto);
+            // 이미지 업로드
+            Integer affectedRows = reviewService.addImage(reviewDto, reviewNo);
             
             message.setStatus(StatusEnum.OK);
             message.setMessage("리뷰 작성 성공, data : 리뷰번호");
             message.setData(reviewNo);
             
-            return new ResponseEntity(message, headers, HttpStatus.OK);
-      }
-      
-      @PostMapping(name = "/review/photo")
-      @ApiOperation(value = "리뷰 작성전 이미지 업로드")
-      public ResponseEntity addImage(@RequestBody ReviewImageDto reviewImageDto) {
-            Message message = new Message();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
-            //TODO 코드 작성요함
             return new ResponseEntity(message, headers, HttpStatus.OK);
       }
       

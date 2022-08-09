@@ -30,9 +30,10 @@ public class ReviewImage extends BaseTimeEntity {
       private Review review;
       
       /*연관관계 생성 메서드*/
-      public static ReviewImage createReviewImage(Review review) {
+      public static ReviewImage createReviewImage(String imageUrl, Review review) {
             ReviewImage reviewImage = new ReviewImage();
             reviewImage.setReview(review);
+            reviewImage.setImageUrl(imageUrl);
             return reviewImage;
       }
       /**/
