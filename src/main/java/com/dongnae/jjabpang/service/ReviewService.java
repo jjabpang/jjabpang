@@ -34,6 +34,7 @@ public class ReviewService {
       /**
        * 리뷰작성
        */
+      @Transactional
       public Long addReview(ReviewDto reviewDto) {
             Item findItem = itemRepository.findById(reviewDto.getItemNo())
                                           .orElseThrow(EntityNotFoundException::new);
@@ -45,7 +46,13 @@ public class ReviewService {
       /**
        * 리뷰 삭제
        */
-      public void removeReview(Long reviewNo) {
-      
+      @Transactional
+      public Long removeReview(Long reviewNo) {
+            Review findReview = reviewRepository.findById(reviewNo)
+                                                .orElseThrow(() -> new IllegalStateException("해당 리뷰가 없습니다."));
+            
+            findReview.setDelYn("y");
+            
+            return findReview.getReviewNo();
       }
 }

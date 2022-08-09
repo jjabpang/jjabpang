@@ -53,6 +53,12 @@ public class Review extends BaseTimeEntity {
       @Column(name = "summary")
       private String summary;
       
+      /**
+       * 삭제여부
+       */
+      @Column(name = "del_yn")
+      private String delYn;
+      
       @ManyToOne(fetch = LAZY)
       @JoinColumn(name = "item_no")
       @ToString.Exclude

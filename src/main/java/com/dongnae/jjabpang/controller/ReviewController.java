@@ -45,8 +45,9 @@ public class ReviewController {
             Long reviewNo = reviewService.addReview(reviewDto);
             
             message.setStatus(StatusEnum.OK);
-            message.setMessage("리뷰 작성 성공");
+            message.setMessage("리뷰 작성 성공, data : 리뷰번호");
             message.setData(reviewNo);
+            
             return new ResponseEntity(message, headers, HttpStatus.OK);
       }
       
@@ -56,9 +57,20 @@ public class ReviewController {
             Message message = new Message();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
-            
-            reviewService.removeReview(reviewNo);
-            return new ResponseEntity(null);
+            try {
+                  reviewService.removeReview(reviewNo);
+                  
+            } catch (Exception e) {
+                  message.setData(reviewNo);
+                  message.setStatus(StatusEnum.BAD_REQUEST);
+                  message.setMessage("리뷰 삭제 실패 , data : 리뷰번호");
+                  return new ResponseEntity(message, headers, HttpStatus.BAD_REQUEST);
+                  
+            }
+            message.setData(reviewNo);
+            message.setStatus(StatusEnum.OK);
+            message.setMessage("리뷰 삭제 성공 , data : 리뷰번호");
+            return new ResponseEntity(message, headers, HttpStatus.OK);
       }
       
 }
