@@ -1,16 +1,20 @@
 package com.dongnae.jjabpang.service;
 
 import com.dongnae.jjabpang.dto.ReviewDto;
+import com.dongnae.jjabpang.dto.ReviewDto.ReviewImageDto;
 import com.dongnae.jjabpang.entity.Item;
 import com.dongnae.jjabpang.entity.Review;
+import com.dongnae.jjabpang.entity.User;
 import com.dongnae.jjabpang.repository.ReviewRepository;
 import com.dongnae.jjabpang.repository.item.ItemRepository;
+import com.dongnae.jjabpang.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 /*
  *packageName    : com.dongnae.jjabpang.service
@@ -30,6 +34,7 @@ import javax.persistence.EntityNotFoundException;
 public class ReviewService {
       private final ReviewRepository reviewRepository;
       private final ItemRepository itemRepository;
+      private final UserRepository userRepository;
       
       /**
        * 리뷰작성
@@ -38,7 +43,20 @@ public class ReviewService {
       public Long addReview(ReviewDto reviewDto) {
             Item findItem = itemRepository.findById(reviewDto.getItemNo())
                                           .orElseThrow(EntityNotFoundException::new);
-            Review createdReview = Review.createReview(findItem);
+            
+            User findUser = userRepository.findById(reviewDto.getUserNo())
+                                          .orElseThrow(() -> new IllegalStateException("해당 회원이 존재하지 않습니다."));
+            
+            // 사진 데이터 목록
+            List<ReviewImageDto> reviewImages = reviewDto.getReviewImages();
+            
+            for (ReviewImageDto reviewImage : reviewImages) {
+                  String imageUrl = reviewImage.getImageUrl();
+                  
+            }
+            
+            Review createdReview = Review.createReview(findUser, findItem, reviewImages);
+            
             reviewRepository.save(createdReview);
             return createdReview.getReviewNo();
       }

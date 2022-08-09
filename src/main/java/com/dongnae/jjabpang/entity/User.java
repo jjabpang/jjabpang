@@ -117,4 +117,8 @@ public class User extends BaseTimeEntity {
       @OneToMany(fetch = LAZY, mappedBy = "user")
       @ToString.Exclude
       private List<Order> orderList = new ArrayList<>();
+      
+      @OneToMany(fetch = LAZY, mappedBy = "user")
+      @ToString.Exclude
+      private List<Review> reviewList = new ArrayList<>();
 }
