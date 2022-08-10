@@ -71,7 +71,6 @@ public class QReviewRepositoryImpl implements QReviewRepository {
             return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
       }
       
-      
       /**
        * 리뷰번호로 이미지 조회
        */
