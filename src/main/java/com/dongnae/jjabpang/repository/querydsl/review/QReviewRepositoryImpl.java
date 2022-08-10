@@ -75,15 +75,15 @@ public class QReviewRepositoryImpl implements QReviewRepository {
       @Override
       public List<String> findReviewsDyPagingAndCondition(String reviewNo) {
             
-            List<String> content = queryFactory.from(reviewImage)
-                                               .select(reviewImage.imageUrl)
-                                               .where(
-                                                     reviewImage.review.reviewNo.eq(Long.valueOf(reviewNo))
-                                               )
-                                               .fetch();
+            List<String> imageUrlList = queryFactory.from(reviewImage)
+                                                    .select(reviewImage.imageUrl)
+                                                    .where(
+                                                          reviewImage.review.reviewNo.eq(Long.valueOf(reviewNo))
+                                                    )
+                                                    .fetch();
             
             
-            return
+            return imageUrlList;
       }
       
       

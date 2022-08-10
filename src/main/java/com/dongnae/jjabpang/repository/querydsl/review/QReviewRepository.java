@@ -17,8 +17,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface QReviewRepository {
       
       @Query(name = "리뷰 목록을 조회합니다 (페이징 및 동적 정렬 및 조건")
       Page<ReviewListDto> findReviewsDyPagingAndCondition(ReviewSearchCondition searchCondition, Pageable pageable);
+      
+      @Query(name = "리뷰 번호로 이미지 url 리스트 조회")
+      List<String> findReviewsDyPagingAndCondition(String reviewNo);
 }
