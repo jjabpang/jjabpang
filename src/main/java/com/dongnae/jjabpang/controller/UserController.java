@@ -199,6 +199,14 @@ public class UserController {
       }
       
       @Data
+      @AllArgsConstructor
+      static class InnerData<T> {
+            
+            private T innerData;
+            
+      }
+      
+      @Data
       static class UserSingUpResponseDto {
             private Integer id;
             

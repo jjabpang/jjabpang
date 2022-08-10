@@ -50,6 +50,12 @@ public class Review extends BaseTimeEntity {
       private String summary;
       
       /**
+       * 별점 개수
+       */
+      @Column(name = "star_cnt", columnDefinition = "INT")
+      private Integer starCnt;
+      
+      /**
        * 삭제여부
        */
       @Column(name = "del_yn", columnDefinition = "VARCHAR(10)")

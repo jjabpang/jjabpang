@@ -2,7 +2,7 @@ package com.dongnae.jjabpang.controller;
 
 import com.dongnae.jjabpang.dto.ItemCategoryOrNameResponseDto;
 import com.dongnae.jjabpang.dto.ItemDto;
-import com.dongnae.jjabpang.dto.ItemSearchCondition;
+import com.dongnae.jjabpang.dto.condition.ItemSearchCondition;
 import com.dongnae.jjabpang.entity.Item;
 import com.dongnae.jjabpang.repository.item.ItemRepository;
 import com.dongnae.jjabpang.repository.querydsl.item.QItemRepository;

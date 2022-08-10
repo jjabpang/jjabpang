@@ -1,8 +1,8 @@
 package com.dongnae.jjabpang.repository.querydsl.item;
 
 import com.dongnae.jjabpang.dto.ItemCategoryOrNameResponseDto;
-import com.dongnae.jjabpang.dto.ItemSearchCondition;
 import com.dongnae.jjabpang.dto.QItemCategoryOrNameResponseDto;
+import com.dongnae.jjabpang.dto.condition.ItemSearchCondition;
 import com.dongnae.jjabpang.entity.Item;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
@@ -20,6 +20,7 @@ import java.util.List;
 
 import static com.dongnae.jjabpang.entity.QCategory.category;
 import static com.dongnae.jjabpang.entity.QItem.item;
+import static com.dongnae.jjabpang.entity.QReview.review;
 import static org.springframework.util.StringUtils.isEmpty;
 
 /*
@@ -92,7 +93,7 @@ public class QItemRepositoryImpl implements QItemRepository {
        * @param page
        * @return
        */
-      private static OrderSpecifier<?> boardSort(Pageable page) {
+      public static OrderSpecifier<?> boardSort(Pageable page) {
             //서비스에서 보내준 Pageable 객체에 정렬조건 null 값 체크
             if (!page.getSort()
                      .isEmpty()) {
@@ -107,7 +108,10 @@ public class QItemRepositoryImpl implements QItemRepository {
                                     return new OrderSpecifier(direction, item.cdt);
                               case "item.price":
                                     return new OrderSpecifier(direction, item.price);
+                              case "review.cdt":
+                                    return new OrderSpecifier(direction, review.cdt);
                         }
+                        
                   }
             }
             return null;
