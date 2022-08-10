@@ -1,44 +1,99 @@
 package com.dongnae.jjabpang.config;
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.filter.GenericFilterBean;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-
 /*
  *packageName    : com.dongnae.jjabpang.config
  * fileName       : JwtTokenProvider
  * author         : ipeac
- * date           : 2022-08-10
+ * date           : 2022-08-11
  * description    :
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2022-08-10        ipeac       최초 생성
+ * 2022-08-11        ipeac       최초 생성
  */
-//해당 클래스는 JwtTokenProvider가 검증을 끝낸 Jwt로부터 유저 정보를 조회해와서 UserPasswordAuthenticationFilter 로 전달합니다.
+
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Base64;
+import java.util.Date;
+import java.util.List;
+
+//  JWT를 생성하고 검증하는 컴포넌트. JWT에는 토큰 만료 시간이나 회원 권한 정보등을 저장가능
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter extends GenericFilterBean {
+@Component
+public class JwtTokenProvider {
       
-      private final JwtTokenProvider jwtTokenProvider;
+      private String secretKey = "webfirewood";
       
-      @Override
-      public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-            // 헤더에서 JWT 를 받아옵니다.
-            String token = jwtTokenProvider.resolveToken((HttpServletRequest) request);
-            // 유효한 토큰인지 확인합니다.
-            if (token != null && jwtTokenProvider.validateToken(token)) {
-                  // 토큰이 유효하면 토큰으로부터 유저 정보를 받아옵니다.
-                  Authentication authentication = jwtTokenProvider.getAuthentication(token);
-                  // SecurityContext 에 Authentication 객체를 저장합니다.
-                  SecurityContextHolder.getContext()
-                                       .setAuthentication(authentication);
-            }
-            chain.doFilter(request, response);
+      // 토큰 유효시간 30분
+      private long tokenValidTime = 30 * 60 * 1000L;
+      
+      private final UserDetailsService userDetailsService;
+      
+      // 객체 초기화, secretKey를 Base64로 인코딩한다.
+      @PostConstruct
+      protected void init() {
+            secretKey = Base64.getEncoder()
+                              .encodeToString(secretKey.getBytes());
       }
+      
+      // JWT 토큰 생성
+      public String createToken(String userPk, List<String> roles) {
+            Claims claims = Jwts.claims()
+                                .setSubject(userPk); // JWT payload 에 저장되는 정보단위
+            claims.put("roles", roles); // 정보는 key / value 쌍으로 저장된다.
+            Date now = new Date();
+            return Jwts.builder()
+                       .setClaims(claims) // 정보 저장
+                       .setIssuedAt(now) // 토큰 발행 시간 정보
+                       .setExpiration(new Date(now.getTime() + tokenValidTime)) // set Expire Time
+                       .signWith(SignatureAlgorithm.HS256, secretKey)  // 사용할 암호화 알고리즘과
+                       // signature 에 들어갈 secret값 세팅
+                       .compact();
+      }
+      
+      // JWT 토큰에서 인증 정보 조회
+      public Authentication getAuthentication(String token) {
+            UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserPk(token));
+            return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+      }
+      
+      // 토큰에서 회원 정보 추출
+      public String getUserPk(String token) {
+            return Jwts.parser()
+                       .setSigningKey(secretKey)
+                       .parseClaimsJws(token)
+                       .getBody()
+                       .getSubject();
+      }
+      
+      // Request의 Header에서 token 값을 가져옵니다. "X-AUTH-TOKEN" : "TOKEN값'
+      public String resolveToken(HttpServletRequest request) {
+            return request.getHeader("X-AUTH-TOKEN");
+      }
+      
+      // 토큰의 유효성 + 만료일자 확인
+      public boolean validateToken(String jwtToken) {
+            try {
+                  Jws<Claims> claims = Jwts.parser()
+                                           .setSigningKey(secretKey)
+                                           .parseClaimsJws(jwtToken);
+                  return !claims.getBody()
+                                .getExpiration()
+                                .before(new Date());
+            } catch (Exception e) {
+                  return false;
+            }
+      }
+}
