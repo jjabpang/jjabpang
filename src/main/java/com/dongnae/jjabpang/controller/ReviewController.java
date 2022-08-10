@@ -62,11 +62,9 @@ public class ReviewController {
       @GetMapping("/review")
       @ApiOperation(value = "리뷰 조회 - 페이징; ")
       public Result findReview(@RequestBody ReviewSearchCondition searchCondition, Pageable pageable) {
-            
             log.debug("searchCondition = " + searchCondition);
             
             List<ReviewListDto> content = reviewService.findReviewList(searchCondition, pageable);
-            
             
             return new Result(content);
       }

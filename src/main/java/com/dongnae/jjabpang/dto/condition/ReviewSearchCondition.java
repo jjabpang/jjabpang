@@ -15,6 +15,8 @@ import lombok.Data;
  */
 @Data
 public class ReviewSearchCondition {
+      private Long itemNo;
+      private Long userNo;
       private String reviewDetail;
       private Integer reviewStarCnt;
       private String orderBy;
