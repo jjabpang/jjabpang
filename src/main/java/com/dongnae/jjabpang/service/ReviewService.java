@@ -76,7 +76,6 @@ public class ReviewService {
             }
             
             return reviewImages.size();
-            
       }
       
       /**
@@ -91,4 +90,5 @@ public class ReviewService {
             
             return findReview.getReviewNo();
       }
+      
 }

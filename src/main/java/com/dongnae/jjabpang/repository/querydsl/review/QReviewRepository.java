@@ -1,4 +1,4 @@
-package com.dongnae.jjabpang.repository.querydsl.item;
+package com.dongnae.jjabpang.repository.querydsl.review;
 /*
  *packageName    : com.dongnae.jjabpang.repository.querydsl.order
  * fileName       : PostOrderRepository
@@ -11,14 +11,14 @@ package com.dongnae.jjabpang.repository.querydsl.item;
  * 2022-08-04        ipeac       최초 생성
  */
 
-import com.dongnae.jjabpang.dto.ItemCategoryOrNameResponseDto;
-import com.dongnae.jjabpang.dto.condition.ItemSearchCondition;
+import com.dongnae.jjabpang.dto.ReviewListDto;
+import com.dongnae.jjabpang.dto.condition.ReviewSearchCondition;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 
-public interface QItemRepository {
+public interface QReviewRepository {
       
-      @Query(name = "해당 카테고리 번호를 가진 목록만 불러옵니다. 페이징 적용")
-      Page<ItemCategoryOrNameResponseDto> findByCategoryAndNameOrderByCdtDESC(ItemSearchCondition searchCondition, Pageable pageable);
+      @Query(name = "리뷰 목록을 조회합니다 (페이징 및 동적 정렬 및 조건")
+      Page<ReviewListDto> findReviewsDyPagingAndCondition(ReviewSearchCondition searchCondition, Pageable pageable);
 }

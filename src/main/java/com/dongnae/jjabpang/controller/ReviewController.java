@@ -1,6 +1,8 @@
 package com.dongnae.jjabpang.controller;
 
+import com.dongnae.jjabpang.controller.UserController.Result;
 import com.dongnae.jjabpang.dto.ReviewDto;
+import com.dongnae.jjabpang.dto.ReviewListDto;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
 import com.dongnae.jjabpang.service.ReviewService;
@@ -35,7 +37,7 @@ import java.nio.charset.StandardCharsets;
 public class ReviewController {
       private final ReviewService reviewService;
       
-      @PostMapping(name = "/review")
+      @PostMapping("/review")
       @ApiOperation(value = "리뷰작성")
       public ResponseEntity addReview(@RequestBody ReviewDto reviewDto) {
             Message message = new Message();
@@ -54,7 +56,17 @@ public class ReviewController {
             return new ResponseEntity(message, headers, HttpStatus.OK);
       }
       
-      @DeleteMapping(name = "/review/{reviewNo}")
+      @GetMapping("/review")
+      @ApiOperation(value = "리뷰 조회 - 페이징; ")
+      public Result findReview(@RequestBody ReviewListDto reviewListDto) {
+            log.debug("reviewListDto = " + reviewListDto);
+            
+            
+            return new Result(null);
+      }
+      
+      
+      @DeleteMapping("/review/{reviewNo}")
       @ApiOperation(value = "리뷰 삭제")
       public ResponseEntity removeReview(@PathVariable Long reviewNo) {
             Message message = new Message();
