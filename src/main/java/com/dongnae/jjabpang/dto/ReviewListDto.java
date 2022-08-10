@@ -3,7 +3,10 @@ package com.dongnae.jjabpang.dto;
 import com.querydsl.core.annotations.QueryProjection;
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 /*
  *packageName    : com.dongnae.jjabpang.dto
@@ -18,6 +21,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
+@NoArgsConstructor
 @ApiModel(description = "리뷰 목록 조회를 위한 dto")
 public class ReviewListDto {
       private Long reviewNo;
@@ -26,6 +30,8 @@ public class ReviewListDto {
       private Integer starCnt;
       private Long itemNo;
       private Long userNo;
+      private List<String> imageUrls;
+      
       
       @QueryProjection
       public ReviewListDto(Long reviewNo, String detail, String summary, Integer starCnt, Long itemNo, Long userNo) {

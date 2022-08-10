@@ -3,6 +3,7 @@ package com.dongnae.jjabpang.controller;
 import com.dongnae.jjabpang.controller.UserController.Result;
 import com.dongnae.jjabpang.dto.ReviewDto;
 import com.dongnae.jjabpang.dto.ReviewListDto;
+import com.dongnae.jjabpang.dto.condition.ReviewSearchCondition;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
 import com.dongnae.jjabpang.service.ReviewService;
@@ -10,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /*
  *packageName    : com.dongnae.jjabpang.controller
@@ -58,11 +61,14 @@ public class ReviewController {
       
       @GetMapping("/review")
       @ApiOperation(value = "리뷰 조회 - 페이징; ")
-      public Result findReview(@RequestBody ReviewListDto reviewListDto) {
-            log.debug("reviewListDto = " + reviewListDto);
+      public Result findReview(@RequestBody ReviewSearchCondition searchCondition, Pageable pageable) {
+            
+            log.debug("searchCondition = " + searchCondition);
+            
+            List<ReviewListDto> content = reviewService.findReviewList(searchCondition, pageable);
             
             
-            return new Result(null);
+            return new Result(content);
       }
       
       

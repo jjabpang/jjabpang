@@ -20,6 +20,7 @@ import java.util.List;
 
 import static com.dongnae.jjabpang.entity.QCategory.category;
 import static com.dongnae.jjabpang.entity.QItem.item;
+import static com.dongnae.jjabpang.entity.QReview.review;
 import static org.springframework.util.StringUtils.isEmpty;
 
 /*
@@ -107,7 +108,10 @@ public class QItemRepositoryImpl implements QItemRepository {
                                     return new OrderSpecifier(direction, item.cdt);
                               case "item.price":
                                     return new OrderSpecifier(direction, item.price);
+                              case "review.cdt":
+                                    return new OrderSpecifier(direction, review.cdt);
                         }
+                        
                   }
             }
             return null;

@@ -73,7 +73,7 @@ public class QReviewRepositoryImpl implements QReviewRepository {
        * 리뷰번호로 이미지 조회
        */
       @Override
-      public List<String> findReviewsDyPagingAndCondition(String reviewNo) {
+      public List<String> findImageUrlByReviewNo(String reviewNo) {
             
             List<String> imageUrlList = queryFactory.from(reviewImage)
                                                     .select(reviewImage.imageUrl)

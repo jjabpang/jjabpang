@@ -25,5 +25,5 @@ public interface QReviewRepository {
       Page<ReviewListDto> findReviewsDyPagingAndCondition(ReviewSearchCondition searchCondition, Pageable pageable);
       
       @Query(name = "리뷰 번호로 이미지 url 리스트 조회")
-      List<String> findReviewsDyPagingAndCondition(String reviewNo);
+      List<String> findImageUrlByReviewNo(String reviewNo);
 }
