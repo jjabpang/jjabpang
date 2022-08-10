@@ -51,7 +51,9 @@ public class QReviewRepositoryImpl implements QReviewRepository {
                                                       .leftJoin(review.user, user)
                                                       .where(
                                                             detailEq(searchCondition.getReviewDetail()),
-                                                            starCntEq(searchCondition.getReviewStarCnt())
+                                                            starCntEq(searchCondition.getReviewStarCnt()),
+                                                            itemNoEq(searchCondition.getItemNo()),
+                                                            userNoEq(searchCondition.getUserNo())
                                                       )
                                                       .orderBy(boardSort(pageable))
                                                       .offset(pageable.getOffset())
@@ -86,6 +88,19 @@ public class QReviewRepositoryImpl implements QReviewRepository {
             return imageUrlList;
       }
       
+      private BooleanExpression itemNoEq(Long itemNo) {
+            if (isEmpty(itemNo)) {
+                  return null;
+            }
+            return review.item.itemNo.eq(itemNo);
+      }
+      
+      private BooleanExpression userNoEq(Long userNo) {
+            if (isEmpty(userNo)) {
+                  return null;
+            }
+            return review.user.userNo.eq(userNo);
+      }
       
       private BooleanExpression starCntEq(Integer reviewStarCnt) {
             if (isEmpty(reviewStarCnt)) {
