@@ -119,7 +119,7 @@ public class UserController {
             }
             
             
-            return jwtTokenProvider.createToken(findUser.getEmail(), findUser.getRoles());
+            return jwtTokenProvider.createToken(String.valueOf(findUser.getUserNo()), findUser.getRoles());
       }
       
       @ApiOperation(value = "회원 정보 수정")
