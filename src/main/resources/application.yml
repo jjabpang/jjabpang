@@ -22,9 +22,7 @@ spring:
                 default_batch_fetch_size: 1000
 
 jwt:
-    header: Authorization
-    
-    token-validity-in-seconds: 86400
+    password: jjabpang
 
 decorator:
     datasource:

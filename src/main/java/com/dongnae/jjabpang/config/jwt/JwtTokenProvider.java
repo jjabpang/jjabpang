@@ -5,6 +5,7 @@ import com.dongnae.jjabpang.exception.CustomJwtRuntimeException;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -27,7 +28,9 @@ import java.util.Map;
 @Component
 @Slf4j
 public class JwtTokenProvider {
-      private final JwtProperties jwtProperties;
+      
+      @Value("${jwt.password}")
+      private String secretKey;
       
       public String generateToken(User user) {
             Date now = new Date();
@@ -37,7 +40,7 @@ public class JwtTokenProvider {
                        .setIssuedAt(now)  // (3)
                        .setExpiration(new Date(now.getTime() + Duration.ofHours(3)
                                                                        .toMillis())) // (4)
-                       .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecret())  // (5)
+                       .signWith(SignatureAlgorithm.HS256, secretKey)  // (5)
                        .compact();
       }
       
@@ -58,7 +61,7 @@ public class JwtTokenProvider {
       private Claims getClaims(String token) throws CustomJwtRuntimeException {
             try {
                   return Jwts.parser()
-                             .setSigningKey(jwtProperties.getSecret())
+                             .setSigningKey(secretKey)
                              .parseClaimsJws(token)
                              .getBody();
                   // 토큰 유효성 확인

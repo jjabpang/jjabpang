@@ -1,5 +1,6 @@
 package com.dongnae.jjabpang.controller;
 
+import com.dongnae.jjabpang.config.jwt.JwtTokenProvider;
 import com.dongnae.jjabpang.dto.UserDeliveryDto;
 import com.dongnae.jjabpang.dto.UserInfoModificationDto;
 import com.dongnae.jjabpang.dto.UserLoginRequestDto;
@@ -53,6 +54,7 @@ public class UserController {
       private final QUserRepository qUserRepository;
       private final DeliveryService deliveryService;
       private final PasswordEncoder passwordEncoder;
+      private final JwtTokenProvider tokenProvider;
       
       /**
        * 회원가입 기능
@@ -106,17 +108,14 @@ public class UserController {
       
       @ApiOperation(value = "회원 로그인 기능 - JWT 토큰 반환")
       @PostMapping("/users/login")
-      public ResponseEntity login(@ApiParam(value = "로그인 요청 DTO") @RequestBody UserLoginRequestDto dto) throws UsernameNotFoundException {
+      public Result login(@ApiParam(value = "로그인 요청 DTO") @RequestBody UserLoginRequestDto dto) throws UsernameNotFoundException {
             
-            User findUser = userService.findByEmail(dto.getEmail())
+            User findUser = userService.findByEmail(dto)
                                        .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 사용자 입니다."));
-            
-            //암호화된 비밀번호와 비교해야함.
-            if (!passwordEncoder.matches(dto.getPassword(), findUser.getPassword())) {
-                  throw new IllegalArgumentException("잘못된 비밀번호 입니다");
-            }
-            
-            return new ResponseEntity(findUser, HttpStatus.OK);
+            String generateToken = tokenProvider.generateToken(findUser);
+            Map<String, String> tokenizedMap = new HashMap<>();
+            tokenizedMap.put("jwtToken", generateToken);
+            return new Result(tokenizedMap);
       }
       
       @ApiOperation(value = "회원 정보 수정")

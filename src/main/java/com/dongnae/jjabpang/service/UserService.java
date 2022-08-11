@@ -2,6 +2,7 @@ package com.dongnae.jjabpang.service;
 
 import com.dongnae.jjabpang.dto.UserInfoModificationDto;
 import com.dongnae.jjabpang.dto.UserListDto;
+import com.dongnae.jjabpang.dto.UserLoginRequestDto;
 import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.Role;
 import com.dongnae.jjabpang.entity.User;
@@ -83,11 +84,16 @@ public class UserService {
       /**
        * 이메일로 조회
        */
-      public Optional<User> findByEmail(String email) throws UsernameNotFoundException {
-            Optional<User> findUser = userRepository.findAllByEmail(email);
+      public Optional<User> findByEmail(UserLoginRequestDto dto) throws UsernameNotFoundException {
+            Optional<User> findUser = userRepository.findAllByEmail(dto.getEmail());
             findUser
                   .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
             
+            //암호화된 비밀번호와 비교해야함.
+            if (!passwordEncoder.matches(dto.getPassword(), findUser.get()
+                                                                    .getPassword())) {
+                  throw new IllegalArgumentException("잘못된 비밀번호 입니다");
+            }
             
             return findUser;
       }
