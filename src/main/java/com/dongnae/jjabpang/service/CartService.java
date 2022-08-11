@@ -52,7 +52,7 @@ public class CartService {
                                             throw new IllegalArgumentException("엔티티 조회 불가능");
                                       });
             /* 로그인한 유저 데이터*/
-            Optional<User> loginedUser = userRepository.findByEmail(email);
+            Optional<User> loginedUser = userRepository.findAllByEmail(email);
             
             if (loginedUser.isPresent()) {
                   Cart cart = cartRepository.findByUser_UserNo(loginedUser.get()

@@ -12,7 +12,7 @@ package com.dongnae.jjabpang.repository.querydsl.item;
  */
 
 import com.dongnae.jjabpang.dto.ItemCategoryOrNameResponseDto;
-import com.dongnae.jjabpang.dto.ItemSearchCondition;
+import com.dongnae.jjabpang.dto.condition.ItemSearchCondition;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

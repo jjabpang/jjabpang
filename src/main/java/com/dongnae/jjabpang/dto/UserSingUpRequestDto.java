@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class UserSingUpRequestDto {
+      
       private String email;
       private String password;
       private String username;
@@ -28,6 +29,7 @@ public class UserSingUpRequestDto {
       private String agree_promotion;
       private String phoneNm;
       private String del_yn;
+      
       
       @Builder
       public UserSingUpRequestDto(String email, String password, String username, String agree_TOS, String agree_PICU, String gender, String agree_promotion, String phoneNm, String del_yn) {

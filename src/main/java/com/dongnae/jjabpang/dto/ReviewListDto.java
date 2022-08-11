@@ -1,50 +1,45 @@
 package com.dongnae.jjabpang.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
-import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.io.Serializable;
 import java.util.List;
 
-/**
- * packageName    : com.dongnae.jjabpang.dto
+/*
+ *packageName    : com.dongnae.jjabpang.dto
  * fileName       : ReviewListDto
- * author         : jihye94
- * date           : 2022-08-09
+ * author         : ipeac
+ * date           : 2022-08-10
  * description    :
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2022-08-09        jihye94       최초 생성
+ * 2022-08-10        ipeac       최초 생성
  */
-@Data
-public class ReviewListDto implements Serializable {
-      private final String cdt;
-      private final String udt;
-      private final Long reviewNo;
-      private final String detail;
-      private final String summary;
-      private final String delYn;
-      private final Long itemItemNo;
-      private final Long userUserNo;
-      private final List<ReviewImageDto> reviewImages;
+@Setter
+@Getter
+@NoArgsConstructor
+@ApiModel(description = "리뷰 목록 조회를 위한 dto")
+public class ReviewListDto {
+      private Long reviewNo;
+      private String detail;
+      private String summary;
+      private Integer starCnt;
+      private Long itemNo;
+      private Long userNo;
+      private List<String> imageUrls;
+      
       
       @QueryProjection
-      public ReviewListDto(String cdt, String udt, Long reviewNo, String detail, String summary, String delYn, Long itemItemNo, Long userUserNo, List<ReviewImageDto> reviewImages) {
-            this.cdt = cdt;
-            this.udt = udt;
+      public ReviewListDto(Long reviewNo, String detail, String summary, Integer starCnt, Long itemNo, Long userNo) {
             this.reviewNo = reviewNo;
             this.detail = detail;
             this.summary = summary;
-            this.delYn = delYn;
-            this.itemItemNo = itemItemNo;
-            this.userUserNo = userUserNo;
-            this.reviewImages = reviewImages;
-      }
-      
-      @Data
-      public static class ReviewImageDto implements Serializable {
-            private final Long reviewImageNo;
-            private final String imageUrl;
+            this.starCnt = starCnt;
+            this.itemNo = itemNo;
+            this.userNo = userNo;
       }
 }

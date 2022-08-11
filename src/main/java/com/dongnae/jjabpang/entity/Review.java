@@ -50,7 +50,7 @@ public class Review extends BaseTimeEntity {
       private String summary;
       
       /**
-       * 별점
+       * 별점 개수
        */
       @Column(name = "star_cnt", columnDefinition = "INT")
       private Integer starCnt;

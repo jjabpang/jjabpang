@@ -1,7 +1,7 @@
 package com.dongnae.jjabpang.repository.querydsl.item;
 
 import com.dongnae.jjabpang.dto.ItemCategoryOrNameResponseDto;
-import com.dongnae.jjabpang.dto.ItemSearchCondition;
+import com.dongnae.jjabpang.dto.condition.ItemSearchCondition;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

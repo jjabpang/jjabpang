@@ -1,5 +1,6 @@
 package com.dongnae.jjabpang.controller;
 
+import com.dongnae.jjabpang.config.JwtTokenProvider;
 import com.dongnae.jjabpang.dto.UserDeliveryDto;
 import com.dongnae.jjabpang.dto.UserInfoModificationDto;
 import com.dongnae.jjabpang.dto.UserLoginRequestDto;
@@ -24,6 +25,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.StandardCharsets;
@@ -51,6 +53,8 @@ public class UserController {
       private final UserService userService;
       private final QUserRepository qUserRepository;
       private final DeliveryService deliveryService;
+      private final PasswordEncoder passwordEncoder;
+      private final JwtTokenProvider jwtTokenProvider;
       
       /**
        * 회원가입 기능
@@ -102,26 +106,20 @@ public class UserController {
             return new ResponseEntity<>(message, headers, HttpStatus.OK);
       }
       
-      @ApiOperation(value = "회원 로그인 기능")
+      @ApiOperation(value = "회원 로그인 기능 - JWT 토큰 반환")
       @PostMapping("/users/login")
-      public ResponseEntity<Message> login(@ApiParam(value = "로그인 요청 DTO") @RequestBody UserLoginRequestDto dto) throws UsernameNotFoundException {
-            Message message = new Message();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
+      public String login(@ApiParam(value = "로그인 요청 DTO") @RequestBody UserLoginRequestDto dto) throws UsernameNotFoundException {
             
             User findUser = userService.findByEmail(dto.getEmail())
                                        .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 사용자 입니다."));
             
-            if (!findUser.getPassword()
-                         .equals(dto.getPassword())) {
-                  throw new IllegalArgumentException("잘못된 비밀번호 입니다.");
+            //암호화된 비밀번호와 비교해야함.
+            if (!passwordEncoder.matches(dto.getPassword(), findUser.getPassword())) {
+                  throw new IllegalArgumentException("잘못된 비밀번호 입니다");
             }
             
-            message.setStatus(StatusEnum.OK);
-            message.setMessage("로그인 성공");
-            message.setData(findUser.getUserNo());
             
-            return new ResponseEntity<>(message, headers, HttpStatus.OK);
+            return jwtTokenProvider.createToken(String.valueOf(findUser.getUserNo()), findUser.getRoles());
       }
       
       @ApiOperation(value = "회원 정보 수정")
@@ -195,6 +193,14 @@ public class UserController {
       static class Result<T> {
             
             private T data;
+            
+      }
+      
+      @Data
+      @AllArgsConstructor
+      static class InnerData<T> {
+            
+            private T innerData;
             
       }
       

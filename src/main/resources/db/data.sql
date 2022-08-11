@@ -655,20 +655,124 @@ INSERT INTO jjabpang.cart_item (cart_item_no, cdt, crt_by, udt, upt_by, item_cou
 VALUES (null, '2022-08-08 17:29:20', null, '2022-08-08 17:29:25', null, 12, 1000, 1, 41);
 
 -- 리뷰 추가
-INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
-VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 4, '요약', 1, 1);
+INSERT INTO jjabpang.review (review_no, cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (null, null, null, null, null, 'n', '디테일', 3, 'ㅇ요약', 1, 1);
+
+INSERT INTO jjabpang.review (review_no, cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (null, null, null, null, null, 'n', '디테일', 2, 'ㅇ요약', 1, 1);
+
+INSERT INTO jjabpang.review (review_no, cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (null, null, null, null, null, 'n', '디테일', 4, 'ㅇ요약', 1, 1);
+
+INSERT INTO jjabpang.review (review_no, cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (null, null, null, null, null, 'n', '디테일', 5, 'ㅇ요약', 1, 1);
+
+INSERT INTO jjabpang.review (review_no, cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (null, null, null, null, null, 'n', '디테일', 1, 'ㅇ요약', 1, 1);
 
 INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
-VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 4, '요약', 2, 1);
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 2, 'ㅇ요약', 1, 1);
 
 INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
-VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 4, '요약', 3, 1);
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 3, 'ㅇ요약', 1, 1);
 
 INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
-VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 4, '요약', 4, 1);
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 4, 'ㅇ요약', 1, 2);
 
 INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
-VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 4, '요약', 1, 1);
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 5, 'ㅇ요약', 1, 2);
+
+INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 3, 'ㅇ요약', 1, 2);
+
+INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 2, 'ㅇ요약', 1, 2);
+
+INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 4, 'ㅇ요약', 1, 2);
+
+INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 5, 'ㅇ요약', 2, 1);
+
+INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 1, 'ㅇ요약', 2, 1);
+
+INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 2, 'ㅇ요약', 2, 1);
+
+INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 3, 'ㅇ요약', 2, 1);
+
+INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 4, 'ㅇ요약', 2, 1);
+
+INSERT INTO jjabpang.review (cdt, crt_by, udt, upt_by, del_yn, detail, star_cnt, summary, item_no, user_no)
+VALUES (DEFAULT, null, DEFAULT, null, 'n', '디테일', 5, 'ㅇ요약', 2, 1);
+
+-- 리뷰 이미지 추가
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 1);
+
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 1);
+
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 1);
+
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 1);
+
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 1);
+
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 2);
+
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 2);
+
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 2);
+
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 2);
+
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 2);
+
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 2);
+
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 1);
+
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 2);
+
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 1);
+
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 2);
+
+INSERT INTO jjabpang.review_image (cdt, crt_by, udt, upt_by, image_url, review_no)
+VALUES (DEFAULT, null, DEFAULT, null,
+        'https://tecoble.techcourse.co.kr/static/0b18bd94a62a12fdc81ea720c28722f6/3891b/tecoble.png', 1);
 
 
 
