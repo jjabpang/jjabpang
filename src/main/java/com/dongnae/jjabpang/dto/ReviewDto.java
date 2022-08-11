@@ -25,6 +25,7 @@ public class ReviewDto implements Serializable {
       private Long itemNo;
       private Long userNo;
       private Long reviewNo;
+      private Integer starCnt;
       private List<ReviewImageDto> reviewImages;
       
       @Data

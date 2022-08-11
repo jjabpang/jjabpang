@@ -1,16 +1,7 @@
 package com.dongnae.jjabpang.config;
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 /*
  *packageName    : com.dongnae.jjabpang.config
- * fileName       : WebSeurityConfig
+ * fileName       : WebSecurityConfig
  * author         : ipeac
  * date           : 2022-08-11
  * description    :
@@ -19,33 +10,59 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * -----------------------------------------------------------
  * 2022-08-11        ipeac       최초 생성
  */
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+
+// WebSecurityConfig.java
+@Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-      // 암호화에 필요한 PasswordEncoder 를 Bean 등록합니다.
+      
+      @Override
+      public void configure(WebSecurity webSecurity) throws Exception {
+            // static 디렉터리의 하위 파일 목록은 인증 무시 ( = 항상통과 )
+            webSecurity.ignoring()
+                       .antMatchers("/css/**", "/js/**", "/image/**", "/lib/**");
+      }
+      
       @Bean
       public PasswordEncoder passwordEncoder() {
-            return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-      }
-      
-      // authenticationManager를 Bean 등록합니다.
-      @Bean
-      @Override
-      public AuthenticationManager authenticationManagerBean() throws Exception {
-            return super.authenticationManagerBean();
+            return new BCryptPasswordEncoder();
       }
       
       @Override
-      protected void configure(HttpSecurity http) throws Exception {
-            http.csrf()
-                .disable();
-            http.httpBasic()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/admin/**")
-                .hasRole("ADMIN")
-                .antMatchers("/user/**")
-                .hasRole("USER")
-                .antMatchers("/**")
-                .permitAll();
+      protected void configure(HttpSecurity httpSecurity) throws Exception {
+            httpSecurity
+                  // h2-console 옵션 disable
+                  .csrf()
+                  .disable()
+                  .headers()
+                  .frameOptions()
+                  .disable()
+                  .and()
+                  .authorizeRequests()
+                  .antMatchers("/", "/oauth2/**", "/signin/**", "/login/**", "console/**", "/api/**")
+                  .permitAll()
+                  // 인증된 사용자만 접근 가능
+                  .anyRequest()
+                  .authenticated()
+                  .and()
+                  .exceptionHandling()
+                  // 인증 없이 페이지에 접근할 경우 리다이렉트
+                  .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/signin"))
+                  .and()
+                  .logout()
+                  .logoutSuccessUrl("/");
       }
+      
 }

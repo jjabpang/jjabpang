@@ -41,28 +41,28 @@ insert into jjabpang.user(user_no, cdt, udt, agree_tos, agree_picu, agree_promot
                                                                      'qkrtkdwns3410@naver.com',
                                                                      'm',
                                                                      'qkrtkdw', '1234',
-                                                                     '01011111111', 'b');
+                                                                     '01011111111', 'ROLE_USER');
 insert into jjabpang.user(user_no, cdt, udt, agree_tos, agree_picu, agree_promotion, birth, del_yn, email, gender,
                           nickname, password, phone_nm, role) value (2, current_date, current_date,
                                                                      '0', '0', '0',
                                                                      '19951203', 'n',
                                                                      'qkrtkdwns3410@naver1.com',
                                                                      'm', 'qkrtkdw2', '1234',
-                                                                     '01011111111', 'b');
+                                                                     '01011111111', 'ROLE_USER');
 insert into jjabpang.user(user_no, cdt, udt, agree_tos, agree_picu, agree_promotion, birth, del_yn, email, gender,
                           nickname, password, phone_nm, role) value (3, current_date, current_date,
                                                                      '0', '0', '0',
                                                                      '19941103', 'n',
                                                                      'qkrtkdwns3410@naver2.com',
                                                                      'm', 'qkrtkdw3', '1234',
-                                                                     '01011111111', 'b');
+                                                                     '01011111111', 'ROLE_USER');
 insert into jjabpang.user(user_no, cdt, udt, agree_tos, agree_picu, agree_promotion, birth, del_yn, email, gender,
                           nickname, password, phone_nm, role) value (4, current_date, current_date,
                                                                      '0', '0', '0',
                                                                      '19931103', 'n',
                                                                      'qkrtkdwns3410@naver3.com',
                                                                      'm', 'qkrtkdw4', '1234',
-                                                                     '01011111111', 'b');
+                                                                     '01011111111', 'ROLE_USER');
 -- 상품 추가
 INSERT INTO jjabpang.item (item_no, cdt, crt_by, udt, upt_by, brand_name, delivery_fee, detail, discount_rate, image,
                            price, quantity, rating_cnt, rating_sum, special_price, title, category)

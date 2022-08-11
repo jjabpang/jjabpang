@@ -21,6 +21,9 @@ spring:
                     charSet: UTF-8 # 인코딩 설정
                 default_batch_fetch_size: 1000
 
+jwt:
+    password: jjabpang
+
 decorator:
     datasource:
         p6spy:

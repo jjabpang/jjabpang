@@ -15,9 +15,8 @@ import lombok.Getter;
 
 @Getter
 public enum Role {
-      b("b", "구매자"),
-      s("s", "판매자"),
-      m("m", "관리자");
+      b("ROLE_USER", "구매자"),
+      m("ROLE_ADMIN", "관리자");
       
       private String code;
       private String name;

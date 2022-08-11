@@ -1,9 +1,10 @@
 package com.dongnae.jjabpang.service;
 
-import com.dongnae.jjabpang.config.JwtTokenProvider;
 import com.dongnae.jjabpang.dto.UserInfoModificationDto;
 import com.dongnae.jjabpang.dto.UserListDto;
+import com.dongnae.jjabpang.dto.UserLoginRequestDto;
 import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
+import com.dongnae.jjabpang.entity.Role;
 import com.dongnae.jjabpang.entity.User;
 import com.dongnae.jjabpang.exception.UsernameNotFoundException;
 import com.dongnae.jjabpang.repository.user.UserRepository;
@@ -16,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +29,6 @@ public class UserService {
       private final ModelMapper modelMapper;
       private final UserRepository userRepository;
       private final PasswordEncoder passwordEncoder;
-      private final JwtTokenProvider jwtTokenProvider;
       
       
       public List<UserListDto> findAll() {
@@ -53,7 +52,7 @@ public class UserService {
             User user = dto.toEntity();
             //암호화 된 비밀번호 저장
             user.setPassword(passwordEncoder.encode(dto.getPassword()));
-            user.setRoles(Collections.singletonList("ROLE_USER"));
+            user.setRole(Role.b);
             userRepository.save(user);
             
             return user.getUserNo();
@@ -85,11 +84,16 @@ public class UserService {
       /**
        * 이메일로 조회
        */
-      public Optional<User> findByEmail(String email) throws UsernameNotFoundException {
-            Optional<User> findUser = userRepository.findAllByEmail(email);
+      public Optional<User> findByEmail(UserLoginRequestDto dto) throws UsernameNotFoundException {
+            Optional<User> findUser = userRepository.findAllByEmail(dto.getEmail());
             findUser
                   .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
             
+            //암호화된 비밀번호와 비교해야함.
+            if (!passwordEncoder.matches(dto.getPassword(), findUser.get()
+                                                                    .getPassword())) {
+                  throw new IllegalArgumentException("잘못된 비밀번호 입니다");
+            }
             
             return findUser;
       }
@@ -115,11 +119,5 @@ public class UserService {
             return 1;
       }
       
-      /**
-       * Security & JWT 용 함수
-       */
-      public Optional<User> findByIdPw(Long id) {
-            return userRepository.findById(id);
-      }
       
 }
