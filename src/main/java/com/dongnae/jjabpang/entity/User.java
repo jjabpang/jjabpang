@@ -88,7 +88,7 @@ public class User extends BaseTimeEntity {
        */
       @Column(name = "role", columnDefinition = "varchar(20) default 'b'")
       @Enumerated(EnumType.STRING)
-      private Role roles;
+      private Role role;
       
       /**
        * 회원상태

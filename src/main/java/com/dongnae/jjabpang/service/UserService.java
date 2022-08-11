@@ -51,7 +51,7 @@ public class UserService {
             User user = dto.toEntity();
             //암호화 된 비밀번호 저장
             user.setPassword(passwordEncoder.encode(dto.getPassword()));
-            user.setRoles(Role.b);
+            user.setRole(Role.b);
             userRepository.save(user);
             
             return user.getUserNo();

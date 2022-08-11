@@ -106,7 +106,7 @@ public class UserController {
       
       @ApiOperation(value = "회원 로그인 기능 - JWT 토큰 반환")
       @PostMapping("/users/login")
-      public String login(@ApiParam(value = "로그인 요청 DTO") @RequestBody UserLoginRequestDto dto) throws UsernameNotFoundException {
+      public ResponseEntity login(@ApiParam(value = "로그인 요청 DTO") @RequestBody UserLoginRequestDto dto) throws UsernameNotFoundException {
             
             User findUser = userService.findByEmail(dto.getEmail())
                                        .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 사용자 입니다."));
@@ -116,8 +116,7 @@ public class UserController {
                   throw new IllegalArgumentException("잘못된 비밀번호 입니다");
             }
             
-            
-            return null;
+            return new ResponseEntity(findUser, HttpStatus.OK);
       }
       
       @ApiOperation(value = "회원 정보 수정")
