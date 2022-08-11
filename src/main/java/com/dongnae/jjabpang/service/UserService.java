@@ -1,9 +1,9 @@
 package com.dongnae.jjabpang.service;
 
-import com.dongnae.jjabpang.config.JwtTokenProvider;
 import com.dongnae.jjabpang.dto.UserInfoModificationDto;
 import com.dongnae.jjabpang.dto.UserListDto;
 import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
+import com.dongnae.jjabpang.entity.Role;
 import com.dongnae.jjabpang.entity.User;
 import com.dongnae.jjabpang.exception.UsernameNotFoundException;
 import com.dongnae.jjabpang.repository.user.UserRepository;
@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +28,6 @@ public class UserService {
       private final ModelMapper modelMapper;
       private final UserRepository userRepository;
       private final PasswordEncoder passwordEncoder;
-      private final JwtTokenProvider jwtTokenProvider;
       
       
       public List<UserListDto> findAll() {
@@ -53,7 +51,7 @@ public class UserService {
             User user = dto.toEntity();
             //암호화 된 비밀번호 저장
             user.setPassword(passwordEncoder.encode(dto.getPassword()));
-            user.setRoles(Collections.singletonList("ROLE_USER"));
+            user.setRoles(Role.b);
             userRepository.save(user);
             
             return user.getUserNo();
@@ -115,11 +113,5 @@ public class UserService {
             return 1;
       }
       
-      /**
-       * Security & JWT 용 함수
-       */
-      public Optional<User> findByIdPw(Long id) {
-            return userRepository.findById(id);
-      }
       
 }

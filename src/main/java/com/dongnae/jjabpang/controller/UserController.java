@@ -1,6 +1,5 @@
 package com.dongnae.jjabpang.controller;
 
-import com.dongnae.jjabpang.config.JwtTokenProvider;
 import com.dongnae.jjabpang.dto.UserDeliveryDto;
 import com.dongnae.jjabpang.dto.UserInfoModificationDto;
 import com.dongnae.jjabpang.dto.UserLoginRequestDto;
@@ -54,7 +53,6 @@ public class UserController {
       private final QUserRepository qUserRepository;
       private final DeliveryService deliveryService;
       private final PasswordEncoder passwordEncoder;
-      private final JwtTokenProvider jwtTokenProvider;
       
       /**
        * 회원가입 기능
@@ -119,7 +117,7 @@ public class UserController {
             }
             
             
-            return jwtTokenProvider.createToken(String.valueOf(findUser.getUserNo()), findUser.getRoles());
+            return null;
       }
       
       @ApiOperation(value = "회원 정보 수정")

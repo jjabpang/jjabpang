@@ -36,8 +36,8 @@ dependencies {
     //스프링 시큐리티
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.security:spring-security-test'
-    //JWT
-    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    //jwt
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
 
     compileOnly 'org.projectlombok:lombok'
     implementation 'org.springframework.boot:spring-boot-devtools'
