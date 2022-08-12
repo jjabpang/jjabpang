@@ -68,4 +68,13 @@ public class CartItem extends BaseTimeEntity {
             this.itemCount += itemCount;
       }
       
+      public void removeCount(int itemCount) {
+            int removedCount = this.itemCount - itemCount;
+            if (removedCount < 0) {
+                  this.itemCount = 0;
+            } else {
+                  this.itemCount -= itemCount;
+            }
+      }
+      
 }

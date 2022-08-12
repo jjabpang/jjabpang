@@ -1,6 +1,7 @@
 package com.dongnae.jjabpang.controller;
 
 import com.dongnae.jjabpang.controller.UserController.Result;
+import com.dongnae.jjabpang.dto.ReviewDeleteDto;
 import com.dongnae.jjabpang.dto.ReviewDto;
 import com.dongnae.jjabpang.dto.ReviewListDto;
 import com.dongnae.jjabpang.dto.condition.ReviewSearchCondition;
@@ -70,23 +71,23 @@ public class ReviewController {
       }
       
       
-      @DeleteMapping("/review/{reviewNo}")
+      @DeleteMapping("/review")
       @ApiOperation(value = "리뷰 삭제")
-      public ResponseEntity removeReview(@PathVariable Long reviewNo) {
+      public ResponseEntity removeReview(ReviewDeleteDto reviewDeleteDto) {
             Message message = new Message();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
             try {
-                  reviewService.removeReview(reviewNo);
+                  Long reviewNo = reviewService.removeReview(reviewDeleteDto);
                   
             } catch (Exception e) {
-                  message.setData(reviewNo);
+                  message.setData(reviewDeleteDto.getReviewNo());
                   message.setStatus(StatusEnum.BAD_REQUEST);
                   message.setMessage("리뷰 삭제 실패 , data : 리뷰번호");
                   return new ResponseEntity(message, headers, HttpStatus.BAD_REQUEST);
                   
             }
-            message.setData(reviewNo);
+            message.setData(reviewDeleteDto.getReviewNo());
             message.setStatus(StatusEnum.OK);
             message.setMessage("리뷰 삭제 성공 , data : 리뷰번호");
             return new ResponseEntity(message, headers, HttpStatus.OK);

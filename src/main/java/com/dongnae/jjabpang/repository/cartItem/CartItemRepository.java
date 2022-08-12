@@ -27,4 +27,8 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
                    "order by ci.udt DESC ")
       List<CartDetailDto> findCartDetailDtoList(@Param(value = "cartNo") Long cartNo);
       
+      
+      List<CartItem> findCartItemByCart_CartNo(@Param(value = "cartNo") Long cartNo);
+      
+      
 }
