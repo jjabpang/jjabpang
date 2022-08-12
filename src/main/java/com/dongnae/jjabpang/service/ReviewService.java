@@ -1,5 +1,6 @@
 package com.dongnae.jjabpang.service;
 
+import com.dongnae.jjabpang.dto.ReviewDeleteDto;
 import com.dongnae.jjabpang.dto.ReviewDto;
 import com.dongnae.jjabpang.dto.ReviewDto.ReviewImageDto;
 import com.dongnae.jjabpang.dto.ReviewListDto;
@@ -24,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /*
@@ -114,9 +116,13 @@ public class ReviewService {
        * 리뷰 삭제
        */
       @Transactional
-      public Long removeReview(Long reviewNo) {
-            Review findReview = reviewRepository.findById(reviewNo)
+      public Long removeReview(ReviewDeleteDto reviewDeleteDto) throws IllegalAccessException {
+            Review findReview = reviewRepository.findById(reviewDeleteDto.getReviewNo())
                                                 .orElseThrow(() -> new IllegalStateException("해당 리뷰가 없습니다."));
+            if (!Objects.equals(findReview.getUser()
+                                          .getUserNo(), reviewDeleteDto.getUserNo())) {
+                  throw new IllegalAccessException("해당 리뷰의 작성자가 아닙니다.");
+            }
             
             findReview.setDelYn("y");
             
