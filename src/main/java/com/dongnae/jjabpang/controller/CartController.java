@@ -81,9 +81,10 @@ public class CartController {
       }
       
       @ApiOperation(value = "장바구니 아이템 삭제")
-      @DeleteMapping("/cart}")
+      @DeleteMapping("/cart")
       public ResponseEntity removeCartItem(@RequestBody ItemRemoveDto dto) throws Exception {
-      
+            
+            return cartService.removeCart(dto);
       }
       
       @ApiOperation(value = "회원별 장바구니 조회")

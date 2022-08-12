@@ -2,6 +2,7 @@ package com.dongnae.jjabpang.service;
 
 import com.dongnae.jjabpang.dto.CartDetailDto;
 import com.dongnae.jjabpang.dto.CartItemDto;
+import com.dongnae.jjabpang.dto.ItemRemoveDto;
 import com.dongnae.jjabpang.entity.Cart;
 import com.dongnae.jjabpang.entity.CartItem;
 import com.dongnae.jjabpang.entity.Item;
@@ -12,11 +13,14 @@ import com.dongnae.jjabpang.repository.item.ItemRepository;
 import com.dongnae.jjabpang.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /*
@@ -102,6 +106,24 @@ public class CartService {
             } else {
                   throw new IllegalStateException("존재하지 않는 아이디입니다.");
             }
+            
+      }
+      
+      /**
+       * 장바구니의 아이템 삭제
+       */
+      @Transactional
+      public ResponseEntity removeCart(ItemRemoveDto dto) {
+            List<CartItem> cartItemByCart_cartNo = cartItemRepository.findCartItemByCart_CartNo(dto.getCartNo());
+            for (CartItem cartItem : cartItemByCart_cartNo) {
+                  if (Objects.equals(cartItem.getItem()
+                                             .getItemNo(), dto.getItemNo())) {
+                        cartItemRepository.delete(cartItem);
+                        return new ResponseEntity("삭제 성공", HttpStatus.OK);
+                  }
+            }
+            return new ResponseEntity("삭제할 아이템을 찾지 못했습니다,", HttpStatus.BAD_REQUEST);
+            
             
       }
 }
