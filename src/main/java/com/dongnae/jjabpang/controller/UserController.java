@@ -120,7 +120,7 @@ public class UserController {
       
       @ApiOperation(value = "회원 정보 수정")
       @ApiImplicitParam(name = "userNo", dataTypeClass = Long.class, value = "회원 번호", paramType = "query", required = true)
-      @PutMapping("/users/{userNo}")
+      @PatchMapping("/users/{userNo}")
       public ResponseEntity<Message> modify(@PathVariable Long userNo, @RequestBody UserInfoModificationDto dto) {
             Message message = new Message();
             HttpHeaders headers = new HttpHeaders();
