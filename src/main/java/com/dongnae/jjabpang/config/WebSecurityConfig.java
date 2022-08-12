@@ -27,12 +27,29 @@ import org.springframework.security.web.authentication.LoginUrlAuthenticationEnt
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+      private static final String[] PERMIT_URL_ARRAY = {
+            /* swagger v2 */
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            /* swagger v3 */
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
+      };
       
       @Override
       public void configure(WebSecurity webSecurity) throws Exception {
             // static 디렉터리의 하위 파일 목록은 인증 무시 ( = 항상통과 )
             webSecurity.ignoring()
                        .antMatchers("/css/**", "/js/**", "/image/**", "/lib/**");
+            webSecurity.ignoring()
+                       .antMatchers("/v2/api-docs", "/v3/api-docs", "/configuration/ui",
+                             "/swagger-resources", "/configuration/security",
+                             "/swagger-ui.html", "/webjars/**", "/swagger/**");
       }
       
       @Bean
@@ -53,6 +70,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                   .authorizeRequests()
                   .antMatchers("/", "/oauth2/**", "/signin/**", "/login/**", "console/**", "/api/**")
                   .permitAll()
+                  .and()
+                  .authorizeRequests()
+                  .antMatchers(PERMIT_URL_ARRAY)
+                  .permitAll()
                   // 인증된 사용자만 접근 가능
                   .anyRequest()
                   .authenticated()
@@ -63,6 +84,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                   .and()
                   .logout()
                   .logoutSuccessUrl("/");
+            
       }
       
 }

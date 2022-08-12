@@ -3,6 +3,7 @@ package com.dongnae.jjabpang.controller;
 import com.dongnae.jjabpang.controller.UserController.Result;
 import com.dongnae.jjabpang.dto.CartDetailDto;
 import com.dongnae.jjabpang.dto.CartItemDto;
+import com.dongnae.jjabpang.dto.ItemRemoveDto;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
 import com.dongnae.jjabpang.service.CartService;
@@ -77,6 +78,12 @@ public class CartController {
             message.setData(data);
             message.setStatus(StatusEnum.OK);
             return new ResponseEntity<>(message, headers, HttpStatus.OK);
+      }
+      
+      @ApiOperation(value = "장바구니 아이템 삭제")
+      @DeleteMapping("/cart}")
+      public ResponseEntity removeCartItem(@RequestBody ItemRemoveDto dto) throws Exception {
+      
       }
       
       @ApiOperation(value = "회원별 장바구니 조회")
