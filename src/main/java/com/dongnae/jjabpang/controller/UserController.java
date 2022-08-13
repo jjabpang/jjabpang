@@ -147,7 +147,7 @@ public class UserController {
             String email = qUserRepository.findEmailByPhoneNm(phoneNum.get("phoneNum"));
             
             if (email == null) {
-                  throw new IllegalStateException("등록된 이메일이 없습니다");
+                  throw new IllegalStateException("등록된 이메일이 없습니다.");
             }
             
             resultMap.put("email", email);
