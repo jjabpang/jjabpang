@@ -7,6 +7,7 @@ class JjabpangApplicationTests {
       
       @Test
       void contextLoads() {
+      
       }
       
 }
