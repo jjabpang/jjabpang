@@ -121,4 +121,7 @@ public class User extends BaseTimeEntity {
       @ToString.Exclude
       private List<Review> reviewList = new ArrayList<>();
       
+      @OneToOne(fetch = LAZY, mappedBy = "user")
+      @ToString.Exclude
+      private Jjim jjim;
 }
