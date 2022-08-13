@@ -1,7 +1,6 @@
 package com.dongnae.jjabpang.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,6 +22,9 @@ import static javax.persistence.FetchType.LAZY;
 @Entity(name = "Jjim")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Jjim extends BaseTimeEntity {
       @Id
       @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,15 +34,27 @@ public class Jjim extends BaseTimeEntity {
       /**
        * 회원 번호
        */
-      @JoinColumn(name = "user_no")
+      @JoinColumn(name = "user_no", columnDefinition = "BIGINT")
       @OneToOne(fetch = LAZY)
+      @ToString.Exclude
       private User user;
       
       /**
        * 찜 번호
        */
-      @OneToMany(fetch = LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-      @JoinColumn(name = "jjim_no")
+      @OneToMany(fetch = LAZY, mappedBy = "jjim")
+      @ToString.Exclude
       private List<JjimItem> jjimItems = new ArrayList<>();
+      
+      /**
+       * 연관관계 메서드
+       */
+      public static Jjim createJjim(User user, List<JjimItem> jjimItems) {
+            Jjim jjim = new Jjim();
+            jjim.setJjimItems(jjimItems);
+            jjim.setUser(user);
+            return jjim;
+      }
+      
       
 }
