@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-REPOSITORY=/home/ubuntu/magazine
+REPOSITORY=/home/qkrtkdwns3410/jjabpang
 cd $REPOSITORY
 
 APP_NAME=cicd-test
