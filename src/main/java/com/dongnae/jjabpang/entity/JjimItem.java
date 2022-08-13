@@ -45,4 +45,16 @@ public class JjimItem extends BaseTimeEntity {
       @JoinColumn(name = "item_no")
       @ToString.Exclude
       private Item item;
+      
+      /**
+       * 연관관계 메서드
+       */
+      public JjimItem createJjimItem(Jjim jjim, Item item) {
+            JjimItem jjimItem = new JjimItem();
+            jjimItem.setItem(item);
+            jjimItem.setJjim(jjim);
+            return jjimItem;
+      }
+      
+      
 }
