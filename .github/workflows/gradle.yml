@@ -17,14 +17,6 @@ jobs:
     build:
         runs-on: ubuntu-20.04
         steps:
-            -   name: Start MySQL
-                uses: samin/mysql-action@v1.3
-                with:
-                    mysql database: 'jdbc:mysql://jjabpang.c4ccun7w5hlo.ap-northeast-2.rds.amazonaws.com:3306/jjabpang?serverTimezone=Asia/Seoul&characterEncoding=UTF-8'
-                    mysql user: 'jjabpang'
-                    mysql password: ${{ secrets.MYSQL_PASSWORD }} # github Secret 탭에서 설정하세요!
-                    mysql version: '5.7.38'
-            
             -   name: Checkout
                 uses: actions/checkout@v2
             
