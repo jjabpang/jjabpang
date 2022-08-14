@@ -12,11 +12,18 @@ env:
     BUCKET_NAME: jjabpang
     CODE_DEPLOY_APP_NAME: codeDeploy-test
     DEPLOYMENT_GROUP_NAME: codeDeploy-test
+    DB_DATABASE: jdbc:mysql://jjabpang.c4ccun7w5hlo.ap-northeast-2.rds.amazonaws.com:3306/jjabpang?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    DB_USER: jjabpang
+    DB_PASSWORD: 34103410
 
 jobs:
     build:
         runs-on: ubuntu-20.04
         steps:
+            -   name: Set up MySQL
+                run: |
+                    sudo /etc/init.d/mysql start
+                    mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
             -   name: Checkout
                 uses: actions/checkout@v2
             
