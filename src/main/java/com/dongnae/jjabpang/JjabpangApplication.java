@@ -1,7 +1,7 @@
 package com.dongnae.jjabpang;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -10,8 +10,15 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableJpaAuditing
 public class JjabpangApplication {
       
+      public static final String APPLICATION_LOCATIONS = "spring.config.location="
+                                                         + "classpath:application.yml,"
+                                                         +
+                                                         "C:/Users/qkrtkdwns3410/OneDrive - fllla/real-application.yml";
+      
       public static void main(String[] args) {
-            SpringApplication.run(JjabpangApplication.class, args);
+            new SpringApplicationBuilder(JjabpangApplication.class).properties(APPLICATION_LOCATIONS)
+                                                                   .run(args);
+            
       }
       
       @Bean
