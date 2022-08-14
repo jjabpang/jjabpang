@@ -12,9 +12,9 @@ env:
     BUCKET_NAME: jjabpang
     CODE_DEPLOY_APP_NAME: codeDeploy-test
     DEPLOYMENT_GROUP_NAME: codeDeploy-test
-    DB_DATABASE: jdbc:mysql://jjabpang.c4ccun7w5hlo.ap-northeast-2.rds.amazonaws.com:3306/jjabpang?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    DB_USER: jjabpang
-    DB_PASSWORD: 34103410
+    DB_DATABASE: 'jdbc:mysql://jjabpang.c4ccun7w5hlo.ap-northeast-2.rds.amazonaws.com:3306/jjabpang?serverTimezone=Asia/Seoul&characterEncoding=UTF-8'
+    DB_USER: 'jjabpang'
+    DB_PASSWORD: '34103410'
 
 jobs:
     build:
