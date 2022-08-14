@@ -40,7 +40,7 @@ jobs:
             -   name: Setup MySQL
                 uses: samin/mysql-action@v1
                 with:
-                    character set server: 'utf8'
+                    character set server: 'utf8mb4'
                     mysql database: 'jdbc:mysql://jjabpang.c4ccun7w5hlo.ap-northeast-2.rds.amazonaws.com:3306/jjabpang'
                     mysql user: 'jjabpang'
                     mysql password: '34103410'
