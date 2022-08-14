@@ -1,10 +1,10 @@
 package com.dongnae.jjabpang.controller;
 
 import com.dongnae.jjabpang.controller.UserController.Result;
-import com.dongnae.jjabpang.dto.JjimAddDto;
-import com.dongnae.jjabpang.dto.JjimListDto;
-import com.dongnae.jjabpang.dto.JjimListResponseDto;
-import com.dongnae.jjabpang.dto.JjimRemoveDto;
+import com.dongnae.jjabpang.dto.jjim.JjimAddDto;
+import com.dongnae.jjabpang.dto.jjim.JjimListDto;
+import com.dongnae.jjabpang.dto.jjim.JjimListResponseDto;
+import com.dongnae.jjabpang.dto.jjim.JjimRemoveDto;
 import com.dongnae.jjabpang.entity.Jjim;
 import com.dongnae.jjabpang.entity.JjimItem;
 import com.dongnae.jjabpang.repository.JjimItemRepository;

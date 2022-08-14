@@ -1,19 +1,19 @@
 package com.dongnae.jjabpang.service;
 
-import com.dongnae.jjabpang.dto.ReviewDeleteDto;
-import com.dongnae.jjabpang.dto.ReviewDto;
-import com.dongnae.jjabpang.dto.ReviewDto.ReviewImageDto;
-import com.dongnae.jjabpang.dto.ReviewListDto;
 import com.dongnae.jjabpang.dto.condition.ReviewSearchCondition;
+import com.dongnae.jjabpang.dto.review.ReviewDeleteDto;
+import com.dongnae.jjabpang.dto.review.ReviewDto;
+import com.dongnae.jjabpang.dto.review.ReviewDto.ReviewImageDto;
+import com.dongnae.jjabpang.dto.review.ReviewListDto;
 import com.dongnae.jjabpang.entity.Item;
 import com.dongnae.jjabpang.entity.Review;
 import com.dongnae.jjabpang.entity.ReviewImage;
 import com.dongnae.jjabpang.entity.User;
+import com.dongnae.jjabpang.repository.ItemRepository;
 import com.dongnae.jjabpang.repository.ReviewImageRepository;
 import com.dongnae.jjabpang.repository.ReviewRepository;
-import com.dongnae.jjabpang.repository.item.ItemRepository;
+import com.dongnae.jjabpang.repository.UserRepository;
 import com.dongnae.jjabpang.repository.querydsl.review.QReviewRepository;
-import com.dongnae.jjabpang.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;

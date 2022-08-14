@@ -12,10 +12,10 @@ package com.dongnae.jjabpang.controller;
  */
 
 import com.dongnae.jjabpang.controller.UserController.Result;
-import com.dongnae.jjabpang.dto.OrderListByEmailAndPagingResponseDto;
-import com.dongnae.jjabpang.dto.OrderRequestDto;
+import com.dongnae.jjabpang.dto.order.OrderListByEmailAndPagingResponseDto;
+import com.dongnae.jjabpang.dto.order.OrderRequestDto;
 import com.dongnae.jjabpang.exception.OutOfStockException;
-import com.dongnae.jjabpang.repository.order.OrderRepository;
+import com.dongnae.jjabpang.repository.OrderRepository;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
 import com.dongnae.jjabpang.service.OrderService;

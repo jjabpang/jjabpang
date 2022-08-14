@@ -1,10 +1,10 @@
 package com.dongnae.jjabpang.controller;
 
 import com.dongnae.jjabpang.controller.UserController.Result;
-import com.dongnae.jjabpang.dto.ReviewDeleteDto;
-import com.dongnae.jjabpang.dto.ReviewDto;
-import com.dongnae.jjabpang.dto.ReviewListDto;
 import com.dongnae.jjabpang.dto.condition.ReviewSearchCondition;
+import com.dongnae.jjabpang.dto.review.ReviewDeleteDto;
+import com.dongnae.jjabpang.dto.review.ReviewDto;
+import com.dongnae.jjabpang.dto.review.ReviewListDto;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
 import com.dongnae.jjabpang.service.ReviewService;

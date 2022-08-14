@@ -1,13 +1,13 @@
 package com.dongnae.jjabpang.service;
 
-import com.dongnae.jjabpang.dto.UserInfoModificationDto;
-import com.dongnae.jjabpang.dto.UserListDto;
-import com.dongnae.jjabpang.dto.UserLoginRequestDto;
-import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
+import com.dongnae.jjabpang.dto.user.UserInfoModificationDto;
+import com.dongnae.jjabpang.dto.user.UserListDto;
+import com.dongnae.jjabpang.dto.user.UserLoginRequestDto;
+import com.dongnae.jjabpang.dto.user.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.Role;
 import com.dongnae.jjabpang.entity.User;
 import com.dongnae.jjabpang.exception.UsernameNotFoundException;
-import com.dongnae.jjabpang.repository.user.UserRepository;
+import com.dongnae.jjabpang.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;

@@ -1,10 +1,10 @@
 package com.dongnae.jjabpang.service;
 
-import com.dongnae.jjabpang.dto.UserDeliveryDto;
+import com.dongnae.jjabpang.dto.user.UserDeliveryDto;
 import com.dongnae.jjabpang.entity.Delivery;
 import com.dongnae.jjabpang.entity.User;
-import com.dongnae.jjabpang.repository.delivery.DeliveryRepository;
-import com.dongnae.jjabpang.repository.user.UserRepository;
+import com.dongnae.jjabpang.repository.DeliveryRepository;
+import com.dongnae.jjabpang.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

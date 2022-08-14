@@ -1,10 +1,10 @@
 package com.dongnae.jjabpang.controller;
 
 import com.dongnae.jjabpang.config.jwt.JwtTokenProvider;
-import com.dongnae.jjabpang.dto.UserDeliveryDto;
-import com.dongnae.jjabpang.dto.UserInfoModificationDto;
-import com.dongnae.jjabpang.dto.UserLoginRequestDto;
-import com.dongnae.jjabpang.dto.UserSingUpRequestDto;
+import com.dongnae.jjabpang.dto.user.UserDeliveryDto;
+import com.dongnae.jjabpang.dto.user.UserInfoModificationDto;
+import com.dongnae.jjabpang.dto.user.UserLoginRequestDto;
+import com.dongnae.jjabpang.dto.user.UserSingUpRequestDto;
 import com.dongnae.jjabpang.entity.User;
 import com.dongnae.jjabpang.exception.UsernameNotFoundException;
 import com.dongnae.jjabpang.repository.querydsl.user.QUserRepository;
