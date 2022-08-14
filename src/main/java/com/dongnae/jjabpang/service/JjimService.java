@@ -1,6 +1,7 @@
 package com.dongnae.jjabpang.service;
 
 import com.dongnae.jjabpang.dto.JjimAddDto;
+import com.dongnae.jjabpang.dto.JjimRemoveDto;
 import com.dongnae.jjabpang.entity.Item;
 import com.dongnae.jjabpang.entity.Jjim;
 import com.dongnae.jjabpang.entity.JjimItem;
@@ -9,12 +10,17 @@ import com.dongnae.jjabpang.repository.JjimItemRepository;
 import com.dongnae.jjabpang.repository.JjimRepository;
 import com.dongnae.jjabpang.repository.item.ItemRepository;
 import com.dongnae.jjabpang.repository.user.UserRepository;
+import com.dongnae.jjabpang.response.Message;
+import com.dongnae.jjabpang.response.StatusEnum;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,5 +88,21 @@ public class JjimService {
             return new ResponseEntity("찜 저장완료", HttpStatus.OK);
       }
       
+      @Transactional
+      public ResponseEntity removeJjim(JjimRemoveDto jjimRemoveDto) {
+            JjimItem findJjimItem = jjimItemRepository.findById(jjimRemoveDto.getJjimItemNo())
+                                                      .orElseThrow(() -> new IllegalStateException("해당 상품이 존재하지 않습니다"));
+            
+            jjimItemRepository.delete(findJjimItem);
+            
+            Message message = new Message();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
+            message.setMessage("해당 찜이 제거되었습니다");
+            message.setStatus(StatusEnum.OK);
+            message.setData(jjimRemoveDto.getJjimItemNo());
+            
+            return new ResponseEntity("해당 찜이 제거되었습니다.", headers, HttpStatus.OK);
+      }
       
 }

@@ -4,6 +4,7 @@ import com.dongnae.jjabpang.controller.UserController.Result;
 import com.dongnae.jjabpang.dto.JjimAddDto;
 import com.dongnae.jjabpang.dto.JjimListDto;
 import com.dongnae.jjabpang.dto.JjimListResponseDto;
+import com.dongnae.jjabpang.dto.JjimRemoveDto;
 import com.dongnae.jjabpang.entity.Jjim;
 import com.dongnae.jjabpang.entity.JjimItem;
 import com.dongnae.jjabpang.repository.JjimItemRepository;
@@ -93,4 +94,11 @@ public class JjimController {
             
             return jjimService.addJjim(jjimAddDto);
       }
+      
+      @ApiOperation(value = "찜 삭제 기능")
+      @PostMapping("/jjim/remove")
+      public ResponseEntity removeJjim(@RequestBody JjimRemoveDto jjimRemoveDto) {
+            return jjimService.removeJjim(jjimRemoveDto);
+      }
+      
 }
