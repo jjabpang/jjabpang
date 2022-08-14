@@ -45,11 +45,11 @@ jobs:
             -   name: Setup MySQL
                 uses: samin/mysql-action@v1
                 with:
-                    character set server: 'utf8mb4'
+                    character-set-server: 'utf8mb4'
                     mysql database: 'jdbc:mysql://jjabpang.c4ccun7w5hlo.ap-northeast-2.rds.amazonaws.com:3306/jjabpang?serverTimezone=Asia/Seoul&characterEncoding=UTF-8/jjabpang'
                     mysql user: 'jjabpang'
                     mysql password: ${{ secrets.MYSQL_PASSWORD }} # github Secret 탭에서 설정하세요!
-                
+                    mysql version: '5.7.38'
                 #빌드 시작
             -   name: Build with Gradle
                 run: ./gradlew build
