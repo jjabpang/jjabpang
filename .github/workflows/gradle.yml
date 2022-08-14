@@ -18,9 +18,8 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             -   name: Setup MySQL
-                uses: samin/mysql-action@v1
+                uses: mirromutth/mysql-action@v1.1
                 with:
-                    character set server: 'utf8'
                     mysql database: 'jdbc:mysql://jjabpang.c4ccun7w5hlo.ap-northeast-2.rds.amazonaws.com:3306/jjabpang?serverTimezone=Asia/Seoul&characterEncoding=UTF-8'
                     mysql user: 'jjabpang'
                     mysql password: ${{ secrets.MYSQL_PASSWORD }} # github Secret 탭에서 설정하세요!
