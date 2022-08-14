@@ -1,6 +1,5 @@
 package com.dongnae.jjabpang.config;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -29,7 +28,7 @@ class SecurityConfigTest {
       @Autowired
       private TestRestTemplate restTemplate;
       
-      @Test
+      //      @Test
       public void profile() throws Exception {
             String expected = "default";
             ResponseEntity<String> response = restTemplate.getForEntity("/profile", String.class);
