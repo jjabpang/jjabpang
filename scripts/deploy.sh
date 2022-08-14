@@ -1,29 +1,22 @@
-# switch.sh
+#!/usr/bin/env bash
 
-#!/bin/bash
+REPOSITORY=/home/qkrtkdwns3410/jjabpang
+cd $REPOSITORY
 
-# Crawl current connected port of WAS
-CURRENT_PORT=$(cat /home/ec2-user/service_url.inc  | grep -Po '[0-9]+' | tail -1)
-TARGET_PORT=0
+APP_NAME=cicd-test
+JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep 'SNAPSHOT.jar' | tail -n 1)
+JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
 
-echo "> Nginx currently proxies to ${CURRENT_PORT}."
+CURRENT_PID=$(pgrep -f $APP_NAME)
 
-# Toggle port number
-if [ ${CURRENT_PORT} -eq 8070 ]; then
-    TARGET_PORT=8071
-elif [ ${CURRENT_PORT} -eq 8071 ]; then
-    TARGET_PORT=8070
+if [ -z $CURRENT_PID ]
+then
+  echo "> 종료할것 없음."
 else
-    echo "> No WAS is connected to nginx"
-    exit 1
+  echo "> kill -9 $CURRENT_PID"
+  kill -15 $CURRENT_PID
+  sleep 5
 fi
 
-# Change proxying port into target port
-echo "set \$service_url http://127.0.0.1:${TARGET_PORT};" | tee /home/ec2-user/service_url.inc
-
-echo "> Now Nginx proxies to ${TARGET_PORT}."
-
-# Reload nginx
-sudo service nginx reload
-
-echo "> Nginx reloaded."
+echo "> $JAR_PATH 배포"
+nohup java -jar $JAR_PATH > /dev/null 2> /dev/null < /dev/null &
