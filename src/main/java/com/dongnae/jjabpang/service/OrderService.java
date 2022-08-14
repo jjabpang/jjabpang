@@ -1,13 +1,13 @@
 package com.dongnae.jjabpang.service;
 
-import com.dongnae.jjabpang.dto.OrderListByEmailAndPagingResponseDto;
-import com.dongnae.jjabpang.dto.OrderRequestDto;
+import com.dongnae.jjabpang.dto.order.OrderListByEmailAndPagingResponseDto;
+import com.dongnae.jjabpang.dto.order.OrderRequestDto;
 import com.dongnae.jjabpang.entity.*;
 import com.dongnae.jjabpang.exception.OutOfStockException;
-import com.dongnae.jjabpang.repository.item.ItemRepository;
-import com.dongnae.jjabpang.repository.order.OrderRepository;
+import com.dongnae.jjabpang.repository.ItemRepository;
+import com.dongnae.jjabpang.repository.OrderRepository;
+import com.dongnae.jjabpang.repository.UserRepository;
 import com.dongnae.jjabpang.repository.querydsl.order.QOrderRepository;
-import com.dongnae.jjabpang.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

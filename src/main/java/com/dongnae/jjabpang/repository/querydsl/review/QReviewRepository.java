@@ -11,8 +11,8 @@ package com.dongnae.jjabpang.repository.querydsl.review;
  * 2022-08-04        ipeac       최초 생성
  */
 
-import com.dongnae.jjabpang.dto.ReviewListDto;
 import com.dongnae.jjabpang.dto.condition.ReviewSearchCondition;
+import com.dongnae.jjabpang.dto.review.ReviewListDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

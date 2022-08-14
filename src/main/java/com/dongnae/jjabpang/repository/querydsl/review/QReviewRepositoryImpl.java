@@ -1,8 +1,8 @@
 package com.dongnae.jjabpang.repository.querydsl.review;
 
-import com.dongnae.jjabpang.dto.QReviewListDto;
-import com.dongnae.jjabpang.dto.ReviewListDto;
 import com.dongnae.jjabpang.dto.condition.ReviewSearchCondition;
+import com.dongnae.jjabpang.dto.review.QReviewListDto;
+import com.dongnae.jjabpang.dto.review.ReviewListDto;
 import com.dongnae.jjabpang.entity.Review;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;

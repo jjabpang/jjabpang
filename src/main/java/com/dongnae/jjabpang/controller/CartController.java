@@ -1,9 +1,9 @@
 package com.dongnae.jjabpang.controller;
 
 import com.dongnae.jjabpang.controller.UserController.Result;
-import com.dongnae.jjabpang.dto.CartDetailDto;
-import com.dongnae.jjabpang.dto.CartItemDto;
-import com.dongnae.jjabpang.dto.ItemRemoveDto;
+import com.dongnae.jjabpang.dto.cart.CartDetailDto;
+import com.dongnae.jjabpang.dto.cart.CartItemDto;
+import com.dongnae.jjabpang.dto.item.ItemRemoveDto;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
 import com.dongnae.jjabpang.service.CartService;

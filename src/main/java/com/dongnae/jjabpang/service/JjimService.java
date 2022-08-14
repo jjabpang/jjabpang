@@ -1,15 +1,15 @@
 package com.dongnae.jjabpang.service;
 
-import com.dongnae.jjabpang.dto.JjimAddDto;
-import com.dongnae.jjabpang.dto.JjimRemoveDto;
+import com.dongnae.jjabpang.dto.jjim.JjimAddDto;
+import com.dongnae.jjabpang.dto.jjim.JjimRemoveDto;
 import com.dongnae.jjabpang.entity.Item;
 import com.dongnae.jjabpang.entity.Jjim;
 import com.dongnae.jjabpang.entity.JjimItem;
 import com.dongnae.jjabpang.entity.User;
+import com.dongnae.jjabpang.repository.ItemRepository;
 import com.dongnae.jjabpang.repository.JjimItemRepository;
 import com.dongnae.jjabpang.repository.JjimRepository;
-import com.dongnae.jjabpang.repository.item.ItemRepository;
-import com.dongnae.jjabpang.repository.user.UserRepository;
+import com.dongnae.jjabpang.repository.UserRepository;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
 import lombok.RequiredArgsConstructor;

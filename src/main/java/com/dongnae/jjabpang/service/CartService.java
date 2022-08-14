@@ -1,16 +1,16 @@
 package com.dongnae.jjabpang.service;
 
-import com.dongnae.jjabpang.dto.CartDetailDto;
-import com.dongnae.jjabpang.dto.CartItemDto;
-import com.dongnae.jjabpang.dto.ItemRemoveDto;
+import com.dongnae.jjabpang.dto.cart.CartDetailDto;
+import com.dongnae.jjabpang.dto.cart.CartItemDto;
+import com.dongnae.jjabpang.dto.item.ItemRemoveDto;
 import com.dongnae.jjabpang.entity.Cart;
 import com.dongnae.jjabpang.entity.CartItem;
 import com.dongnae.jjabpang.entity.Item;
 import com.dongnae.jjabpang.entity.User;
-import com.dongnae.jjabpang.repository.cart.CartRepository;
-import com.dongnae.jjabpang.repository.cartItem.CartItemRepository;
-import com.dongnae.jjabpang.repository.item.ItemRepository;
-import com.dongnae.jjabpang.repository.user.UserRepository;
+import com.dongnae.jjabpang.repository.CartItemRepository;
+import com.dongnae.jjabpang.repository.CartRepository;
+import com.dongnae.jjabpang.repository.ItemRepository;
+import com.dongnae.jjabpang.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
