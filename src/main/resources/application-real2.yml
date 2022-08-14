@@ -1,0 +1,38 @@
+spring:
+    profiles:
+        include: oauth,real-db
+    datasource:
+        url: jdbc:mysql://jjabpang.c4ccun7w5hlo.ap-northeast-2.rds.amazonaws.com:3306/jjabpang?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+        username: jjabpang
+        driver-class-name: com.mysql.jdbc.Driver
+        password: 34103410
+    
+    jpa:
+        hibernate:
+            ddl-auto: create-drop
+        properties:
+            hibernate:
+                #                format_sql: true
+                show_sql: true
+                dialect: org.hibernate.dialect.MySQL5Dialect
+                hbm2ddl:
+                    import_files: classpath:db/data.sql # DB 파일 명시적으로 선택
+                    import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor # 멀티 라인 입력 가능하도록
+                connection:
+                    charSet: UTF-8 # 인코딩 설정
+                default_batch_fetch_size: 1000
+
+server:
+    port: 8082
+
+jwt:
+    password: jjabpang
+
+decorator:
+    datasource:
+        p6spy:
+            enable-logging: true
+
+
+
+            
