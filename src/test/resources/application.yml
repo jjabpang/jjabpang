@@ -22,11 +22,6 @@ spring:
 jwt:
     password: jjabpang
 
-decorator:
-    datasource:
-        p6spy:
-            enable-logging: true
-
 
 
             
