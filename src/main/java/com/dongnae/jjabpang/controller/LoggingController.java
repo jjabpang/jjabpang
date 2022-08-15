@@ -21,7 +21,7 @@ public class LoggingController {
       @Value("${logging-module.version}")
       private String version;
       
-      @GetMapping("/")
+      @GetMapping("/version")
       public String version() {
             return String.format("Project Version : %s", version);
       }
