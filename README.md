@@ -192,20 +192,19 @@ MYSQL에서는 8버전 이상인 경우에만 재귀함수로 해당 기능을 �
 ![img_4.png](img_4.png)
 
 OrderSpecifier 를 반환값으로 하여 boardSort 기능 구현하였습니다
-boardSort의 경우 api requestBody안에 sort &
+boardSort의 경우 api requestBody안에 sort & orderBy Key 값에 해당하는 Value 를 전달하게 된다면 해당하는 엔티티의 컬럼값에 맞춰 정렬이 가능합니다.
+
+복잡한 쿼리를 여러개 만들어내는 수고를 덜 수 있다는 장점이 있습니다.
 
 ### CI/CD 무중단 배포
 
-애플리케이션 출시에 있어서 지속적 통합과 지속적 배포를 위해 깃헙, travis, AWS CodeDeploy를 사용했으며 빌드와 배포를 분리하기 위해 github Action과 AWS s3를 이용했습니다.
+애플리케이션 출시에 있어서 지속적 통합과 지속적 배포를 위해 깃헙 , AWS CodeDeploy를 사용했으며 빌드와 배포를 분리하기 위해 github Action과 AWS s3를 이용했습니다.
 
-![시스템 구조](img.png)
+![시스템 구조](img_6.png)
 
 깃헙으로 push된 프로젝트는 action 에서 설정에 따라 자동화 테스트를 거쳐 빌드되며 빌드된 jar는 AWS S3에 저장됩니다.
 
 이후 배포요청을 받은 CodeDeploy는 S3에서 jar 파일을 넘겨받아 ec2로 파일을 넘겨주며 이때 배포 수명 주기의 순서대로 설정된 스크립트를 실행하게 됩니다.
-
-- appspec 설정
-  ![appspec 설정](img_5.png)[appspec 설정](https://github.com/jinia91/blog/blob/main/appspec.yml)
 
 여기서 무중단 배포를 구현하기 위하여 EC2의 8070과 8071 포트에 프로젝트 jar 두개를 구동시키고 엔진엑스로 8080포트를 열되
 
