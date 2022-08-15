@@ -11,6 +11,7 @@ if [ ${CURRENT_PORT} -eq 8070 ]; then
     TARGET_PORT=8071
 elif [ ${CURRENT_PORT} -eq 8071 ]; then
     TARGET_PORT=8070
+
 else
     echo "> No WAS is connected to nginx"
     exit 1
