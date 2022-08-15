@@ -2,22 +2,6 @@
 
 ---
 
-### 1. Project Progress
-
-1. Initial ERD
-
->
-
-2. Mock-Up
-
-> 쿠팡 사이트클론 : https://www.figma.com/file/Fm62pxMOLegL4XotlC7IJc/%EC%BF%A0%ED%8C%A1%EB%AA%A9%EC%97%85?node-id=0%3A1
-
-3. Skills
-    1. Spring boot 2.2.2 REALESE
-    2. Spring Data Jpa
-    3. QueryDsl
-    4. JWT & Spring Security
-
 # JjabPang
 
 쿠팡 클론 프로젝트
@@ -146,6 +130,8 @@
 하지만 기존 사이트야 말로 실제로 개발자들이 수년간 유지보수및 개발을 진행하면서 수 많은 시행착오를 거친 그 부산물이라고 생각되어 쿠팡 사이트의 일부분을 클론하게 되었습니다.
 
 현재 2022.08.14 일 기준으로는 어드민 사이트를 별도로 구현하지는 못하였습니다. 하지만 시큐리티의 정수인 어드민과 일반 유저가의 접속 권한에 따른 분기를 설정하기 위하여 앞으로 구현할 생각이 있습니다.
+
+---
 
 ## 핵심 기능(릴리즈 후 추가 개선)
 
