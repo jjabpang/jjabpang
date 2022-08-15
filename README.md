@@ -207,7 +207,7 @@ boardSort의 경우 api requestBody안에 sort &
 - appspec 설정
   ![appspec 설정](img_5.png)[appspec 설정](https://github.com/jinia91/blog/blob/main/appspec.yml)
 
-여기서 무중단 배포를 구현하기 위하여 EC2의 8081과 8082 포트에 프로젝트 jar 두개를 구동시키고 엔진엑스로 8080포트를 열되
+여기서 무중단 배포를 구현하기 위하여 EC2의 8070과 8071 포트에 프로젝트 jar 두개를 구동시키고 엔진엑스로 8080포트를 열되
 
 엔진엑스는 81과 82중 하나의 포트만 리버스 프록시하도록 했습니다.
 
@@ -217,41 +217,10 @@ boardSort의 경우 api requestBody안에 sort &
 
 이후 ValidateService 주기에 health.sh 스크립트로 정상배포를 확인하고 정상적일경우 엔진엑스의 프록시를 신규 버전 포트로 돌려(reload) 배포를 완료합니다.
 
-[무중단 배포를 위한 쉘스크립트 파일들](https://github.com/jinia91/blog/tree/main/scripts)
+### https 프로토콜
 
-### SEO 최적화
-
-#### 도메인과 https 프로토콜
-
-배포된 웹 앱을 제대로 서비스하기위해 letsencrypt로 ssl 인증을 받아 https 보안 프로토콜을 적용했으며, 가비아에서 도메인을 구입하고 AWS Route 53을 이용하여 도메인을 연결하였습니다.
-
-#### SEO 최적화
-
-1. RSS Feed 발행
-
-앱 서버내에서 모든 게시물들을 조회한 뒤 해당 게시물들을 RSS 포멧에 맞는 xml로 작성하여 발행하도록 로직을 작성했으며 RSS 작성시 만들어지는 객체생성과 게시물 조회의 비용을 생각하여
-
-해당 로직을 캐싱처리토록 했습니다.
-
-2. sitemap
-
-또한 현재 존재하는 카테고리들의 url을 이용해 sitemap xml을 동적으로 작성하도록 하였으며 역시나 캐싱처리를 통해 비용에 대한 부담을 경감시켰습니다.
-
-3. 동적 메타태그 작성
-
-모든 게시물들은 해당 컨텐츠를 이용해 서버사이드에서 동적으로 메타태그를 작성토록하여 seo 최적화를 구축했습니다.
-
-4. robot설정
-
-크롤링대상이 되는 url과 조회할 필요없는 url을 분류하여 robot.txt를 작성했습니다.
-
-5. 네이버 검색 어드바이저와 구글 서치콘솔에 등록
-
-각 검색 서비스에 소유 인증을 하고 rss와 sitemap 제출을 하여 적극적인 크롤링 요청을 하였습니다.
-
-![검색](https://github.com/jinia91/blogBackUp/blob/main/img/1aacfe5e-a6d3-47c8-80d1-b1f4165bd85e.png?raw=true)
-
-[구글 검색창에서 조회결과]
+SSL 인증서를 적용하여 https 보안 연결을 적용하였습니다.
+무료 보안 인증서 발급을 Let's Encrypt 에서 진행하여 발급받고 3개월마다 갱신하여야하는 SSL 의 귀찮음을 줄이고자 Certbot으로 발급을 자동화 하였습니다.
 
 ## 프로젝트를 통해 느낀점
 
