@@ -37,7 +37,7 @@ spring:
     profiles: set1
 
 server:
-    port: 8081
+    port: 8071
 ---
 spring:
     datasource:
@@ -47,6 +47,6 @@ spring:
         password: 34103410
     profiles: set2
 server:
-    port: 8082
+    port: 8070
 
 ---

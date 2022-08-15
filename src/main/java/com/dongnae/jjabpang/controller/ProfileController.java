@@ -12,6 +12,8 @@ package com.dongnae.jjabpang.controller;
  * 2022-08-14        jihye94       최초 생성
  */
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +24,11 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@Api(tags = "프로파일 확인")
 public class ProfileController {
       private final Environment env;
       
+      @ApiOperation(value = "프로파일 확인")
       @GetMapping("/profile")
       public String profile() {
             List<String> profiles = Arrays.asList(env.getActiveProfiles());
