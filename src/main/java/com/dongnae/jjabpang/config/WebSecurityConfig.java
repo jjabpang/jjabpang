@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             webSecurity.ignoring()
                        .antMatchers("/css/**", "/js/**", "/image/**", "/lib/**");
             webSecurity.ignoring()
-                       .antMatchers("/v2/api-docs", "/v3/api-docs", "/configuration/ui",
+                       .antMatchers("/**", "/v2/api-docs", "/v3/api-docs", "/configuration/ui",
                              "/swagger-resources", "/configuration/security",
                              "/swagger-ui.html", "/webjars/**", "/swagger/**");
       }
@@ -69,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                   .disable()
                   .and()
                   .authorizeRequests()
-                  .antMatchers("/", "/oauth2/**", "/signin/**", "/login/**", "console/**", "/api/**")
+                  .antMatchers("/**", "/oauth2/**", "/signin/**", "/login/**", "console/**", "/api/**")
                   .permitAll()
                   .and()
                   .authorizeRequests()
