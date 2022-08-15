@@ -15,7 +15,6 @@ import com.dongnae.jjabpang.controller.UserController.Result;
 import com.dongnae.jjabpang.dto.order.OrderListByEmailAndPagingResponseDto;
 import com.dongnae.jjabpang.dto.order.OrderRequestDto;
 import com.dongnae.jjabpang.exception.OutOfStockException;
-import com.dongnae.jjabpang.repository.OrderRepository;
 import com.dongnae.jjabpang.response.Message;
 import com.dongnae.jjabpang.response.StatusEnum;
 import com.dongnae.jjabpang.service.OrderService;
@@ -42,8 +41,6 @@ import java.nio.charset.StandardCharsets;
 public class OrderController {
       
       private final OrderService orderService;
-      
-      private final OrderRepository orderRepository;
       
       @ApiOperation(value = "상품 주문")
       @PostMapping("/orderItem")

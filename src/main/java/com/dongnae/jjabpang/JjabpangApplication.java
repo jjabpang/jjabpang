@@ -11,8 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class JjabpangApplication {
       
       public static final String APPLICATION_LOCATIONS = "spring.config.location="
-                                                         + "classpath:application.yml,"
-                                                         + "C:/Users/ipeac/OneDrive - fllla/real-application.yml";
+                                                         + "classpath:application.yml";
       
       public static void main(String[] args) {
             new SpringApplicationBuilder(JjabpangApplication.class).properties(APPLICATION_LOCATIONS)
