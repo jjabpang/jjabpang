@@ -4,7 +4,10 @@ name: logging-system
 
 on:
     workflow_dispatch:
-
+    push:
+        branches: [ master ]
+    pull_request:
+        branches: [ master ]
 env: # 새로 추가한 부분
     S3_BUCKET_NAME: jjabpang
     PROJECT_NAME: jjabpang
@@ -48,4 +51,4 @@ jobs:
             
             ### 새로 추가한 부분 ###
             -   name: Code Deploy
-                run: aws deploy create-deployment --application-name logging-system-deploy --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name develop  --ignore-application-stop-failures --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+                run: aws deploy create-deployment --application-name logging-system-deploy --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name develop --ignore-application-stop-failures --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
