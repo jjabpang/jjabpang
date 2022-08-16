@@ -138,6 +138,10 @@
 
 너무 잦은 푸쉬때문에 서버 배포에서 문제가 생기기에 github action을 수동화하기로 결정
 
+-> aws --ignore-application-stop-failures 와 연관있음  
+-> 이전 배포시 실패했기때문에 발생한 에러였음  
+-> 해당 에러 --ignore-application-stop-failures workflow에 추가함으로 해결
+
 ---
 
 ## 핵심 기능(릴리즈 전)
