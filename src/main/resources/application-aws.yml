@@ -6,6 +6,7 @@ spring:
         driver-class-name: com.mysql.jdbc.Driver
         password: 34103410
 
+
 jwt:
     password: jjabpang
 
