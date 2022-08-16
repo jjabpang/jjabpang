@@ -1,11 +1,5 @@
 spring:
-    profiles:
-        include: aws
-    datasource:
-        url: jdbc:mysql://jjabpang.c4ccun7w5hlo.ap-northeast-2.rds.amazonaws.com:3306/jjabpang?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-        username: jjabpang
-        driver-class-name: com.mysql.jdbc.Driver
-        password: 34103410
+    
     
     jpa:
         hibernate:
@@ -23,8 +17,7 @@ spring:
                 default_batch_fetch_size: 1000
 
 
-jwt:
-    password: jjabpang
+
 
 decorator:
     datasource:
