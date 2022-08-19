@@ -50,13 +50,13 @@ public class CartService {
        * email 은 현재 로그인한 친구
        */
       @Transactional
-      public Long addCart(CartItemDto cartItemDto, String email) throws Exception {
+      public Long addCart(CartItemDto cartItemDto) throws Exception {
             Item item = itemRepository.findById(cartItemDto.getItemNo())
                                       .orElseThrow(() -> {
                                             throw new IllegalArgumentException("엔티티 조회 불가능");
                                       });
             /* 로그인한 유저 데이터*/
-            Optional<User> loginedUser = userRepository.findAllByEmail(email);
+            Optional<User> loginedUser = userRepository.findAllByEmail(cartItemDto.getUserEmail());
             
             if (loginedUser.isPresent()) {
                   Cart cart = cartRepository.findByUser_UserNo(loginedUser.get()
