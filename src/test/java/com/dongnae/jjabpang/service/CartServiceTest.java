@@ -9,10 +9,14 @@ import com.dongnae.jjabpang.repository.CartItemRepository;
 import com.dongnae.jjabpang.repository.CartRepository;
 import com.dongnae.jjabpang.repository.ItemRepository;
 import com.dongnae.jjabpang.repository.UserRepository;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.Optional;
@@ -22,6 +26,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @WebAppConfiguration
 class CartServiceTest {
+      
+      private final static Logger logger = LoggerFactory.getLogger(CartServiceTest.class);
+      
       @Autowired
       private CartRepository cartRepository;
       
@@ -33,6 +40,12 @@ class CartServiceTest {
       
       @Autowired
       private CartItemRepository cartItemRepository;
+      
+      @BeforeClass
+      @Sql({"classpath:db/dataTest.sql"})
+      public static void setUpBeforeClass() throws Exception {
+            logger.debug("Test Data Create And Insert!");
+      }
       
       @Test
       @DisplayName(value = "장바구니 추가 테스트")
