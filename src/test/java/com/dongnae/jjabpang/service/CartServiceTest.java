@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -25,6 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @WebAppConfiguration
+@Transactional
 class CartServiceTest {
       
       private final static Logger logger = LoggerFactory.getLogger(CartServiceTest.class);
@@ -45,11 +47,24 @@ class CartServiceTest {
       @Sql({"classpath:db/dataTest.sql"})
       public static void setUpBeforeClass() throws Exception {
             logger.debug("Test Data Create And Insert!");
+            
       }
+      
       
       @Test
       @DisplayName(value = "장바구니 추가 테스트")
       void addCart() {
+            User user = new User();
+            user.setUserNo(1L);
+            user.setEmail("qkrtkdwns3410@naver.com");
+            user.setPhoneNm("010-1111-1111");
+            
+            Item creatItem = new Item(1L, "coco", "dd", "dd", 10000, 0.0f, 100, 0, 0, 1, "디테일", 3, null, null, null, null);
+            
+            userRepository.save(user);
+            
+            itemRepository.save(creatItem);
+            
             /* 카트 아이템 dto 설정*/
             CartItemDto cartItemDto = new CartItemDto();
             cartItemDto.setItemCount(3);
@@ -75,22 +90,32 @@ class CartServiceTest {
                   
                   /* 현재 상품이 이미 장바구니에 들어가 있는지 검증*/
                   CartItem savedCartItem = cartItemRepository.findByItem_ItemNoAndCart_CartNo(item.getItemNo(), cart.getCartNo());
-                  CartItem cartItem = new CartItem();
+                  CartItem cartItem;
                   
                   /*이미 장바구니에 아이템이 들어가있다면 카운트 !*/
                   if (savedCartItem != null) {
                         savedCartItem.addCount(cartItemDto.getItemCount());
+                        // 카트아이템에 들어간 아이템 번호 검증
+                        assertThat(savedCartItem.getItem()
+                                                .getItemNo()).isEqualTo(1L);
+                        
+                        //카트아이템에 들어간 카트번호를 통해 > 유저검증
+                        assertThat(savedCartItem.getCart()
+                                                .getUser()
+                                                .getUserNo()).isEqualTo(1L);
                   } else {
                         cartItem = CartItem.createCartItem(cart, item, cartItemDto.getItemCount(), cartItemDto.getItemPrice());
                         cartItemRepository.save(cartItem);
+                        // 카트아이템에 들어간 아이템 번호 검증
+                        assertThat(cartItem.getItem()
+                                           .getItemNo()).isEqualTo(1L);
+                        //카트아이템에 들어간 카트번호를 통해 > 유저검증
+                        assertThat(cartItem.getCart()
+                                           .getUser()
+                                           .getUserNo()).isEqualTo(1L);
                   }
-                  // 카트아이템에 들어간 아이템 번호 검증
-                  assertThat(cartItem.getItem()
-                                     .getItemNo()).isEqualTo(1);
-                  //카트아이템에 들어간 카트번호를 통해 > 유저검증
-                  assertThat(cartItem.getCart()
-                                     .getUser()
-                                     .getUserNo()).isEqualTo(1);
+                  
+                  
             } else {
                   throw new IllegalStateException("로그인한 유저 데이터 없음");
             }

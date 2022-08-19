@@ -97,7 +97,7 @@ public class Item extends BaseTimeEntity {
       @ToString.Exclude
       private List<Review> reviews = new ArrayList<>();
       
-      @OneToMany(fetch = LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "item")
+      @OneToMany(fetch = LAZY, cascade = CascadeType.ALL, mappedBy = "item")
       private List<JjimItem> jjimItems = new ArrayList<>();
       
       public void removeStock(int quantity) throws OutOfStockException {

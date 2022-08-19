@@ -57,7 +57,7 @@ public class Order extends BaseTimeEntity {
       @ToString.Exclude
       private Delivery delivery;
       
-      @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "order")
+      @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
       @ToString.Exclude
       private List<OrderItem> orderItems = new ArrayList<>();
       
