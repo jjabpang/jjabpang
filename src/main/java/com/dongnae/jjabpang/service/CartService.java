@@ -114,6 +114,12 @@ public class CartService {
        */
       @Transactional
       public ResponseEntity removeCart(ItemRemoveDto dto) {
+            //해당 사용자가 존재하는 지 검증
+            Optional<User> findUser = userRepository.findById(dto.getUserNo());
+            if (findUser.isEmpty()) {
+                  throw new IllegalStateException("존재하지 않는 사용자 입니다.");
+            }
+            
             List<CartItem> cartItemByCart_cartNo = cartItemRepository.findCartItemByCart_CartNo(dto.getCartNo());
             for (CartItem cartItem : cartItemByCart_cartNo) {
                   if (Objects.equals(cartItem.getItem()
