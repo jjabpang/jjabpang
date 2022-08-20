@@ -1,3 +1,6 @@
+
+
+
 alter table jjabpang.user
     convert to charset utf8mb4;
 alter table jjabpang.item
