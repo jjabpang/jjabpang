@@ -4,11 +4,12 @@
 
 # JjabPang
 
-쿠팡 클론 프로젝트
+쿠팡 클론 프로젝트 ( 아직 프론트는 미완성 )
 
 ※ 백엔드 + 프론트 엔드 협업 프로젝트
 
 백엔드 프로젝트 기간 : 2022.08.01 ~
+프론트엔드 프로젝트 기간 : 미정
 
 # 목차
 
@@ -34,6 +35,7 @@
         + [쿠팡 클론 프로젝트를 기획한 이유?](#쿠팡-클론-프로젝트를-기획한-이유?)
     * [핵심 기능(기능 개발 후)](#핵심-기능(릴리즈-후-추가-개선))
         + [테스트 코드 추가](#테스트-코드-추가)
+        + [전역 에러 설정](#에러-전역-설정)
     * [핵심 기능(기능 개발 중)](#핵심-기능(릴리즈-전))
         + [ModelMapper 사용으로 코드 간략화](#ModelMapper-사용으로-코드-간략화)
         + [QueryDsl To JPQL](#QueryDsl-To-JPQL)
@@ -113,11 +115,11 @@
 
 ## 시스템 아키텍쳐
 
-![img.png](img.png)https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FnBCGB%2FbtrFzNmbwAR%2FroFSU19mpzgDfwNktBaBEK%2Fimg.png
+![img.png](img.png)
 
 ## WAS 아키텍처
 
-## E-R 다이어그램<a id="er"></>
+## E-R 다이어그램<a id="er"/>
 
 <a href="https://ibb.co/p4WXczg"><img src="https://i.ibb.co/6DvszP2/coupang.png" alt="coupang" border="0"></a>
 
